@@ -1,7 +1,6 @@
 import streamlit as st
 import webbrowser
 
-# Your details
 name = "Vedant Kale"
 bio = "🚀 Highly passionate and innovative developer with extensive expertise in Python, Machine Learning, Android Development, C/C++, Java, and Data Structures & Algorithms. 📊 Proficient in Jupyter Notebook, Git, and GitHub. 🌟 Eager to lead and shape innovation, driving impactful tech projects to astounding success. 🤝 Let’s connect and ignite a collaboration that transforms the tech landscape! I Love reading books, watching Anime and playing games  😁"
 email = "vedant.kale22@pccoepune.org"
@@ -9,22 +8,19 @@ phone = "+91-8421204009"
 linkedin = "https://www.linkedin.com/in/vedant-kale-a057b2257/"
 github = "https://github.com/VedantKale106"
 profile_pic = "img.jpg"
-whatsapp_link = "https://wa.me/918421204009"  # WhatsApp chat link with your number
+whatsapp_link = "https://wa.me/918421204009" 
 
-# Configure the page
 st.set_page_config(page_title=f"{name} - Portfolio", layout="wide")
 
 st.title(f"Welcome to My Portfolio Website")
 
-# Main content
-col1, col2 = st.columns([3, 7])  # Adjust column width as needed
+col1, col2 = st.columns([3, 7]) 
 with col1:
     st.image(profile_pic, width=250, use_column_width=True, output_format='PNG')
 with col2:
     st.write(f"# {name}")
     st.write(bio)
 
-# Sidebar with contact details
 with st.sidebar:
     st.title("Contact")
     st.write(f"📧 [Email](mailto:{email})")
@@ -34,9 +30,8 @@ with st.sidebar:
     if st.button("Contact via WhatsApp"):
         webbrowser.open(whatsapp_link)
 
-# Main content continued
 
-# Skills Section
+# Skills 
 st.subheader("Skills")
 st.write("""
 - **Programming Languages:** Python, C, C++, Java, SQL
@@ -44,7 +39,6 @@ st.write("""
 - **Areas of Expertise:**  Machine Learning, Data Science, Data Structures and Algorithms, Android App Development
 """)
 
-# Projects Section
 # Projects Section
 st.subheader("Projects")
 st.write("""
@@ -75,7 +69,6 @@ st.write("""
   - 93.40 % in SSC
 """)
 
-# Adding a footer in the bottom right corner
 st.markdown("""
     <style>
         footer {
