@@ -2,7 +2,7 @@ import streamlit as st
 import webbrowser
 
 name = "Vedant Kale"
-bio = "🚀 Highly passionate and innovative developer with extensive expertise in Python, Machine Learning, Android Development, C/C++, Java, and Data Structures & Algorithms. 📊 Proficient in Jupyter Notebook, Git, and GitHub. 🌟 Eager to lead and shape innovation, driving impactful tech projects to astounding success. 🤝 Let’s connect and ignite a collaboration that transforms the tech landscape! I Love reading books, watching Anime and playing games  😁"
+bio = "🚀 Highly passionate and innovative developer with extensive expertise in Python, Machine Learning, Android Development, C/C++, Java, and Data Structures & Algorithms. 📊 Proficient in Jupyter Notebook, Git, and GitHub. 🌟 Eager to lead and shape innovation, driving impactful tech projects to astounding success. 🤝 Let’s connect and ignite a collaboration that transforms the tech landscape! I Love reading books, watching Anime and playing games  😁."
 email = "vedant.kale22@pccoepune.org"
 phone = "+91-8421204009"
 linkedin = "https://www.linkedin.com/in/vedant-kale-a057b2257/"
