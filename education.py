@@ -39,7 +39,6 @@ def app():
 
         with col2:
             st.write(f"- **Institution/School:** {education.get('institution', education.get('school'))}")
-            st.write(f"- **Year:** {education.get('year', '')}")
             st.write(f"- **CGPA/Percentage:** {education.get('cgpa', education.get('percentage'))}")
 
 # Run the Streamlit app
