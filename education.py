@@ -9,21 +9,21 @@ def app():
             "institution": "Pimpri Chinchwad College of Engineering (PCCOE)",
             "year": "Currently in third year",
             "cgpa": "7.8",
-            "image": "Education/pccoe.jpeg",
+            "image": "images/pccoe.jpeg",
             "caption": "PCCOE"
         },
         {
             "name": "Higher Secondary School Certificate (HSC), 2022",
             "school": "G.R.P.Sabnis College, Narayangaon",
             "percentage": "79.83% (PCM)",
-            "image": "Education/grps.jpeg",
+            "image": "images/grps.jpeg",
             "caption": "G.R.P.Sabnis College"
         },
         {
             "name": "Secondary School Certificate (SSC), 2020",
             "school": "Shakarrao Butte Patil Vidyalaya, Junnar",
             "percentage": "93.40%",
-            "image": "Education/sbp.jpeg",
+            "image": "images/sbp.jpeg",
             "caption": "Shakarrao Butte Patil Vidyalaya"
         }
     ]
