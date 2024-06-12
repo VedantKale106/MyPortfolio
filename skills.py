@@ -5,17 +5,17 @@ def app():
     st.title("Skills")
 
     skills = [
-        {"name": "Python", "logo": "Logos/python.jpeg"},
-        {"name": "C", "logo": "Logos/c.jpeg"},
-        {"name": "C++", "logo": "Logos/cpp.jpeg"},
-        {"name": "Java", "logo": "Logos/java.jpeg"},
-        {"name": "SQL", "logo": "Logos/mysql.jpeg"},
-        {"name": "GitHub", "logo": "Logos/github.jpeg"},
-        {"name": "Jupyter", "logo": "Logos/jupyter.jpeg"},
-        {"name": "Android Studio", "logo": "Logos/jupp.jpeg"},
-        {"name": "Machine Learning", "logo": "Logos/ml.jpeg"},
-        {"name": "Data Science", "logo": "Logos/ds.jpeg"},
-        {"name": "Data Structures and Algorithms", "logo": "Logos/dsa.jpeg"},
+        {"name": "Python", "logo": "images/python.jpeg"},
+        {"name": "C", "logo": "images/c.jpeg"},
+        {"name": "C++", "logo": "images/cpp.jpeg"},
+        {"name": "Java", "logo": "images/java.jpeg"},
+        {"name": "SQL", "logo": "images/mysql.jpeg"},
+        {"name": "GitHub", "logo": "images/github.jpeg"},
+        {"name": "Jupyter", "logo": "images/jupyter.jpeg"},
+        {"name": "Android Studio", "logo": "images/jupp.jpeg"},
+        {"name": "Machine Learning", "logo": "images/ml.jpeg"},
+        {"name": "Data Science", "logo": "images/ds.jpeg"},
+        {"name": "Data Structures and Algorithms", "logo": "images/dsa.jpeg"},
     ]
 
     # Display skills in a grid layout
