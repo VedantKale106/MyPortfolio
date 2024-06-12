@@ -8,13 +8,13 @@ def app():
             "name": "SalaryScope",
             "description": "A comprehensive machine learning project designed to predict the salary of software engineers based on various parameters such as experience, education level, and location. Leveraging advanced data analysis techniques and machine learning algorithms including regression and ensemble methods, SalaryScope provides accurate salary estimations, aiding both job seekers and employers in making informed decisions.",
             "link": "https://github.com/VedantKale106/SalaryScope",
-            "image": "Screenshots/SalaryScope.png"
+            "image": "images/SalaryScope.png"
         },
         {
             "name": "RentWizard",
             "description": "RentWizard is an intelligent rental price prediction tool tailored for real estate markets. By analyzing factors such as property size, number of rooms, amenities, and market trends, RentWizard forecasts rental prices with high precision. Utilizing regression techniques, it offers valuable insights to landlords, tenants, and property investors, facilitating optimal rental pricing strategies and negotiations.",
             "link": "https://github.com/VedantKale106/RentWizard",
-            "image": "Screenshots/RentWizard.png"
+            "image": "images/RentWizard.png"
         }
     ]
 
