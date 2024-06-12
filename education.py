@@ -15,6 +15,7 @@ def app():
         {
             "name": "Higher Secondary School Certificate (HSC), 2022",
             "school": "G.R.P.Sabnis College, Narayangaon",
+            "year": "2022",
             "percentage": "79.83% (PCM)",
             "image": "images/grps.jpeg",
             "caption": "G.R.P.Sabnis College"
@@ -22,6 +23,7 @@ def app():
         {
             "name": "Secondary School Certificate (SSC), 2020",
             "school": "Shakarrao Butte Patil Vidyalaya, Junnar",
+            "year": "2020",
             "percentage": "93.40%",
             "image": "images/sbp.jpeg",
             "caption": "Shakarrao Butte Patil Vidyalaya"
