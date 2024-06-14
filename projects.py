@@ -15,6 +15,12 @@ def app():
             "description": "RentWizard is an intelligent rental price prediction tool tailored for real estate markets. By analyzing factors such as property size, number of rooms, amenities, and market trends, RentWizard forecasts rental prices with high precision. Utilizing regression techniques, it offers valuable insights to landlords, tenants, and property investors, facilitating optimal rental pricing strategies and negotiations.",
             "link": "https://github.com/VedantKale106/RentWizard",
             "image": "images/RentWizard.png"
+        },
+        {
+            "name": "MovieMatch",
+            "description": "MovieMatch is a movie recommendation and search system that helps users discover new movies based on their preferences. Utilizing collaborative filtering and content-based algorithms, MovieMatch provides personalized movie suggestions and allows users to search for movies by genre, actor, director, and more. This project enhances the movie-watching experience by making it easier for users to find movies they will enjoy.",
+            "link": "https://github.com/VedantKale106/MovieMatch",
+            "image": "images/MovieMatch.png"
         }
     ]
 
