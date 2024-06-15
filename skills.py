@@ -18,13 +18,12 @@ def app():
         {"name": "Data Structures and Algorithms", "logo": "images/dsa.jpeg"},
     ]
 
-    # Display skills in a grid layout
     num_columns = 3
     columns = st.columns(num_columns)
     for i, skill in enumerate(skills):
         with columns[i % num_columns]:
             img = Image.open(skill["logo"]).convert("RGBA")
-            img = img.resize((120, 120))  # Ensure consistent size
+            img = img.resize((120, 120))
             st.image(img, width=200)
             st.write(f"**{skill['name']}**")
 
