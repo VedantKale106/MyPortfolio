@@ -32,7 +32,7 @@ def app():
 
     for education in education_details:
         st.markdown(f"## {education['name']}")
-        col1, col2 = st.columns([1, 3])  # Adjust the column ratios as needed
+        col1, col2 = st.columns([1, 3])  
 
         with col1:
             st.image(education["image"], caption=education["caption"], use_column_width=True)
@@ -41,6 +41,5 @@ def app():
             st.write(f"- **Institution/School:** {education.get('institution', education.get('school'))}")
             st.write(f"- **CGPA/Percentage:** {education.get('cgpa', education.get('percentage'))}")
 
-# Run the Streamlit app
 if __name__ == '__main__':
     app()
