@@ -26,9 +26,9 @@ def app():
 
     for project in projects:
         st.subheader(project["name"])
-        col1, col2 = st.columns([1.5, 2.5])  # Adjusted column widths
+        col1, col2 = st.columns([1.5, 2.5])
         with col1:
-            st.image(project["image"], caption=project["name"], use_column_width=True)  # Use Streamlit's image function
+            st.image(project["image"], caption=project["name"], use_column_width=True) 
         with col2:
             st.write(project["description"])
             st.markdown(f"[GitHub Repository]({project['link']})")
