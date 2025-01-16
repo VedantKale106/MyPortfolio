@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedant Kale - Ninja Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --naruto-orange: #FF7E1F;
+            --naruto-black: #2C2C2C;
+            --leaf-green: #4CAF50;
+            --chakra-blue: #00A3FF;
+        }
+        
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            background-image: url("{{ url_for('static', filename='leaf-pattern.png') }}");
+            overflow-x: hidden;
+        }
+        
+        .ninja-card {
+            background: rgba(44, 44, 44, 0.95);
+            border: 2px solid var(--naruto-orange);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ninja-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 126, 31, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+        
+        .ninja-card:hover::before {
+            left: 100%;
+        }
+        
+        .ninja-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px var(--naruto-orange);
+        }
+        
+        .ninja-heading {
+            color: var(--naruto-orange);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .chakra-text {
+            background: linear-gradient(45deg, var(--naruto-orange), var(--chakra-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: chakra-pulse 2s infinite;
+        }
+
+        .skill-tag {
+            background: var(--naruto-orange);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            display: inline-block;
+            margin: 0.25rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.1);
+            background: var(--chakra-blue);
+        }
+
+        .ninja-scroll {
+            position: relative;
+            padding: 2rem;
+            background: url("{{ url_for('static', filename='image.png') }}") center/cover no-repeat;
+        }
+
+        .rasengan-loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--chakra-blue);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes chakra-pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Naruto-themed scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--naruto-black);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--naruto-orange);
+            border-radius: 5px;
+        }
+
+        .kunai-bullet {
+            list-style: none;
+            position: relative;
+            padding-left: 1.5em;
+        }
+
+        .kunai-bullet::before {
+            content: '⚔️';
+            position: absolute;
+            left: 0;
+            transform: rotate(45deg);
+        }
+
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--naruto-orange);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '忍';
+            position: absolute;
+            font-size: 20rem;
+            opacity: 0.1;
+            right: -5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-50%) translateX(-20px); }
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <nav class="bg-gray-900/95 p-4 sticky top-0 z-50 backdrop-blur-sm">
+        <div class="flex justify-between items-center max-w-7xl mx-auto px-4">
+            <h1 class="text-2xl font-bold chakra-text">忍者 Vedant Kale</h1>
+            <div class="space-x-6">
+                <a href="#about" class="nav-link text-white hover:text-orange-500 transition-colors">About</a>
+                <a href="#skills" class="nav-link text-white hover:text-orange-500 transition-colors">Skills</a>
+                <a href="#projects" class="nav-link text-white hover:text-orange-500 transition-colors">Projects</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero-section px-4 py-24 text-center">
+            <h1 class="text-6xl font-bold ninja-heading mb-4 animate__animated animate__fadeIn">Vedant Kale</h1>
+            <p class="text-2xl text-gray-300 animate__animated animate__fadeIn animate__delay-1s">
+                Data Science Ninja | Machine Learning Enthusiast
+            </p>
+            <div class="mt-8 animate__animated animate__fadeIn animate__delay-2s">
+                <span class="inline-block p-2 bg-orange-500/20 rounded-lg">
+                    忍道 - The Ninja Way of Code
+                </span>
+            </div>
+        </section>
+
+        <section id="about" class="px-4 py-16 scroll-reveal">
+            <div class="ninja-card p-8 rounded-lg max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold ninja-heading mb-6">About Me</h2>
+                <p class="text-lg leading-relaxed">
+                    Greetings, fellow shinobi! I am a Computer Science major from Pune, India, walking the path of the 
+                    data ninja. With the Will of Code burning strong, I channel my chakra into data science and machine learning,
+                    seeking to master the arts of problem-solving and data-driven decision-making. Like a true ninja,
+                    I have honed my skills in various jutsu including Python, C++, SQL, Flask, and more.
+                </p>
+            </div>
+        </section>
+
+        <section id="skills" class="px-4 py-16 scroll-reveal">
+            <div class="ninja-card p-8 rounded-lg max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold ninja-heading mb-6">Ninja Skills</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    {% for category, skill_list in skills.items() %}
+                    <div class="ninja-scroll p-6">
+                        <h3 class="text-xl font-bold mb-4 chakra-text">{{ category }}</h3>
+                        <div class="flex flex-wrap gap-2">
+                            {% for skill in skill_list %}
+                            <span class="skill-tag animate__animated animate__fadeIn">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="px-4 py-16 scroll-reveal">
+            <h2 class="text-3xl font-bold ninja-heading mb-6 text-center">Secret Scrolls (Projects)</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+                {% for project in projects %}
+                <div class="ninja-card p-6 rounded-lg animate__animated animate__fadeIn">
+                    <h3 class="text-xl font-bold mb-2 chakra-text">{{ project.name }}</h3>
+                    <p class="text-sm text-gray-400 mb-2">{{ project.type }}</p>
+                    <p class="text-gray-300">{{ project.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900/95 py-8 mt-16 backdrop-blur-sm">
+        <div class="text-center">
+            <p class="text-gray-400">© 2024 Vedant Kale | Crafted with Ninja Way 忍道</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach((element) => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
