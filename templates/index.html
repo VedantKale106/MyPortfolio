@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vedant Kale - Ninja Portfolio</title>
+    <title>Vedant Kale</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
@@ -13,7 +14,7 @@
             --leaf-green: #4CAF50;
             --chakra-blue: #00A3FF;
         }
-        
+
         body {
             background-color: #1a1a1a;
             color: #ffffff;
@@ -21,7 +22,7 @@
             background-image: url("{{ url_for('static', filename='leaf-pattern.png') }}");
             overflow-x: hidden;
         }
-        
+
         .ninja-card {
             background: rgba(44, 44, 44, 0.95);
             border: 2px solid var(--naruto-orange);
@@ -29,7 +30,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .ninja-card::before {
             content: '';
             position: absolute;
@@ -37,24 +38,22 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 126, 31, 0.2),
-                transparent
-            );
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 126, 31, 0.2),
+                    transparent);
             transition: 0.5s;
         }
-        
+
         .ninja-card:hover::before {
             left: 100%;
         }
-        
+
         .ninja-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 0 15px var(--naruto-orange);
         }
-        
+
         .ninja-heading {
             color: var(--naruto-orange);
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -87,123 +86,127 @@
 
         .ninja-scroll {
             position: relative;
-            padding: 2rem;
-            background: url("{{ url_for('static', filename='image.png') }}") center/cover no-repeat;
+            padding: 1rem;
+            background: rgba(44, 44, 44, 0.95);
+            border-radius: 0.5rem;
+            margin: 0.5rem 0;
         }
 
-        .rasengan-loader {
-            width: 50px;
-            height: 50px;
-            border: 3px solid var(--chakra-blue);
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s linear infinite;
+        /* Mobile-friendly adjustments */
+        @media (max-width: 768px) {
+            .ninja-scroll {
+                padding: 0.75rem;
+                margin: 0.25rem 0;
+            }
+
+            .skill-tag {
+                padding: 0.25rem 0.75rem;
+                font-size: 0.875rem;
+            }
         }
 
-        @keyframes chakra-pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Naruto-themed scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--naruto-black);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--naruto-orange);
-            border-radius: 5px;
-        }
-
-        .kunai-bullet {
-            list-style: none;
-            position: relative;
-            padding-left: 1.5em;
-        }
-
-        .kunai-bullet::before {
-            content: '⚔️';
-            position: absolute;
+        /* Mobile menu styles */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
             left: 0;
-            transform: rotate(45deg);
-        }
-
-        .nav-link {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--naruto-orange);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
             width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 26, 0.98);
+            z-index: 100;
+            padding: 2rem;
         }
 
-        .hero-section {
-            position: relative;
-            overflow: hidden;
+        .mobile-menu.active {
+            display: block;
         }
 
-        .hero-section::before {
-            content: '忍';
-            position: absolute;
-            font-size: 20rem;
-            opacity: 0.1;
-            right: -5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            animation: float 6s ease-in-out infinite;
+        .menu-button {
+            display: none;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(-50%) translateX(0); }
-            50% { transform: translateY(-50%) translateX(-20px); }
+        @media (max-width: 768px) {
+            .menu-button {
+                display: block;
+            }
+
+            .desktop-menu {
+                display: none;
+            }
         }
 
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
+        /* Contact form styles */
+        .contact-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--naruto-orange);
+            color: white;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            width: 100%;
+            transition: all 0.3s ease;
         }
 
-        .scroll-reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .contact-input:focus {
+            outline: none;
+            border-color: var(--chakra-blue);
+            box-shadow: 0 0 10px rgba(0, 163, 255, 0.3);
+        }
+
+        .submit-button {
+            background: var(--naruto-orange);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background: var(--chakra-blue);
+            transform: translateY(-2px);
         }
     </style>
 </head>
+
 <body class="min-h-screen">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="flex justify-end mb-8">
+            <button onclick="toggleMenu()" class="text-white text-2xl">&times;</button>
+        </div>
+        <div class="flex flex-col space-y-6 text-center">
+            <a href="#about" class="nav-link text-white text-xl" onclick="toggleMenu()">About</a>
+            <a href="#skills" class="nav-link text-white text-xl" onclick="toggleMenu()">Skills</a>
+            <a href="#projects" class="nav-link text-white text-xl" onclick="toggleMenu()">Projects</a>
+            <a href="#contact" class="nav-link text-white text-xl" onclick="toggleMenu()">Contact</a>
+        </div>
+    </div>
+
     <nav class="bg-gray-900/95 p-4 sticky top-0 z-50 backdrop-blur-sm">
         <div class="flex justify-between items-center max-w-7xl mx-auto px-4">
-            <h1 class="text-2xl font-bold chakra-text">忍者 Vedant Kale</h1>
-            <div class="space-x-6">
+            <a href="#home">
+                <h1 class="text-2xl font-bold chakra-text">忍者 Vedant Kale</h1>
+              </a>
+              
+            <div class="desktop-menu space-x-6">
                 <a href="#about" class="nav-link text-white hover:text-orange-500 transition-colors">About</a>
                 <a href="#skills" class="nav-link text-white hover:text-orange-500 transition-colors">Skills</a>
                 <a href="#projects" class="nav-link text-white hover:text-orange-500 transition-colors">Projects</a>
+                <a href="#contact" class="nav-link text-white hover:text-orange-500 transition-colors">Contact</a>
             </div>
+            <button class="menu-button text-white" onclick="toggleMenu()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
         </div>
     </nav>
 
     <main>
-        <section class="hero-section px-4 py-24 text-center">
+        <section id="home" class="hero-section px-4 py-24 text-center">
             <h1 class="text-6xl font-bold ninja-heading mb-4 animate__animated animate__fadeIn">Vedant Kale</h1>
             <p class="text-2xl text-gray-300 animate__animated animate__fadeIn animate__delay-1s">
                 Data Science Ninja | Machine Learning Enthusiast
@@ -215,29 +218,253 @@
             </div>
         </section>
 
-        <section id="about" class="px-4 py-16 scroll-reveal">
-            <div class="ninja-card p-8 rounded-lg max-w-4xl mx-auto">
-                <h2 class="text-3xl font-bold ninja-heading mb-6">About Me</h2>
-                <p class="text-lg leading-relaxed">
-                    Greetings, fellow shinobi! I am a Computer Science major from Pune, India, walking the path of the 
-                    data ninja. With the Will of Code burning strong, I channel my chakra into data science and machine learning,
-                    seeking to master the arts of problem-solving and data-driven decision-making. Like a true ninja,
-                    I have honed my skills in various jutsu including Python, C++, SQL, Flask, and more.
-                </p>
+        <section id="about" class="px-4 py-16 scroll-reveal relative">
+            <!-- Decorative Background Elements -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
+                <div style="position: absolute; 
+                            font-size: 180px; 
+                            top: 50%; 
+                            left: -20px; 
+                            transform: translateY(-50%) rotate(-90deg);">
+                    忍道
+                </div>
+            </div>
+
+            <div class="ninja-card p-8 rounded-lg max-w-4xl mx-auto relative" style="background: linear-gradient(145deg, rgba(44, 44, 44, 0.95), rgba(28, 28, 28, 0.95)); 
+                        border: 2px solid var(--naruto-orange);">
+
+                <!-- Decorative Scroll Elements -->
+                <div class="absolute top-0 left-0 w-16 h-16" style="border-top: 3px solid var(--naruto-orange); 
+                            border-left: 3px solid var(--naruto-orange); 
+                            opacity: 0.7;"></div>
+                <div class="absolute top-0 right-0 w-16 h-16" style="border-top: 3px solid var(--naruto-orange); 
+                            border-right: 3px solid var(--naruto-orange); 
+                            opacity: 0.7;"></div>
+                <div class="absolute bottom-0 left-0 w-16 h-16" style="border-bottom: 3px solid var(--naruto-orange); 
+                            border-left: 3px solid var(--naruto-orange); 
+                            opacity: 0.7;"></div>
+                <div class="absolute bottom-0 right-0 w-16 h-16" style="border-bottom: 3px solid var(--naruto-orange); 
+                            border-right: 3px solid var(--naruto-orange); 
+                            opacity: 0.7;"></div>
+
+                <!-- Section Title with Decoration -->
+                <div class="text-center mb-8 relative">
+                    <h2 class="text-3xl font-bold ninja-heading inline-block"
+                        style="text-shadow: 0 0 10px var(--naruto-orange);">
+                        <span style="opacity: 0.6; margin-right: 8px;">忍者</span>
+                        My Ninja Way
+                    </h2>
+                    <!-- Decorative Headband -->
+                    <div style="position: absolute; 
+                               top: -15px; 
+                               left: 50%; 
+                               transform: translateX(-50%); 
+                               font-size: 24px;">
+                    </div>
+                </div>
+
+                <!-- About Content -->
+                <div class="space-y-6 relative" style="background: rgba(0, 0, 0, 0.2); 
+                            padding: 2rem; 
+                            border-radius: 1rem; 
+                            border-left: 4px solid var(--naruto-orange);">
+
+                    <p class="text-lg leading-relaxed chakra-text-glow">
+                        Konnichiwa, fellow shinobi! Like Naruto's journey to become Hokage, I am on my path to becoming
+                        a master of the digital arts!
+                        <span style="color: var(--naruto-orange);">Born in the hidden village of Junnar</span>, I carry
+                        the Will of Code that burns as
+                        bright as the Will of Fire! 🔥
+                    </p>
+
+                    <p class="text-lg leading-relaxed chakra-text-glow">
+                        Just as Naruto mastered the Shadow Clone Jutsu, I've developed expertise in creating parallel
+                        processing algorithms.
+                        Like Sasuke's Sharingan analyzing movements, I use <span style="color: var(--chakra-blue);">data
+                            science to recognize patterns</span>
+                        and derive insights. My machine learning models are as precise as Kakashi's Lightning Blade! ⚡
+                    </p>
+
+                    <p class="text-lg leading-relaxed chakra-text-glow">
+                        Following the way of the sage, I've mastered many jutsu including:
+                        <span class="block mt-4 ml-6"
+                            style="border-left: 2px solid var(--naruto-orange); padding-left: 1rem;">
+                            • Python Style: Data Manipulation Jutsu 🐍<br>
+                            • Mongodb Art: Database Query Mastery 📊<br>
+                            • Flask Technique: Web Application Deployment 🌐
+                        </span>
+                    </p>
+
+                    <p class="text-lg leading-relaxed chakra-text-glow">
+                        Like the Fourth Hokage's Flying Raijin, I swiftly adapt to new technologies. My goal? To become
+                        a Tech Hokage in the
+                        world of data science, believing in the power of continuous learning and growth, dattebayo! 💫
+                    </p>
+                </div>
+
+                <!-- Decorative Elements -->
+                <div class="absolute bottom-4 right-4 transform rotate-45 opacity-30" style="font-size: 24px;">
+                    ⚔️
+                </div>
             </div>
         </section>
 
-        <section id="skills" class="px-4 py-16 scroll-reveal">
-            <div class="ninja-card p-8 rounded-lg max-w-4xl mx-auto">
-                <h2 class="text-3xl font-bold ninja-heading mb-6">Ninja Skills</h2>
+        <style>
+            .chakra-text-glow {
+                position: relative;
+                z-index: 1;
+            }
+
+            .chakra-text-glow::selection {
+                background: var(--naruto-orange);
+                color: white;
+            }
+
+            .ninja-card {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .ninja-card::after {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: linear-gradient(45deg,
+                        transparent,
+                        rgba(255, 126, 31, 0.1),
+                        transparent);
+                transform: rotate(45deg);
+                animation: shimmer 3s infinite;
+            }
+
+            @keyframes shimmer {
+                0% {
+                    transform: rotate(45deg) translateY(-100%);
+                }
+
+                100% {
+                    transform: rotate(45deg) translateY(100%);
+                }
+            }
+
+            .chakra-text-glow:hover {
+                text-shadow: 0 0 8px rgba(255, 126, 31, 0.5);
+                transition: text-shadow 0.3s ease;
+            }
+        </style>
+
+        <section id="skills" class="px-4 py-16 scroll-reveal relative">
+            <!-- Background Kanji -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none" style="opacity: 0.05; 
+                        z-index: 0;">
+                <div style="position: absolute; 
+                            font-size: 200px; 
+                            top: 10%; 
+                            left: 5%; 
+                            transform: rotate(-15deg);">
+                    術
+                </div>
+                <div style="position: absolute; 
+                            font-size: 200px; 
+                            bottom: 10%; 
+                            right: 5%; 
+                            transform: rotate(15deg);">
+                    技
+                </div>
+            </div>
+
+            <div class="ninja-card p-8 rounded-lg max-w-4xl mx-auto relative"
+                style="background: linear-gradient(145deg, rgba(44, 44, 44, 0.95), rgba(28, 28, 28, 0.95));">
+
+                <!-- Decorative Corner Elements -->
+                <div class="absolute top-0 left-0 w-12 h-12" style="border-top: 3px solid var(--naruto-orange); 
+                            border-left: 3px solid var(--naruto-orange);"></div>
+                <div class="absolute top-0 right-0 w-12 h-12" style="border-top: 3px solid var(--naruto-orange); 
+                            border-right: 3px solid var(--naruto-orange);"></div>
+                <div class="absolute bottom-0 left-0 w-12 h-12" style="border-bottom: 3px solid var(--naruto-orange); 
+                            border-left: 3px solid var(--naruto-orange);"></div>
+                <div class="absolute bottom-0 right-0 w-12 h-12" style="border-bottom: 3px solid var(--naruto-orange); 
+                            border-right: 3px solid var(--naruto-orange);"></div>
+
+                <!-- Section Title -->
+                <div class="text-center relative mb-8">
+                    <h2 class="text-3xl font-bold ninja-heading inline-block"
+                        style="text-shadow: 0 0 10px var(--naruto-orange);">
+                        <span style="opacity: 0.6; margin-right: 8px;">忍術</span>
+                        Ninja Skills
+                    </h2>
+                    <!-- Decorative Sword Elements -->
+                    <span style="position: absolute; 
+                                left: 25%; 
+                                top: 50%; 
+                                transform: translateY(-50%) rotate(30deg);">
+                        ⚔️
+                    </span>
+                    <span style="position: absolute; 
+                                right: 25%; 
+                                top: 50%; 
+                                transform: translateY(-50%) rotate(-30deg);">
+                        ⚔️
+                    </span>
+                </div>
+
                 <div class="grid md:grid-cols-2 gap-8">
                     {% for category, skill_list in skills.items() %}
-                    <div class="ninja-scroll p-6">
-                        <h3 class="text-xl font-bold mb-4 chakra-text">{{ category }}</h3>
-                        <div class="flex flex-wrap gap-2">
+                    <div class="ninja-scroll p-6 relative" style="background: rgba(0, 0, 0, 0.3); 
+                                border: 1px solid rgba(255, 126, 31, 0.3); 
+                                backdrop-filter: blur(5px);">
+                        <!-- Category Header -->
+                        <div class="relative mb-6">
+                            <h3 class="text-xl font-bold chakra-text" style="text-shadow: 0 0 5px var(--chakra-blue);">
+                                {{ category }}
+                            </h3>
+                            <!-- Decorative Line -->
+                            <div style="height: 2px; 
+                                       background: linear-gradient(90deg, 
+                                                                 var(--naruto-orange), 
+                                                                 var(--chakra-blue), 
+                                                                 transparent);
+                                       margin-top: 4px;"></div>
+                        </div>
+
+                        <!-- Skills Container -->
+                        <div class="flex flex-wrap gap-3">
                             {% for skill in skill_list %}
-                            <span class="skill-tag animate__animated animate__fadeIn">{{ skill }}</span>
+                            <span class="skill-tag animate__animated animate__fadeIn" style="background: linear-gradient(135deg, 
+                                                                  var(--naruto-orange), 
+                                                                  var(--chakra-blue)); 
+                                         position: relative; 
+                                         overflow: hidden;">
+                                <!-- Chakra Glow Effect -->
+                                <span style="position: absolute; 
+                                           inset: 0; 
+                                           background: radial-gradient(circle at center, 
+                                                                   rgba(255,255,255,0.2), 
+                                                                   transparent 70%); 
+                                           opacity: 0; 
+                                           transition: opacity 0.3s;" class="chakra-glow"></span>
+                                {{ skill }}
+                            </span>
                             {% endfor %}
+                        </div>
+
+                        <!-- Corner Kunai Decorations -->
+                        <div style="position: absolute; 
+                                   top: -5px; 
+                                   left: -5px; 
+                                   transform: rotate(-45deg); 
+                                   font-size: 12px;">
+                            ⚔️
+                        </div>
+                        <div style="position: absolute; 
+                                   top: -5px; 
+                                   right: -5px; 
+                                   transform: rotate(45deg); 
+                                   font-size: 12px;">
+                            ⚔️
                         </div>
                     </div>
                     {% endfor %}
@@ -245,25 +472,354 @@
             </div>
         </section>
 
+        <style>
+            .skill-tag {
+                padding: 0.5rem 1rem;
+                border-radius: 999px;
+                color: white;
+                font-weight: 500;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+                transition: all 0.3s ease;
+            }
+
+            .skill-tag:hover {
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 5px 15px rgba(255, 126, 31, 0.3);
+            }
+
+            .skill-tag:hover .chakra-glow {
+                opacity: 1;
+            }
+
+            .ninja-scroll {
+                border-radius: 8px;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .ninja-scroll:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3),
+                    0 0 15px rgba(255, 126, 31, 0.2);
+            }
+
+            @keyframes float {
+
+                0%,
+                100% {
+                    transform: translateY(0);
+                }
+
+                50% {
+                    transform: translateY(-10px);
+                }
+            }
+
+            .chakra-text {
+                position: relative;
+            }
+
+            .chakra-text::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg,
+                        var(--naruto-orange),
+                        var(--chakra-blue),
+                        var(--naruto-orange));
+                background-size: 200% 100%;
+                animation: gradient-slide 3s linear infinite;
+            }
+
+            @keyframes gradient-slide {
+                0% {
+                    background-position: 100% 0;
+                }
+
+                100% {
+                    background-position: -100% 0;
+                }
+            }
+        </style>
+
         <section id="projects" class="px-4 py-16 scroll-reveal">
-            <h2 class="text-3xl font-bold ninja-heading mb-6 text-center">Secret Scrolls (Projects)</h2>
+            <h2 class="text-3xl font-bold ninja-heading mb-6 text-center"
+                style="text-shadow: 0 0 10px var(--naruto-orange);">
+                忍術 Secret Scrolls (Projects)
+            </h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
                 {% for project in projects %}
-                <div class="ninja-card p-6 rounded-lg animate__animated animate__fadeIn">
-                    <h3 class="text-xl font-bold mb-2 chakra-text">{{ project.name }}</h3>
-                    <p class="text-sm text-gray-400 mb-2">{{ project.type }}</p>
-                    <p class="text-gray-300">{{ project.description }}</p>
+                <div class="ninja-card p-6 rounded-lg animate__animated animate__fadeIn" style="background: linear-gradient(145deg, rgba(44, 44, 44, 0.95), rgba(28, 28, 28, 0.95)); 
+                            transform-style: preserve-3d; 
+                            transition: all 0.4s ease-out;">
+                    <!-- Ninja Scroll Header -->
+                    <div class="relative mb-4" style="border-bottom: 2px solid var(--naruto-orange); 
+                                padding-bottom: 0.5rem;">
+                        <!-- Scroll Edge Design -->
+                        <div style="position: absolute; 
+                                   left: -10px; 
+                                   top: 50%; 
+                                   width: 20px; 
+                                   height: 20px; 
+                                   background: var(--naruto-orange); 
+                                   border-radius: 50%; 
+                                   transform: translateY(-50%);"></div>
+                        <div style="position: absolute; 
+                                   right: -10px; 
+                                   top: 50%; 
+                                   width: 20px; 
+                                   height: 20px; 
+                                   background: var(--naruto-orange); 
+                                   border-radius: 50%; 
+                                   transform: translateY(-50%);"></div>
+
+                        <h3 class="text-xl font-bold chakra-text pl-4" style="text-shadow: 0 0 5px var(--chakra-blue);">
+                            {{ project.name }}
+                        </h3>
+                    </div>
+
+                    <!-- Project Type Badge -->
+                    <div class="mb-3">
+                        <span style="background: linear-gradient(45deg, var(--naruto-orange), var(--chakra-blue)); 
+                                   padding: 0.3rem 1rem; 
+                                   border-radius: 999px; 
+                                   font-size: 0.875rem; 
+                                   color: white; 
+                                   text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
+                            {{ project.type }}
+                        </span>
+                    </div>
+
+                    <!-- Project Description with Scroll Design -->
+                    <div class="relative" style="background: rgba(0,0,0,0.2); 
+                                padding: 1rem; 
+                                border-radius: 0.5rem; 
+                                border-left: 3px solid var(--naruto-orange);">
+                        <!-- Kunai Icon -->
+                        <div style="position: absolute; 
+                                   left: -6px; 
+                                   top: 10px; 
+                                   transform: rotate(-45deg);">
+                        </div>
+                        <p class="text-gray-300" style="line-height: 1.6; 
+                                  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
+                            {{ project.description }}
+                        </p>
+                    </div>
+
+                    <!-- Chakra Effect on Hover -->
+                    <div class="absolute inset-0 opacity-0 hover:opacity-100" style="background: radial-gradient(circle at center, 
+                                                          var(--chakra-blue) 0%, 
+                                                          transparent 70%); 
+                                mix-blend-mode: overlay; 
+                                pointer-events: none; 
+                                transition: opacity 0.3s ease;">
+                    </div>
                 </div>
                 {% endfor %}
             </div>
+
+            <!-- Decorative Ninja Elements -->
+            <div class="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none" style="font-size: 120px; 
+                        opacity: 0.1; 
+                        transform: rotate(-90deg);">
+                忍
+            </div>
+            <div class="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none" style="font-size: 120px; 
+                        opacity: 0.1; 
+                        transform: rotate(90deg);">
+                術
+            </div>
         </section>
+
+        <style>
+            .ninja-card {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .ninja-card:hover {
+                transform: translateY(-10px) scale(1.02) !important;
+                box-shadow: 0 10px 30px rgba(255, 126, 31, 0.3),
+                    0 0 20px rgba(0, 163, 255, 0.2) !important;
+            }
+
+            .ninja-card::after {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: linear-gradient(45deg,
+                        transparent,
+                        rgba(255, 126, 31, 0.1),
+                        transparent);
+                transform: rotate(45deg);
+                animation: shimmer 3s infinite;
+            }
+
+            @keyframes shimmer {
+                0% {
+                    transform: rotate(45deg) translateY(-100%);
+                }
+
+                100% {
+                    transform: rotate(45deg) translateY(100%);
+                }
+            }
+        </style>
     </main>
 
-    <footer class="bg-gray-900/95 py-8 mt-16 backdrop-blur-sm">
-        <div class="text-center">
-            <p class="text-gray-400">© 2024 Vedant Kale | Crafted with Ninja Way 忍道</p>
+
+    <section id="contact" class="px-4 py-16 scroll-reveal">
+        <div class="ninja-card p-8 rounded-lg max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold ninja-heading mb-6">Contact Me</h2>
+            <form class="space-y-6">
+                <div>
+                    <label for="name" class="block text-gray-300 mb-2">Name</label>
+                    <input type="text" id="name" class="contact-input" placeholder="Enter your name">
+                </div>
+                <div>
+                    <label for="email" class="block text-gray-300 mb-2">Email</label>
+                    <input type="email" id="email" class="contact-input" placeholder="Enter your email">
+                </div>
+                <div>
+                    <label for="message" class="block text-gray-300 mb-2">Message</label>
+                    <textarea id="message" rows="4" class="contact-input" placeholder="Your message"></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="submit-button">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900/95 py-12 mt-16 backdrop-blur-sm relative">
+        <!-- Decorative Background Symbol -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
+            <div style="position: absolute; 
+                        font-size: 180px; 
+                        bottom: -30px; 
+                        left: 50%; 
+                        transform: translateX(-50%);">
+                忍
+            </div>
+        </div>
+    
+        <div class="max-w-6xl mx-auto px-4">
+            <!-- Grid Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Logo & Copyright -->
+                <div class="text-center md:text-left">
+                    <h3 class="text-xl font-bold chakra-text mb-4">Vedant Kale</h3>
+                    <p class="text-gray-400">© 2024 | Crafted with Ninja Way</p>
+                </div>
+    
+                <!-- Connect Section -->
+                <div class="text-center md:text-left">
+                    <h3 class="text-white font-semibold mb-4" 
+                        style="border-bottom: 2px solid var(--naruto-orange); 
+                               display: inline-block; 
+                               padding-bottom: 2px;">
+                        Connect
+                    </h3>
+                    <div class="space-y-2">
+                        <a href="mailto:your.email@example.com" 
+                           class="text-gray-400 hover:text-orange-500 flex items-center justify-center md:justify-start gap-2 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            <span>vedant.kale22@pccoepune.org</span>
+                        </a>
+                        <a href="tel:+91 8421204009" 
+                           class="text-gray-400 hover:text-orange-500 flex items-center justify-center md:justify-start gap-2 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                            </svg>
+                            <span>+91 8421204009</span>
+                        </a>
+                    </div>
+                </div>
+    
+                <!-- Social Links -->
+                <div class="text-center md:text-left">
+                    <h3 class="text-white font-semibold mb-4" 
+                        style="border-bottom: 2px solid var(--naruto-orange); 
+                               display: inline-block; 
+                               padding-bottom: 2px;">
+                        Social
+                    </h3>
+                    <div class="space-y-2">
+                        <a href="https://github.com/vedantkale106" target="_blank" 
+                           class="text-gray-400 hover:text-orange-500 flex items-center justify-center md:justify-start gap-2 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://linkedin.com/in/vedantkale106" target="_blank" 
+                           class="text-gray-400 hover:text-orange-500 flex items-center justify-center md:justify-start gap-2 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
+                </div>
+    
+                <!-- Quick Links -->
+                <div class="text-center md:text-left">
+                    <h3 class="text-white font-semibold mb-4" 
+                        style="border-bottom: 2px solid var(--naruto-orange); 
+                               display: inline-block; 
+                               padding-bottom: 2px;">
+                        Quick Links
+                    </h3>
+                    <div class="space-y-2">
+                        <a href="#about" class="text-gray-400 hover:text-orange-500 block transition-colors">About</a>
+                        <a href="#skills" class="text-gray-400 hover:text-orange-500 block transition-colors">Skills</a>
+                        <a href="#projects" class="text-gray-400 hover:text-orange-500 block transition-colors">Projects</a>
+                        <a href="#contact" class="text-gray-400 hover:text-orange-500 block transition-colors">Contact</a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Bottom Border -->
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center">
+                <p class="text-gray-500 text-sm">
+                    "The one who continues to learn and grow becomes stronger than they were yesterday."
+                </p>
+            </div>
         </div>
     </footer>
+    
+    <style>
+        footer a {
+            transition: all 0.3s ease;
+        }
+    
+        footer a:hover {
+            transform: translateX(5px);
+        }
+    
+        @media (max-width: 768px) {
+            footer a:hover {
+                transform: none;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 
     <script>
         // Scroll reveal animation
@@ -282,6 +838,19 @@
         document.querySelectorAll('.scroll-reveal').forEach((element) => {
             observer.observe(element);
         });
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const menu = document.getElementById('mobileMenu');
+                menu.classList.remove('active');
+            });
+        });
     </script>
 </body>
+
 </html>
