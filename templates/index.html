@@ -218,7 +218,7 @@
             </div>
         </section>
 
-        <section id="about" class="px-4 py-16 scroll-reveal relative">
+        <section id="about" class="px-4 py-16 scroll-reveal relative ">
             <!-- Decorative Background Elements -->
             <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
                 <div style="position: absolute; 
@@ -269,37 +269,27 @@
                             border-radius: 1rem; 
                             border-left: 4px solid var(--naruto-orange);">
 
-                    <p class="text-lg leading-relaxed chakra-text-glow">
-                        Konnichiwa, fellow shinobi! Like Naruto's journey to become Hokage, I am on my path to becoming
-                        a master of the digital arts!
-                        <span style="color: var(--naruto-orange);">Born in the hidden village of Junnar</span>, I carry
-                        the Will of Code that burns as
-                        bright as the Will of Fire! 🔥
-                    </p>
+<p class="text-lg leading-relaxed chakra-text-glow">
+    Konnichiwa! I'm on my journey to become a master of digital arts, born in the hidden village of Junnar. I carry the Will of Code, burning bright like the Will of Fire! 🔥
+</p>
 
-                    <p class="text-lg leading-relaxed chakra-text-glow">
-                        Just as Naruto mastered the Shadow Clone Jutsu, I've developed expertise in creating parallel
-                        processing algorithms.
-                        Like Sasuke's Sharingan analyzing movements, I use <span style="color: var(--chakra-blue);">data
-                            science to recognize patterns</span>
-                        and derive insights. My machine learning models are as precise as Kakashi's Lightning Blade! ⚡
-                    </p>
+<p class="text-lg leading-relaxed chakra-text-glow">
+    Just like Naruto's Shadow Clone Jutsu, I create parallel processing algorithms, and like Sasuke's Sharingan, I use data science to analyze patterns and derive insights. ⚡
+</p>
 
-                    <p class="text-lg leading-relaxed chakra-text-glow">
-                        Following the way of the sage, I've mastered many jutsu including:
-                        <span class="block mt-4 ml-6"
-                            style="border-left: 2px solid var(--naruto-orange); padding-left: 1rem;">
-                            • Python Style: Data Manipulation Jutsu 🐍<br>
-                            • Mongodb Art: Database Query Mastery 📊<br>
-                            • Flask Technique: Web Application Deployment 🌐
-                        </span>
-                    </p>
+<p class="text-lg leading-relaxed chakra-text-glow">
+    My mastered jutsus include: 
+    <span class="block mt-4 ml-6" style="border-left: 2px solid var(--naruto-orange); padding-left: 1rem;">
+        • Python Style: Data Manipulation Jutsu 🐍<br>
+        • Mongodb Art: Database Query Mastery 📊<br>
+        • Flask Technique: Web Deployment 🌐
+    </span>
+</p>
 
-                    <p class="text-lg leading-relaxed chakra-text-glow">
-                        Like the Fourth Hokage's Flying Raijin, I swiftly adapt to new technologies. My goal? To become
-                        a Tech Hokage in the
-                        world of data science, believing in the power of continuous learning and growth, dattebayo! 💫
-                    </p>
+<p class="text-lg leading-relaxed chakra-text-glow">
+    Swiftly adapting to new tech like the Fourth Hokage’s Flying Raijin, my goal is to become a Tech Hokage in data science, always learning and growing, dattebayo! 💫
+</p>
+
                 </div>
 
                 <!-- Decorative Elements -->
@@ -543,83 +533,87 @@
                 }
             }
         </style>
-
+        
         <section id="projects" class="px-4 py-16 scroll-reveal">
-            <h2 class="text-3xl font-bold ninja-heading mb-6 text-center"
-                style="text-shadow: 0 0 10px var(--naruto-orange);">
+            <h2 class="text-3xl font-bold ninja-heading mb-6 text-center" style="text-shadow: 0 0 10px var(--naruto-orange);">
                 忍術 Secret Scrolls (Projects)
             </h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
                 {% for project in projects %}
-                <div class="ninja-card p-6 rounded-lg animate__animated animate__fadeIn" style="background: linear-gradient(145deg, rgba(44, 44, 44, 0.95), rgba(28, 28, 28, 0.95)); 
-                            transform-style: preserve-3d; 
-                            transition: all 0.4s ease-out;">
-                    <!-- Ninja Scroll Header -->
-                    <div class="relative mb-4" style="border-bottom: 2px solid var(--naruto-orange); 
-                                padding-bottom: 0.5rem;">
-                        <!-- Scroll Edge Design -->
-                        <div style="position: absolute; 
-                                   left: -10px; 
-                                   top: 50%; 
-                                   width: 20px; 
-                                   height: 20px; 
-                                   background: var(--naruto-orange); 
-                                   border-radius: 50%; 
-                                   transform: translateY(-50%);"></div>
-                        <div style="position: absolute; 
-                                   right: -10px; 
-                                   top: 50%; 
-                                   width: 20px; 
-                                   height: 20px; 
-                                   background: var(--naruto-orange); 
-                                   border-radius: 50%; 
-                                   transform: translateY(-50%);"></div>
-
-                        <h3 class="text-xl font-bold chakra-text pl-4" style="text-shadow: 0 0 5px var(--chakra-blue);">
-                            {{ project.name }}
-                        </h3>
-                    </div>
-
-                    <!-- Project Type Badge -->
-                    <div class="mb-3">
-                        <span style="background: linear-gradient(45deg, var(--naruto-orange), var(--chakra-blue)); 
-                                   padding: 0.3rem 1rem; 
-                                   border-radius: 999px; 
-                                   font-size: 0.875rem; 
-                                   color: white; 
-                                   text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-                            {{ project.type }}
-                        </span>
-                    </div>
-
-                    <!-- Project Description with Scroll Design -->
-                    <div class="relative" style="background: rgba(0,0,0,0.2); 
-                                padding: 1rem; 
-                                border-radius: 0.5rem; 
-                                border-left: 3px solid var(--naruto-orange);">
-                        <!-- Kunai Icon -->
-                        <div style="position: absolute; 
-                                   left: -6px; 
-                                   top: 10px; 
-                                   transform: rotate(-45deg);">
+                
+                <a href="{{ project.link }}" target="_blank">
+                    <div class="ninja-card p-6 rounded-lg animate__animated animate__fadeIn" style="background: linear-gradient(145deg, rgba(44, 44, 44, 0.95), rgba(28, 28, 28, 0.95)); 
+                                transform-style: preserve-3d; 
+                                transition: all 0.4s ease-out;">
+                        <!-- Ninja Scroll Header -->
+                        <div class="relative mb-4" style="border-bottom: 2px solid var(--naruto-orange); 
+                                    padding-bottom: 0.5rem;">
+                            <!-- Scroll Edge Design -->
+                            <div style="position: absolute; 
+                                       left: -10px; 
+                                       top: 50%; 
+                                       width: 20px; 
+                                       height: 20px; 
+                                       background: var(--naruto-orange); 
+                                       border-radius: 50%; 
+                                       transform: translateY(-50%);"></div>
+                            <div style="position: absolute; 
+                                       right: -10px; 
+                                       top: 50%; 
+                                       width: 20px; 
+                                       height: 20px; 
+                                       background: var(--naruto-orange); 
+                                       border-radius: 50%; 
+                                       transform: translateY(-50%);"></div>
+        
+                            <h3 class="text-xl font-bold chakra-text pl-4" style="text-shadow: 0 0 5px var(--chakra-blue);">
+                                {{ project.name }}
+                            </h3>
                         </div>
-                        <p class="text-gray-300" style="line-height: 1.6; 
-                                  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
-                            {{ project.description }}
-                        </p>
+        
+                        <!-- Project Type Badge -->
+                        <div class="mb-3">
+                            <span style="background: linear-gradient(45deg, var(--naruto-orange), var(--chakra-blue)); 
+                                       padding: 0.3rem 1rem; 
+                                       border-radius: 999px; 
+                                       font-size: 0.875rem; 
+                                       color: white; 
+                                       text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
+                                {{ project.type }}
+                            </span>
+                        </div>
+        
+                        <!-- Project Description with Scroll Design -->
+                        <div class="relative" style="background: rgba(0,0,0,0.2); 
+                                    padding: 1rem; 
+                                    border-radius: 0.5rem; 
+                                    border-left: 3px solid var(--naruto-orange);">
+                            <!-- Kunai Icon -->
+                            <div style="position: absolute; 
+                                       left: -6px; 
+                                       top: 10px; 
+                                       transform: rotate(-45deg);">
+                            </div>
+                            <p class="text-gray-300" style="line-height: 1.6; 
+                                      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
+                                {{ project.description }}
+                            </p>
+                        </div>
+        
+                        <!-- Chakra Effect on Hover -->
+                        <div class="absolute inset-0 opacity-0 hover:opacity-100" style="background: radial-gradient(circle at center, 
+                                                                      var(--chakra-blue) 0%, 
+                                                                      transparent 70%); 
+                                    mix-blend-mode: overlay; 
+                                    pointer-events: none; 
+                                    transition: opacity 0.3s ease;">
+                        </div>
                     </div>
-
-                    <!-- Chakra Effect on Hover -->
-                    <div class="absolute inset-0 opacity-0 hover:opacity-100" style="background: radial-gradient(circle at center, 
-                                                          var(--chakra-blue) 0%, 
-                                                          transparent 70%); 
-                                mix-blend-mode: overlay; 
-                                pointer-events: none; 
-                                transition: opacity 0.3s ease;">
-                    </div>
-                </div>
+                </a>
                 {% endfor %}
             </div>
+        </section>
+        
 
             <!-- Decorative Ninja Elements -->
             <div class="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none" style="font-size: 120px; 
