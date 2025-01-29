@@ -13,6 +13,18 @@ def home():
             "link":"https://vedantkale.vercel.app/"
         },
         {
+            "name": "KayKhau",
+            "type": "Food Recommendation Website",
+            "description": "A website that suggests random food options and helps users discover new dishes.",
+            "link": "https://kaykhau.vercel.app/"
+        },
+        {
+            "name": "LoveMail",
+            "type": "Anonymous Love Confession Platform",
+            "description": "A platform to send love confessions through email while keeping the sender anonymous.",
+            "link": "https://lovemail-rust.vercel.app/"
+        },
+        {
             "name": "PuneJourney",
             "type": "Travel Website",
             "description": "Your ultimate travel companion to explore, plan, and experience amazing destinations in and around Pune.",
