@@ -52,7 +52,7 @@ def home():
             "name": "Starscout",
             "type": "Private Project",
             "description": "Open only if you are 18+.",
-            "link":"https://github.com/VedantKale106/StarScout.git"
+            "link":"https://starscout.onrender.com/"
         },
         {
             "name": "Brazzers University",
