@@ -27,13 +27,13 @@ def home():
         {
             "name": "PuneJourney",
             "type": "Travel Website",
-            "description": "Your ultimate travel companion to explore, plan, and experience amazing destinations in and around Pune.",
+            "description": "Your ultimate guide to exploring, planning, experiencing Pune's amazing destinations.",
             "link":"https://punejourney.vercel.app/"
         },
         {
             "name": "PortfolioHub",
             "type": "Portfolio Website Generator",
-            "description": "A Flask-based tool for creating personalized portfolios with resmue maker and real-time previews",
+            "description": "A Flask-based tool for creating personalized portfolios and resumes with realtime previews",
             "link":"https://portfolioohub.vercel.app/"
         },
         {
@@ -45,7 +45,7 @@ def home():
         {
             "name": "Machine Mitra",
             "type": "Quick ML Models",
-            "description": "A tool to create machine learning models quickly and efficiently.",
+            "description": "Fast, efficient ML model creation",
             "link":"https://machinemitra.onrender.com/"
         },
         {
@@ -83,14 +83,30 @@ def home():
             "type": "Rent Predictor",
             "description": "A predictive tool for estimating rent prices in Pune Area.",
             "link":"https://github.com/VedantKale106/RentWizard.git"
+        },
+        {
+            "name": "Attendance-Mitra",
+            "type": "Attendance Tracker",
+            "description": "Streamlit app for real-time attendance tracking with PCET ERP data.",
+            "link": "https://github.com/VedantKale106/Attendence-Mitra.git"
+        },
+        {
+            "name": "BinanceBot",
+            "type": "Futures Trading Bot",
+            "description": "Binance Futures Testnet Flask bot: trades market/limit orders, validates, and logs.",
+            "link": "https://github.com/VedantKale106/Binance-Trade-Bot.git"
         }
+
+
     ]
     
     skills = {
-        "Programming Jutsu": ["Python", "C++", "SQL","Html","Css","R","Java"],
-        "Framework Style": ["Flask", "Pandas", "Sklearn", "Streamlit", "Mongodb","Numpy"],
-        "Shinobi Tools": ["Git", "GitHub", "Jupyter Notebook", "VS-Code"],
-        "Focus Areas": ["Data Science","Machine Learning","Full Stack Web Development"]
+        "Programming Jutsu": ["Python", "C++", "SQL","HTML","CSS","R","Java"],
+        "Database Ninjutsu": ["MySQL", "MongoDB", "SQLite"],
+        "Framework Style": ["Flask", "Pandas", "Sklearn", "Streamlit", "Mongodb","Numpy","BeautifulSoup","Selenium"],
+        "Shinobi Tools": ["Git", "GitHub", "Jupyter Notebook", "VS-Code","Power BI"],
+        "Focus Areas": ["Data Science","Machine Learning","Full Stack Web Development"],
+        "Deployment Arts": ["Heroku", "Render", "Vercel", "Railway", "GitHub Pages"]
     }
     
     return render_template('index.html', projects=projects, skills=skills)
