@@ -103,7 +103,7 @@ def home():
     skills = {
         "Programming Jutsu": ["Python", "C++", "SQL","HTML","CSS","R","Java"],
         "Database Ninjutsu": ["MySQL", "MongoDB", "SQLite"],
-        "Framework Style": ["Flask", "Pandas", "Sklearn", "Streamlit", "Mongodb","Numpy","BeautifulSoup","Selenium","Matplotlib"],
+        "Framework Style": ["Flask", "Pandas", "Sklearn", "Streamlit", "Mongodb","Numpy","BeautifulSoup","Selenium","Matplotlib","Seaborn"],
         "Shinobi Tools": ["Git", "GitHub", "Jupyter Notebook", "VS-Code","Power BI"],
         "Focus Areas": ["Data Science","Machine Learning","Full Stack Web Development"],
         "Deployment Arts": ["Heroku", "Render", "Vercel", "GitHub Pages"]
