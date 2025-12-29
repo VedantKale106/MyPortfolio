@@ -8,105 +8,104 @@ def home():
     projects = [
         {
             "name": "Portfolio Website",
-            "type": "Personal Website",
+            "type": "Personal Architecture",
             "description": "A personal portfolio to showcase my projects and skills.",
             "link":"https://vedantkale.vercel.app/"
         },
         {
             "name": "KayKhau",
-            "type": "Food Recommendation Website",
+            "type": "Recommendation Algo",
             "description": "A website that suggests random food options and helps users discover new dishes.",
             "link": "https://kaykhau.vercel.app/"
         },
         {
             "name": "LoveMail",
-            "type": "Anonymous Love Confession Platform",
+            "type": "Anonymity Protocol",
             "description": "A platform to send love confessions through email while keeping the sender anonymous.",
             "link": "https://lovemail-rust.vercel.app/"
         },
         {
             "name": "PuneJourney",
-            "type": "Travel Website",
+            "type": "Navigation System",
             "description": "Your ultimate guide to exploring, planning, experiencing Pune's amazing destinations.",
             "link":"https://punejourney.vercel.app/"
         },
         {
             "name": "PortfolioHub",
-            "type": "Portfolio Website Generator",
+            "type": "Generator Tool",
             "description": "A Flask-based tool for creating personalized portfolios and resumes with realtime previews",
             "link":"https://portfolioohub.vercel.app/"
         },
         {
             "name": "Datamitra",
-            "type": "Data Preprocessing Tool",
+            "type": "Preprocessing Unit",
             "description": "A tool designed for efficient data cleaning and preprocessing.",
             "link":"https://datamitra.onrender.com/"
         },
         {
             "name": "Machine Mitra",
-            "type": "Quick ML Models",
+            "type": "Model Synthesis",
             "description": "Fast, efficient ML model creation",
             "link":"https://machinemitra.onrender.com/"
         },
         {
             "name": "Starscout",
-            "type": "Private Project",
+            "type": "Restricted Access",
             "description": "Open only if you are 18+.",
             "link":"https://starscout.onrender.com/"
         },
         {
             "name": "Brazzers University",
-            "type": "Made just for fun",
+            "type": "Satire Project",
             "description": "A Portfolio website for Brazzers University.",
             "link":"https://brazzersuniversity.vercel.app/"
         },
         {
             "name": "Mediscan",
-            "type": "Disease Prediction System",
+            "type": "Diagnostics AI",
             "description": "A system for predicting diseases based on symptoms.",
             "link":"https://github.com/VedantKale106/MediScan.git"
         },
         {
             "name": "Moviematch",
-            "type": "Movie Recommender System",
+            "type": "Preference Engine",
             "description": "A recommendation system for movies based on user preferences.",
             "link":"https://github.com/VedantKale106/MovieMatch.git"
         },
         {
             "name": "Phonepro",
-            "type": "Phone Recommender System",
+            "type": "Hardware Analysis",
             "description": "A tool to recommend phones based on user requirements.",
             "link":"https://github.com/VedantKale106/PhonePro.git"
         },
         {
             "name": "RentWizard",
-            "type": "Rent Predictor",
+            "type": "Market Prediction",
             "description": "A predictive tool for estimating rent prices in Pune Area.",
             "link":"https://github.com/VedantKale106/RentWizard.git"
         },
         {
             "name": "Attendance-Mitra",
-            "type": "Attendance Tracker",
+            "type": "Tracking System",
             "description": "Streamlit app for real-time attendance tracking with PCET ERP data.",
             "link": "https://github.com/VedantKale106/Attendence-Mitra.git"
         },
         {
             "name": "BinanceBot",
-            "type": "Futures Trading Bot",
+            "type": "Algo-Trading",
             "description": "Binance Futures Testnet Flask bot: trades market/limit orders, validates, and logs.",
             "link": "https://github.com/VedantKale106/Binance-Trade-Bot.git"
         }
-
-
     ]
     
+    # Strictly "Lab/Chemistry" terminology
     skills = {
-        "Programming Jutsu": ["Python", "C++", "SQL","HTML","CSS","R","Java"],
-        "Database Ninjutsu": ["MySQL", "MongoDB", "SQLite"],
-        "Framework Style": ["Flask", "Pandas", "Sklearn", "Streamlit", "Mongodb","Numpy","BeautifulSoup","Selenium","Matplotlib","Seaborn"],
-        "Shinobi Tools": ["Git", "GitHub", "Jupyter Notebook", "VS-Code","Power BI"],
-        "Focus Areas": ["Data Science","Machine Learning","Full Stack Web Development"],
-        "Deployment Arts": ["Heroku", "Render", "Vercel", "GitHub Pages"]
+        "Chemical Precursors": ["Python", "C++", "SQL", "HTML/CSS", "R", "Java"],
+        "Storage Vessels": ["MySQL", "MongoDB", "SQLite"],
+        "Active Ingredients": ["Flask", "Pandas", "Sklearn", "Streamlit", "NumPy", "BeautifulSoup"],
+        "Lab Apparatus": ["Git", "GitHub", "Jupyter", "VS-Code", "Power BI"],
+        "Controlled Territory": ["Data Science", "Machine Learning", "Full Stack"],
+        "Distribution Network": ["Heroku", "Render", "Vercel", "GitHub Pages"]
     }
     
     return render_template('index.html', projects=projects, skills=skills)

@@ -4,457 +4,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vedant Kale</title>
+    <title>Vedant Kale | The Cook</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --naruto-orange: #FF7E1F;
-            --naruto-black: #2C2C2C;
-            --leaf-green: #4CAF50;
-            --chakra-blue: #00A3FF;
+            --meth-blue: #00F0FF;
+            --chem-green-light: #4ade80;
+            --chem-green-dark: #1f5231;
+            --hazmat-yellow: #FFC107; /* The iconic yellow */
+            --hazmat-orange: #FF9800;
+            --dark-matter: #0a0a0a;
+            --industrial-gray: #1F2937;
         }
 
         body {
-            background-color: #1a1a1a;
-            color: #ffffff;
-            font-family: 'Arial', sans-serif;
-            background-image: url("{{ url_for('static', filename='leaf-pattern.png') }}");
+            background-color: var(--dark-matter);
+            color: #E5E7EB;
+            font-family: 'Roboto Mono', monospace;
             overflow-x: hidden;
+            /* Subtle desert horizon at the bottom */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L1200,120 L1200,60 C1150,70 1100,80 1050,85 C950,95 850,75 750,65 C650,55 550,75 450,85 C350,95 250,85 150,75 C100,70 50,65 0,60 Z" fill="%23111" opacity="0.3"/></svg>');
+            background-repeat: no-repeat;
+            background-position: bottom;
+            background-size: 100% 150px;
         }
 
-        .ninja-card {
-            background: rgba(44, 44, 44, 0.95);
-            border: 2px solid var(--naruto-orange);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        h1, h2, h3, .brand-font {
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
-        .ninja-card::before {
+        /* --- Special Effects --- */
+
+        /* The iconic Hazard Stripe pattern */
+        .hazmat-stripe {
+            background-image: repeating-linear-gradient(
+                45deg,
+                var(--hazmat-yellow),
+                var(--hazmat-yellow) 10px,
+                var(--dark-matter) 10px,
+                var(--dark-matter) 20px
+            );
+        }
+
+        /* Crystal/Cracked Texture Overlay */
+        .crystal-texture::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg,
-                    transparent,
-                    rgba(255, 126, 31, 0.2),
-                    transparent);
-            transition: 0.5s;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4.29' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            opacity: 0.3;
+            z-index: 1;
         }
 
-        .ninja-card:hover::before {
-            left: 100%;
+        /* --- Components --- */
+
+        /* Loader */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease-out;
         }
 
-        .ninja-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 15px var(--naruto-orange);
-        }
-
-        .ninja-heading {
-            color: var(--naruto-orange);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .chakra-text {
-            background: linear-gradient(45deg, var(--naruto-orange), var(--chakra-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: chakra-pulse 2s infinite;
-        }
-
-        .skill-tag {
-            background: var(--naruto-orange);
+        /* The Title Card Element Style (More exact match) */
+        .element-box {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 3.8rem;
+            height: 3.8rem;
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 999px;
-            display: inline-block;
-            margin: 0.25rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-right: 0.2rem;
+            position: relative;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .element-green { background: linear-gradient(135deg, #1f5231 0%, #369457 100%); }
+        .element-yellow { background: linear-gradient(135deg, #7c5a0b 0%, #d4a017 100%); }
+
+        .element-box .atomic-number {
+            font-size: 0.65rem;
+            position: absolute;
+            top: 3px;
+            left: 5px;
+            font-family: 'Roboto Mono', monospace;
+        }
+        .element-box .symbol {
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+            font-family: 'Oswald', sans-serif;
+        }
+
+        /* Project Cards (Blue Sky Batches) */
+        .batch-card {
+            background: rgba(20, 25, 30, 0.8);
+            border: 1px solid #333;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease-out;
+            backdrop-filter: blur(5px);
+        }
+        
+        .batch-card:hover {
+            border-color: var(--meth-blue);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.3), inset 0 0 10px rgba(0, 240, 255, 0.1);
+            transform: translateY(-3px);
         }
 
-        .skill-tag:hover {
-            transform: scale(1.1);
-            background: var(--chakra-blue);
+        .batch-card h3 {
+            color: #fff;
+            transition: color 0.3s;
+        }
+        .batch-card:hover h3 {
+            color: var(--meth-blue);
+            text-shadow: 0 0 5px var(--meth-blue);
         }
 
-        .ninja-scroll {
-            position: relative;
-            padding: 1rem;
-            background: rgba(44, 44, 44, 0.95);
-            border-radius: 0.5rem;
-            margin: 0.5rem 0;
+        /* Skill Slides */
+        .lab-slide {
+            background: rgba(31, 41, 55, 0.5);
+            border: 1px solid #374151;
+            transition: all 0.3s;
+        }
+        .lab-slide:hover {
+            background: rgba(31, 41, 55, 0.8);
+            border-color: var(--hazmat-yellow);
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.2);
         }
 
-        /* Mobile-friendly adjustments */
-        @media (max-width: 768px) {
-            .ninja-scroll {
-                padding: 0.75rem;
-                margin: 0.25rem 0;
-            }
-
-            .skill-tag {
-                padding: 0.25rem 0.75rem;
-                font-size: 0.875rem;
-            }
+        /* Inputs (Digital Readout Style) */
+        .lab-input {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #444;
+            color: var(--meth-blue);
+            font-family: 'Roboto Mono', monospace;
+            transition: all 0.3s;
         }
-
-        /* Mobile menu styles */
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(26, 26, 26, 0.98);
-            z-index: 100;
-            padding: 2rem;
-        }
-
-        .mobile-menu.active {
-            display: block;
-        }
-
-        .menu-button {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .menu-button {
-                display: block;
-            }
-
-            .desktop-menu {
-                display: none;
-            }
-        }
-
-        /* Contact form styles */
-        .contact-input {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--naruto-orange);
-            color: white;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        .contact-input:focus {
+        .lab-input:focus {
             outline: none;
-            border-color: var(--chakra-blue);
-            box-shadow: 0 0 10px rgba(0, 163, 255, 0.3);
+            border-color: var(--meth-blue);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+            background: rgba(0,0,0,0.8);
+        }
+        .lab-input::placeholder {
+            color: rgba(0, 240, 255, 0.4);
         }
 
-        .submit-button {
-            background: var(--naruto-orange);
-            color: white;
-            padding: 0.75rem 2rem;
-            border-radius: 0.5rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
+        /* Particle Canvas */
+        #fume-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none; opacity: 0.4;
         }
 
-        .submit-button:hover {
-            background: var(--chakra-blue);
-            transform: translateY(-2px);
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            background: rgba(10,10,10,0.98);
         }
+        .mobile-menu.open { transform: translateX(0); }
+
+        /* Utilities */
+        .text-glow { text-shadow: 0 0 10px var(--meth-blue); }
+        .border-hazmat { border-bottom: 3px solid var(--hazmat-yellow); }
     </style>
 </head>
 
-<body class="min-h-screen">
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="flex justify-end mb-8">
-            <button onclick="toggleMenu()" class="text-white text-2xl">&times;</button>
+<body class="antialiased selection:bg-yellow-600 selection:text-black">
+
+    <div id="loader">
+        <div class="text-green-500 font-mono text-xl mb-4 tracking-widest animate-pulse">METHYLAMINE FLOW: STABLE</div>
+        <div class="w-64 h-2 bg-gray-900 rounded-full overflow-hidden border border-gray-800">
+            <div class="h-full bg-gradient-to-r from-green-500 to-blue-500 animate-[width_2.5s_ease-out_forwards]" style="width: 0%;"></div>
         </div>
-        <div class="flex flex-col space-y-6 text-center">
-            <a href="#about" class="nav-link text-white text-xl" onclick="toggleMenu()">About</a>
-            <a href="#skills" class="nav-link text-white text-xl" onclick="toggleMenu()">Skills</a>
-            <a href="#projects" class="nav-link text-white text-xl" onclick="toggleMenu()">Projects</a>
-            <a href="#contact" class="nav-link text-white text-xl" onclick="toggleMenu()">Contact</a>
-        </div>
+        <div class="mt-2 text-xs text-gray-500 font-mono">Starting Cook Process...</div>
     </div>
 
-    <nav class="bg-gray-900/95 p-4 sticky top-0 z-50 backdrop-blur-sm">
-        <div class="flex justify-between items-center max-w-7xl mx-auto px-4">
-            <a href="#home">
-                <h1 class="text-2xl font-bold chakra-text">忍者 Vedant Kale</h1>
-              </a>
-              
-            <div class="desktop-menu space-x-6">
-                <a href="#about" class="nav-link text-white hover:text-orange-500 transition-colors">About</a>
-                <a href="#skills" class="nav-link text-white hover:text-orange-500 transition-colors">Skills</a>
-                <a href="#projects" class="nav-link text-white hover:text-orange-500 transition-colors">Projects</a>
-                <a href="#contact" class="nav-link text-white hover:text-orange-500 transition-colors">Contact</a>
+    <canvas id="fume-canvas"></canvas>
+    <div class="fixed inset-0 bg-[url('https://www.transparenttextures.com/patterns/noisy-net.png')] opacity-20 pointer-events-none z-[-1]"></div>
+
+    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-24">
+                <a href="#home" class="flex items-center group transform hover:scale-105 transition-transform">
+                    <div class="element-box element-green">
+                        <span class="atomic-number">23</span>
+                        <span class="symbol">Ve</span>
+                    </div>
+                    <span class="text-3xl font-bold ml-1 tracking-tighter brand-font text-white">dant</span>
+                    
+                    <div class="element-box element-yellow ml-2">
+                        <span class="atomic-number">19</span>
+                        <span class="symbol">Ka</span>
+                    </div>
+                    <span class="text-3xl font-bold ml-1 tracking-tighter brand-font text-white">le</span>
+                </a>
+
+                <div class="hidden md:flex space-x-8 items-center font-mono text-sm">
+                    <a href="#about" class="hover:text-yellow-400 transition-colors tracking-widest">[THE_COOK]</a>
+                    <a href="#skills" class="hover:text-green-400 transition-colors tracking-widest">[INVENTORY]</a>
+                    <a href="#projects" class="hover:text-blue-400 transition-colors tracking-widest">[BATCHES]</a>
+                    <a href="#contact" class="text-yellow-500 border border-yellow-500 px-4 py-2 hover:bg-yellow-500 hover:text-black transition-all font-bold tracking-widest">CALL_SAUL</a>
+                </div>
+
+                <button id="menuBtn" class="md:hidden text-yellow-500 hover:text-white focus:outline-none">
+                    <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
-            <button class="menu-button text-white" onclick="toggleMenu()">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
         </div>
     </nav>
 
+    <div id="mobileMenu" class="fixed inset-0 z-40 mobile-menu flex flex-col justify-center items-center space-y-8">
+        <button id="closeBtn" class="absolute top-6 right-6 text-gray-500 hover:text-white text-4xl">&times;</button>
+        <a href="#about" class="text-2xl brand-font hover:text-yellow-500" onclick="toggleMenu()">THE COOK</a>
+        <a href="#skills" class="text-2xl brand-font hover:text-green-500" onclick="toggleMenu()">INVENTORY</a>
+        <a href="#projects" class="text-2xl brand-font hover:text-blue-500" onclick="toggleMenu()">BATCHES</a>
+        <a href="#contact" class="text-2xl brand-font text-yellow-500 border-2 border-yellow-500 px-6 py-2" onclick="toggleMenu()">CONTACT</a>
+    </div>
+
     <main>
-        <section id="home" class="hero-section px-4 py-24 text-center">
-            <h1 class="text-6xl font-bold ninja-heading mb-4 animate__animated animate__fadeIn">Vedant Kale</h1>
-            <p class="text-2xl text-gray-300 animate__animated animate__fadeIn animate__delay-1s">
-                Data Science Ninja | Machine Learning Enthusiast
-            </p>
-            <div class="mt-8 animate__animated animate__fadeIn animate__delay-2s">
-                <span class="inline-block p-2 bg-orange-500/20 rounded-lg">
-                    忍道 - The Ninja Way of Code
-                </span>
-            </div>
-        </section>
-
-        <section id="about" class="px-4 py-16 scroll-reveal relative ">
-            <!-- Decorative Background Elements -->
-            <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
-                <div style="position: absolute; 
-                            font-size: 180px; 
-                            top: 50%; 
-                            left: -20px; 
-                            transform: translateY(-50%) rotate(-90deg);">
-                    忍道
-                </div>
-            </div>
-
-            <div class="ninja-card p-8 rounded-lg max-w-4xl mx-auto relative" style="background: linear-gradient(145deg, rgba(44, 44, 44, 0.95), rgba(28, 28, 28, 0.95)); 
-                        border: 2px solid var(--naruto-orange);">
-
-                <!-- Decorative Scroll Elements -->
-                <div class="absolute top-0 left-0 w-16 h-16" style="border-top: 3px solid var(--naruto-orange); 
-                            border-left: 3px solid var(--naruto-orange); 
-                            opacity: 0.7;"></div>
-                <div class="absolute top-0 right-0 w-16 h-16" style="border-top: 3px solid var(--naruto-orange); 
-                            border-right: 3px solid var(--naruto-orange); 
-                            opacity: 0.7;"></div>
-                <div class="absolute bottom-0 left-0 w-16 h-16" style="border-bottom: 3px solid var(--naruto-orange); 
-                            border-left: 3px solid var(--naruto-orange); 
-                            opacity: 0.7;"></div>
-                <div class="absolute bottom-0 right-0 w-16 h-16" style="border-bottom: 3px solid var(--naruto-orange); 
-                            border-right: 3px solid var(--naruto-orange); 
-                            opacity: 0.7;"></div>
-
-                <!-- Section Title with Decoration -->
-                <div class="text-center mb-8 relative">
-                    <h2 class="text-3xl font-bold ninja-heading inline-block"
-                        style="text-shadow: 0 0 10px var(--naruto-orange);">
-                        <span style="opacity: 0.6; margin-right: 8px;">忍者</span>
-                        My Ninja Way
-                    </h2>
-                    <!-- Decorative Headband -->
-                    <div style="position: absolute; 
-                               top: -15px; 
-                               left: 50%; 
-                               transform: translateX(-50%); 
-                               font-size: 24px;">
+        <section id="home" class="min-h-screen flex items-center justify-center px-4 pt-20 relative overflow-hidden">
+            <div class="max-w-5xl w-full z-10">
+                <div class="flex items-center justify-end mb-6">
+                    <div class="bg-black/80 border border-blue-500/50 p-4 rounded flex items-center space-x-4 backdrop-blur-sm">
+                         <div class="h-3 w-3 rounded-full bg-blue-500 animate-ping"></div>
+                        <span class="text-xs font-mono text-blue-300">CURRENT BATCH PURITY:</span>
+                        <span id="purity-counter" class="text-5xl font-bold text-blue-500 brand-font text-glow">0.0%</span>
                     </div>
                 </div>
 
-                <!-- About Content -->
-                <div class="space-y-6 relative" style="background: rgba(0, 0, 0, 0.2); 
-                            padding: 2rem; 
-                            border-radius: 1rem; 
-                            border-left: 4px solid var(--naruto-orange);">
+                <h1 class="text-7xl md:text-9xl font-bold mb-6 leading-none animate__animated animate__fadeInUp">
+                    RESPECT THE <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-yellow-500 to-blue-500 filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">CHEMISTRY</span>
+                </h1>
+                
+                <p class="text-xl md:text-3xl text-gray-300 mb-12 max-w-3xl font-light leading-relaxed border-l-8 border-yellow-500 pl-6 bg-black/40 py-4">
+                    "I am the one who codes. Full Stack & Data Science operations executed with laboratory precision."
+                </p>
 
-<p class="text-lg leading-relaxed chakra-text-glow">
-    Konnichiwa! I'm on my journey to become a master of digital arts, born in the hidden village of Junnar. I carry the Will of Code, burning bright like the Will of Fire! 🔥
-</p>
-
-<p class="text-lg leading-relaxed chakra-text-glow">
-    Just like Naruto's Shadow Clone Jutsu, I create parallel processing algorithms, and like Sasuke's Sharingan, I use data science to analyze patterns and derive insights. ⚡
-</p>
-
-<p class="text-lg leading-relaxed chakra-text-glow">
-    My mastered jutsus include: 
-    <span class="block mt-4 ml-6" style="border-left: 2px solid var(--naruto-orange); padding-left: 1rem;">
-        • Python Style: Data Manipulation Jutsu 🐍<br>
-        • Mongodb Art: Database Query Mastery 📊<br>
-        • Flask Technique: Web Deployment 🌐
-    </span>
-</p>
-
-<p class="text-lg leading-relaxed chakra-text-glow">
-    Swiftly adapting to new tech like the Fourth Hokage’s Flying Raijin, my goal is to become a Tech Hokage in data science, always learning and growing, dattebayo! 💫
-</p>
-
+                <div class="flex flex-col sm:flex-row gap-6 animate__animated animate__fadeInUp animate__delay-1s font-mono">
+                    <a href="#projects" class="px-8 py-4 text-center border-2 border-blue-500 text-blue-500 hover:bg-blue-500/10 hover:box-shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all text-lg font-bold tracking-widest uppercase bg-black/50">
+                        VIEW THE PRODUCT
+                    </a>
+                    <a href="https://github.com/vedantkale106" target="_blank" class="px-8 py-4 text-center border-2 border-gray-600 text-gray-400 hover:text-white hover:border-gray-400 transition-colors text-lg font-bold tracking-widest uppercase bg-black/50">
+                        LAB NOTES (GIT)
+                    </a>
                 </div>
+            </div>
+            
+            <div class="absolute bottom-0 right-0 opacity-30 pointer-events-none hidden lg:block">
+                 <svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="crystalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00F0FF;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#0066FF;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M100,20 L140,60 L120,140 L60,160 L20,100 L60,40 Z" fill="url(#crystalGrad)" opacity="0.6" style="filter:drop-shadow(0 0 10px #00F0FF);"></path>
+                    <path d="M110,40 L150,70 L130,130 L70,150 L40,90 L70,50 Z" fill="url(#crystalGrad)" opacity="0.8" transform="translate(20,20)" style="filter:drop-shadow(0 0 10px #00F0FF);"></path>
+                </svg>
+            </div>
+        </section>
 
-                <!-- Decorative Elements -->
-                <div class="absolute bottom-4 right-4 transform rotate-45 opacity-30" style="font-size: 24px;">
-                    ⚔️
+        <section id="about" class="py-24 px-4 relative scroll-reveal">
+            <div class="hazmat-stripe h-4 w-full absolute top-0 left-0 opacity-50"></div>
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-5 gap-12 items-center bg-gray-900/60 p-8 border-t-4 border-yellow-500">
+                    <div class="md:col-span-2 relative">
+                        <div class="aspect-square bg-black rounded-lg border-2 border-yellow-600 flex items-center justify-center relative overflow-hidden group shadow-[0_0_30px_rgba(255,193,7,0.2)]">
+                            <svg class="w-2/3 h-2/3 text-yellow-600 opacity-80 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1.323c3.954.553 7 3.95 7 8.046 0 .862-.15 1.689-.425 2.465l1.132 1.132a1 1 0 11-1.414 1.414l-.695-.695a8.01 8.01 0 01-11.207 0l-.695.695a1 1 0 11-1.414-1.414l1.132-1.132A8.023 8.023 0 013 12.37c0-4.096 3.046-7.493 7-8.046V3a1 1 0 011-1zm4 10.369a6.01 6.01 0 00-3-10.31V3a1 1 0 11-2 0v-.942a6.01 6.01 0 00-3 10.31V12a1 1 0 108 0v.369z" clip-rule="evenodd"></path></svg>
+                           <div class="absolute bottom-4 left-0 w-full text-center font-mono text-yellow-500 bg-black/80 py-2">
+                               OPERATOR: HEISENBERG
+                           </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:col-span-3">
+                        <h2 class="text-4xl font-bold mb-8 flex items-center text-white">
+                            <span class="element-box element-yellow scale-75 mr-2"><span class="atomic-number">74</span><span class="symbol">W</span></span>
+                            THE COOK
+                        </h2>
+                        <div class="space-y-6 text-gray-300 leading-relaxed text-lg font-light">
+                            <p>
+                                Operating out of Junnar, Pune territory. I don't accept "good enough." I apply rigorous scientific methodology to software architecture.
+                            </p>
+                            <p>
+                                Chemistry is the study of transformation. My work transforms raw, impure data into <span class="text-blue-400 font-bold">99.1% pure</span> actionable intelligence using high-grade <span class="text-green-400 font-bold">Python</span> synthesis.
+                            </p>
+                            <div class="bg-yellow-900/20 border-l-4 border-yellow-500 p-4 mt-6">
+                                <p class="text-yellow-500 italic font-mono">
+                                    "Technical purity is paramount. No half measures. We cook."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <style>
-            .chakra-text-glow {
-                position: relative;
-                z-index: 1;
-            }
-
-            .chakra-text-glow::selection {
-                background: var(--naruto-orange);
-                color: white;
-            }
-
-            .ninja-card {
-                position: relative;
-                overflow: hidden;
-            }
-
-            .ninja-card::after {
-                content: '';
-                position: absolute;
-                top: -50%;
-                left: -50%;
-                width: 200%;
-                height: 200%;
-                background: linear-gradient(45deg,
-                        transparent,
-                        rgba(255, 126, 31, 0.1),
-                        transparent);
-                transform: rotate(45deg);
-                animation: shimmer 3s infinite;
-            }
-
-            @keyframes shimmer {
-                0% {
-                    transform: rotate(45deg) translateY(-100%);
-                }
-
-                100% {
-                    transform: rotate(45deg) translateY(100%);
-                }
-            }
-
-            .chakra-text-glow:hover {
-                text-shadow: 0 0 8px rgba(255, 126, 31, 0.5);
-                transition: text-shadow 0.3s ease;
-            }
-        </style>
-
-        <section id="skills" class="px-4 py-16 scroll-reveal relative">
-            <!-- Background Kanji -->
-            <div class="absolute inset-0 overflow-hidden pointer-events-none" style="opacity: 0.05; 
-                        z-index: 0;">
-                <div style="position: absolute; 
-                            font-size: 200px; 
-                            top: 10%; 
-                            left: 5%; 
-                            transform: rotate(-15deg);">
-                    術
-                </div>
-                <div style="position: absolute; 
-                            font-size: 200px; 
-                            bottom: 10%; 
-                            right: 5%; 
-                            transform: rotate(15deg);">
-                    技
-                </div>
-            </div>
-
-            <div class="ninja-card p-8 rounded-lg max-w-4xl mx-auto relative"
-                style="background: linear-gradient(145deg, rgba(44, 44, 44, 0.95), rgba(28, 28, 28, 0.95));">
-
-                <!-- Decorative Corner Elements -->
-                <div class="absolute top-0 left-0 w-12 h-12" style="border-top: 3px solid var(--naruto-orange); 
-                            border-left: 3px solid var(--naruto-orange);"></div>
-                <div class="absolute top-0 right-0 w-12 h-12" style="border-top: 3px solid var(--naruto-orange); 
-                            border-right: 3px solid var(--naruto-orange);"></div>
-                <div class="absolute bottom-0 left-0 w-12 h-12" style="border-bottom: 3px solid var(--naruto-orange); 
-                            border-left: 3px solid var(--naruto-orange);"></div>
-                <div class="absolute bottom-0 right-0 w-12 h-12" style="border-bottom: 3px solid var(--naruto-orange); 
-                            border-right: 3px solid var(--naruto-orange);"></div>
-
-                <!-- Section Title -->
-                <div class="text-center relative mb-8">
-                    <h2 class="text-3xl font-bold ninja-heading inline-block"
-                        style="text-shadow: 0 0 10px var(--naruto-orange);">
-                        <span style="opacity: 0.6; margin-right: 8px;">忍術</span>
-                        Ninja Skills
-                    </h2>
-                    <!-- Decorative Sword Elements -->
-                    <span style="position: absolute; 
-                                left: 25%; 
-                                top: 50%; 
-                                transform: translateY(-50%) rotate(30deg);">
-                        ⚔️
-                    </span>
-                    <span style="position: absolute; 
-                                right: 25%; 
-                                top: 50%; 
-                                transform: translateY(-50%) rotate(-30deg);">
-                        ⚔️
-                    </span>
+        <section id="skills" class="py-24 px-4 scroll-reveal relative">
+             <div class="hazmat-stripe h-1 w-full absolute top-0 left-0 opacity-30"></div>
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-bold mb-4 brand-font">CHEMICAL INVENTORY</h2>
+                    <div class="inline-block border border-yellow-600 px-4 py-1 text-yellow-600 font-mono text-sm tracking-widest bg-black">
+                        CAUTION: VOLATILE MATERIALS
+                    </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-8">
+                <div class="grid md:grid-cols-3 gap-8">
                     {% for category, skill_list in skills.items() %}
-                    <div class="ninja-scroll p-6 relative" style="background: rgba(0, 0, 0, 0.3); 
-                                border: 1px solid rgba(255, 126, 31, 0.3); 
-                                backdrop-filter: blur(5px);">
-                        <!-- Category Header -->
-                        <div class="relative mb-6">
-                            <h3 class="text-xl font-bold chakra-text" style="text-shadow: 0 0 5px var(--chakra-blue);">
-                                {{ category }}
-                            </h3>
-                            <!-- Decorative Line -->
-                            <div style="height: 2px; 
-                                       background: linear-gradient(90deg, 
-                                                                 var(--naruto-orange), 
-                                                                 var(--chakra-blue), 
-                                                                 transparent);
-                                       margin-top: 4px;"></div>
+                    <div class="lab-slide p-6 group relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-yellow-600 text-black text-[10px] font-bold px-2 py-1 font-mono transform translate-x-8 -translate-y-2 rotate-45 group-hover:bg-yellow-500 transition-colors">
+                            HAZMAT
                         </div>
 
-                        <!-- Skills Container -->
+                        <h3 class="text-xl font-bold text-green-400 mb-6 border-b border-gray-700 pb-2 flex items-center brand-font">
+                            <svg class="w-6 h-6 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                            {{ category }}
+                        </h3>
                         <div class="flex flex-wrap gap-3">
                             {% for skill in skill_list %}
-                            <span class="skill-tag animate__animated animate__fadeIn" style="background: linear-gradient(135deg, 
-                                                                  var(--naruto-orange), 
-                                                                  var(--chakra-blue)); 
-                                         position: relative; 
-                                         overflow: hidden;">
-                                <!-- Chakra Glow Effect -->
-                                <span style="position: absolute; 
-                                           inset: 0; 
-                                           background: radial-gradient(circle at center, 
-                                                                   rgba(255,255,255,0.2), 
-                                                                   transparent 70%); 
-                                           opacity: 0; 
-                                           transition: opacity 0.3s;" class="chakra-glow"></span>
+                            <span class="px-3 py-2 text-xs font-mono bg-black border border-green-800 text-green-300 hover:border-green-400 hover:text-white transition-all cursor-default shadow-[0_0_5px_rgba(54,148,87,0.3)]">
                                 {{ skill }}
                             </span>
                             {% endfor %}
-                        </div>
-
-                        <!-- Corner Kunai Decorations -->
-                        <div style="position: absolute; 
-                                   top: -5px; 
-                                   left: -5px; 
-                                   transform: rotate(-45deg); 
-                                   font-size: 12px;">
-                            ⚔️
-                        </div>
-                        <div style="position: absolute; 
-                                   top: -5px; 
-                                   right: -5px; 
-                                   transform: rotate(45deg); 
-                                   font-size: 12px;">
-                            ⚔️
                         </div>
                     </div>
                     {% endfor %}
@@ -462,392 +354,263 @@
             </div>
         </section>
 
-        <style>
-            .skill-tag {
-                padding: 0.5rem 1rem;
-                border-radius: 999px;
-                color: white;
-                font-weight: 500;
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-                transition: all 0.3s ease;
-            }
-
-            .skill-tag:hover {
-                transform: translateY(-3px) scale(1.05);
-                box-shadow: 0 5px 15px rgba(255, 126, 31, 0.3);
-            }
-
-            .skill-tag:hover .chakra-glow {
-                opacity: 1;
-            }
-
-            .ninja-scroll {
-                border-radius: 8px;
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-            }
-
-            .ninja-scroll:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3),
-                    0 0 15px rgba(255, 126, 31, 0.2);
-            }
-
-            @keyframes float {
-
-                0%,
-                100% {
-                    transform: translateY(0);
-                }
-
-                50% {
-                    transform: translateY(-10px);
-                }
-            }
-
-            .chakra-text {
-                position: relative;
-            }
-
-            .chakra-text::after {
-                content: '';
-                position: absolute;
-                bottom: -2px;
-                left: 0;
-                width: 100%;
-                height: 2px;
-                background: linear-gradient(90deg,
-                        var(--naruto-orange),
-                        var(--chakra-blue),
-                        var(--naruto-orange));
-                background-size: 200% 100%;
-                animation: gradient-slide 3s linear infinite;
-            }
-
-            @keyframes gradient-slide {
-                0% {
-                    background-position: 100% 0;
-                }
-
-                100% {
-                    background-position: -100% 0;
-                }
-            }
-        </style>
-        
-        <section id="projects" class="px-4 py-16 scroll-reveal">
-            <h2 class="text-3xl font-bold ninja-heading mb-6 text-center" style="text-shadow: 0 0 10px var(--naruto-orange);">
-                忍術 Secret Scrolls (Projects)
-            </h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-                {% for project in projects %}
-                
-                <a href="{{ project.link }}" target="_blank">
-                    <div class="ninja-card p-6 rounded-lg animate__animated animate__fadeIn" style="background: linear-gradient(145deg, rgba(44, 44, 44, 0.95), rgba(28, 28, 28, 0.95)); 
-                                transform-style: preserve-3d; 
-                                transition: all 0.4s ease-out;">
-                        <!-- Ninja Scroll Header -->
-                        <div class="relative mb-4" style="border-bottom: 2px solid var(--naruto-orange); 
-                                    padding-bottom: 0.5rem;">
-                            <!-- Scroll Edge Design -->
-                            <div style="position: absolute; 
-                                       left: -10px; 
-                                       top: 50%; 
-                                       width: 20px; 
-                                       height: 20px; 
-                                       background: var(--naruto-orange); 
-                                       border-radius: 50%; 
-                                       transform: translateY(-50%);"></div>
-                            <div style="position: absolute; 
-                                       right: -10px; 
-                                       top: 50%; 
-                                       width: 20px; 
-                                       height: 20px; 
-                                       background: var(--naruto-orange); 
-                                       border-radius: 50%; 
-                                       transform: translateY(-50%);"></div>
-        
-                            <h3 class="text-xl font-bold chakra-text pl-4" style="text-shadow: 0 0 5px var(--chakra-blue);">
-                                {{ project.name }}
-                            </h3>
-                        </div>
-        
-                        <!-- Project Type Badge -->
-                        <div class="mb-3">
-                            <span style="background: linear-gradient(45deg, var(--naruto-orange), var(--chakra-blue)); 
-                                       padding: 0.3rem 1rem; 
-                                       border-radius: 999px; 
-                                       font-size: 0.875rem; 
-                                       color: white; 
-                                       text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-                                {{ project.type }}
-                            </span>
-                        </div>
-        
-                        <!-- Project Description with Scroll Design -->
-                        <div class="relative" style="background: rgba(0,0,0,0.2); 
-                                    padding: 1rem; 
-                                    border-radius: 0.5rem; 
-                                    border-left: 3px solid var(--naruto-orange);">
-                            <!-- Kunai Icon -->
-                            <div style="position: absolute; 
-                                       left: -6px; 
-                                       top: 10px; 
-                                       transform: rotate(-45deg);">
-                            </div>
-                            <p class="text-gray-300" style="line-height: 1.6; 
-                                      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
-                                {{ project.description }}
-                            </p>
-                        </div>
-        
-                        <!-- Chakra Effect on Hover -->
-                        <div class="absolute inset-0 opacity-0 hover:opacity-100" style="background: radial-gradient(circle at center, 
-                                                                      var(--chakra-blue) 0%, 
-                                                                      transparent 70%); 
-                                    mix-blend-mode: overlay; 
-                                    pointer-events: none; 
-                                    transition: opacity 0.3s ease;">
-                        </div>
+        <section id="projects" class="py-24 px-4 relative scroll-reveal bg-gray-900/30">
+             <div class="hazmat-stripe h-1 w-full absolute top-0 left-0 opacity-30"></div>
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row items-end justify-between mb-16 border-b border-gray-800 pb-6">
+                    <div>
+                        <h2 class="text-5xl font-bold brand-font mb-2">
+                            <span class="text-blue-500 text-glow">BLUE SKY</span> BATCHES
+                        </h2>
+                        <p class="text-gray-400 font-mono">Distribution Ready Products</p>
                     </div>
-                </a>
-                {% endfor %}
+                    <span class="text-sm font-mono text-blue-400 border border-blue-500 px-3 py-1 bg-black/50 animate-pulse mt-4 md:mt-0">
+                        STATUS: CRYSTALLIZED
+                    </span>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {% for project in projects %}
+                    <a href="{{ project.link }}" target="_blank" class="block h-full group">
+                        <div class="batch-card p-8 h-full flex flex-col justify-between crystal-texture">
+                            
+                            <div>
+                                <div class="flex justify-between items-start mb-4 relative z-10">
+                                    <h3 class="text-2xl font-bold brand-font tracking-wider">{{ project.name }}</h3>
+                                    <div class="text-[10px] uppercase font-bold text-black bg-blue-500 px-2 py-1 font-mono shadow-[0_0_10px_var(--meth-blue)]">
+                                        {{ project.type[:4] }}
+                                    </div>
+                                </div>
+                                
+                                <p class="text-gray-400 text-sm mb-8 leading-relaxed font-mono z-10 relative">
+                                    // {{ project.description }}
+                                </p>
+                            </div>
+                            
+                            <div class="pt-4 border-t border-gray-700/50 flex justify-between items-center z-10 relative font-mono text-xs">
+                                <span class="text-green-500">{{ project.type }}</span>
+                                <span class="text-blue-400 group-hover:translate-x-2 transition-transform font-bold">ANALYZE SAMPLE &gt;&gt;</span>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
             </div>
         </section>
-        
 
-            <!-- Decorative Ninja Elements -->
-            <div class="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none" style="font-size: 120px; 
-                        opacity: 0.1; 
-                        transform: rotate(-90deg);">
-                忍
-            </div>
-            <div class="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none" style="font-size: 120px; 
-                        opacity: 0.1; 
-                        transform: rotate(90deg);">
-                術
+        <section id="contact" class="py-24 px-4 scroll-reveal relative">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-gray-900 border-2 border-gray-700 p-1 relative rounded-lg shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+                    <div class="hazmat-stripe h-6 w-full rounded-t-lg border-b-2 border-black"></div>
+                    
+                    <div class="p-8 md:p-12 bg-black/80 backdrop-blur-md">
+                        <h2 class="text-4xl font-bold mb-2 text-center text-white brand-font">SECURE CHANNEL</h2>
+                        <p class="text-center text-yellow-500 mb-10 font-mono text-sm uppercase tracking-widest border-b border-yellow-600 pb-4 inline-block w-full">
+                            Encryption Active // Burner Protocol
+                        </p>
+                        
+                        <form class="space-y-8">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="group">
+                                    <label class="block text-blue-400 text-xs font-mono mb-2 uppercase tracking-widest">Codename</label>
+                                    <input type="text" class="w-full lab-input p-4 text-lg" placeholder="Heisenberg">
+                                </div>
+                                <div class="group">
+                                    <label class="block text-blue-400 text-xs font-mono mb-2 uppercase tracking-widest">Frequency (Email)</label>
+                                    <input type="email" class="w-full lab-input p-4 text-lg" placeholder="ww@abq.nm">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-blue-400 text-xs font-mono mb-2 uppercase tracking-widest">Transmission Data</label>
+                                <textarea rows="4" class="w-full lab-input p-4 text-lg font-mono" placeholder="We need to cook."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-gradient-to-b from-yellow-500 to-yellow-700 hover:from-yellow-400 hover:to-yellow-600 text-black font-bold text-xl py-6 tracking-[0.2em] uppercase transition-all border-b-4 border-yellow-900 hover:border-yellow-800 active:border-0 active:translate-y-1 shadow-[0_10px_20px_rgba(0,0,0,0.5)] font-mono relative overflow-hidden group">
+                                <span class="relative z-10">SEND SIGNAL</span>
+                                <div class="absolute inset-0 h-full w-full bg-white/30 transform -skew-x-12 -translate-x-full group-hover:animate-[shimmer_1s_ease-in-out]"></div>
+                            </button>
+                        </form>
+                    </div>
+                     <div class="hazmat-stripe h-6 w-full rounded-b-lg border-t-2 border-black"></div>
+                </div>
             </div>
         </section>
-
-        <style>
-            .ninja-card {
-                position: relative;
-                overflow: hidden;
-            }
-
-            .ninja-card:hover {
-                transform: translateY(-10px) scale(1.02) !important;
-                box-shadow: 0 10px 30px rgba(255, 126, 31, 0.3),
-                    0 0 20px rgba(0, 163, 255, 0.2) !important;
-            }
-
-            .ninja-card::after {
-                content: '';
-                position: absolute;
-                top: -50%;
-                left: -50%;
-                width: 200%;
-                height: 200%;
-                background: linear-gradient(45deg,
-                        transparent,
-                        rgba(255, 126, 31, 0.1),
-                        transparent);
-                transform: rotate(45deg);
-                animation: shimmer 3s infinite;
-            }
-
-            @keyframes shimmer {
-                0% {
-                    transform: rotate(45deg) translateY(-100%);
-                }
-
-                100% {
-                    transform: rotate(45deg) translateY(100%);
-                }
-            }
-        </style>
     </main>
 
-
-    <section id="contact" class="px-4 py-16 scroll-reveal">
-        <div class="ninja-card p-8 rounded-lg max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold ninja-heading mb-6">Contact Me</h2>
-            <form class="space-y-6">
-                <div>
-                    <label for="name" class="block text-gray-300 mb-2">Name</label>
-                    <input type="text" id="name" class="contact-input" placeholder="Enter your name">
+    <footer class="bg-black py-16 border-t border-gray-800 relative overflow-hidden font-mono">
+        <div class="hazmat-stripe h-2 w-full absolute top-0 left-0 opacity-30"></div>
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-12 text-sm relative z-10">
+            <div>
+                <div class="flex items-center mb-6">
+                     <span class="element-box element-green scale-50 origin-left mr-0"><span class="atomic-number">23</span><span class="symbol">Ve</span></span>
+                     <span class="text-2xl font-bold brand-font text-gray-300">dant Kale</span>
                 </div>
-                <div>
-                    <label for="email" class="block text-gray-300 mb-2">Email</label>
-                    <input type="email" id="email" class="contact-input" placeholder="Enter your email">
-                </div>
-                <div>
-                    <label for="message" class="block text-gray-300 mb-2">Message</label>
-                    <textarea id="message" rows="4" class="contact-input" placeholder="Your message"></textarea>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="submit-button">
-                        Send Message
-                    </button>
-                </div>
-            </form>
-        </div>
-    </section>
-
-    <footer class="bg-gray-900/95 py-12 mt-16 backdrop-blur-sm relative">
-        <!-- Decorative Background Symbol -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
-            <div style="position: absolute; 
-                        font-size: 180px; 
-                        bottom: -30px; 
-                        left: 50%; 
-                        transform: translateX(-50%);">
-                忍
-            </div>
-        </div>
-    
-        <div class="max-w-6xl mx-auto px-4">
-            <!-- Grid Container -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Logo & Copyright -->
-                <div class="text-center md:text-left">
-    <h3 class="text-xl font-bold chakra-text mb-4">Vedant Kale</h3>
-    <p class="text-gray-400">© 2025 | Crafted with Ninja Way</p>
-    <div class="text-gray-400 mt-1">
-        <a href="https://drive.google.com/file/d/1ZMT8UKWcI191MsnEHu_aeTdq22wMDQcY/view?usp=sharing" target="_blank" class="text-blue-400 hover:underline mr-4">Resume</a>
-    </div>
-</div>
-    
-                <!-- Connect Section -->
-                <div class="text-center md:text-left">
-                    <h3 class="text-white font-semibold mb-4" 
-                        style="border-bottom: 2px solid var(--naruto-orange); 
-                               display: inline-block; 
-                               padding-bottom: 2px;">
-                        Connect
-                    </h3>
-                    <div class="space-y-2">
-                        <a href="mailto:your.email@example.com" 
-                           class="text-gray-400 hover:text-orange-500 flex items-center justify-center md:justify-start gap-2 transition-colors">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                            <span>vedant.kale22@pccoepune.org</span>
-                        </a>
-                        <a href="tel:+91 8421204009" 
-                           class="text-gray-400 hover:text-orange-500 flex items-center justify-center md:justify-start gap-2 transition-colors">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                            </svg>
-                            <span>+91 8421204009</span>
-                        </a>
-                    </div>
-                </div>
-    
-                <!-- Social Links -->
-                <div class="text-center md:text-left">
-                    <h3 class="text-white font-semibold mb-4" 
-                        style="border-bottom: 2px solid var(--naruto-orange); 
-                               display: inline-block; 
-                               padding-bottom: 2px;">
-                        Social
-                    </h3>
-                    <div class="space-y-2">
-                        <a href="https://github.com/vedantkale106" target="_blank" 
-                           class="text-gray-400 hover:text-orange-500 flex items-center justify-center md:justify-start gap-2 transition-colors">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                            <span>GitHub</span>
-                        </a>
-                        <a href="https://linkedin.com/in/vedantkale106" target="_blank" 
-                           class="text-gray-400 hover:text-orange-500 flex items-center justify-center md:justify-start gap-2 transition-colors">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                            </svg>
-                            <span>LinkedIn</span>
-                        </a>
-                    </div>
-                </div>
-    
-                <!-- Quick Links -->
-                <div class="text-center md:text-left">
-                    <h3 class="text-white font-semibold mb-4" 
-                        style="border-bottom: 2px solid var(--naruto-orange); 
-                               display: inline-block; 
-                               padding-bottom: 2px;">
-                        Quick Links
-                    </h3>
-                    <div class="space-y-2">
-                        <a href="#about" class="text-gray-400 hover:text-orange-500 block transition-colors">About</a>
-                        <a href="#skills" class="text-gray-400 hover:text-orange-500 block transition-colors">Skills</a>
-                        <a href="#projects" class="text-gray-400 hover:text-orange-500 block transition-colors">Projects</a>
-                        <a href="#contact" class="text-gray-400 hover:text-orange-500 block transition-colors">Contact</a>
-                    </div>
-                </div>
-            </div>
-    
-            <!-- Bottom Border -->
-            <div class="mt-8 pt-8 border-t border-gray-800 text-center">
-                <p class="text-gray-500 text-sm">
-                    "The one who continues to learn and grow becomes stronger than they were yesterday."
+                <p class="text-gray-500 max-w-xs leading-relaxed">
+                    Building digital empires. No more half measures.
                 </p>
             </div>
+            
+            <div>
+                <h5 class="text-yellow-500 font-bold mb-6 uppercase tracking-wider text-xs inline-block border-b border-yellow-900 pb-2">Coordinates</h5>
+                <ul class="space-y-4 text-gray-400 text-xs">
+                    <li class="flex items-center"><span class="text-yellow-600 mr-2">LOC:</span> JUNNAR, PUNE [MH]</li>
+                    <li class="flex items-center"><span class="text-yellow-600 mr-2">COM:</span> <a href="mailto:vedant.kale22@pccoepune.org" class="hover:text-blue-400 transition-colors">vedant.kale22@pccoepune.org</a></li>
+                </ul>
+            </div>
+
+            <div class="md:text-right">
+                 <h5 class="text-blue-500 font-bold mb-6 uppercase tracking-wider text-xs inline-block border-b border-blue-900 pb-2">Protocols</h5>
+                 <div class="flex flex-col space-y-4 md:items-end text-gray-400 text-xs uppercase">
+                    <a href="https://github.com/vedantkale106" target="_blank" class="hover:text-blue-400 transition-colors flex items-center"><svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> GitHub_Repo</a>
+                    <a href="https://linkedin.com/in/vedantkale106" target="_blank" class="hover:text-blue-400 transition-colors flex items-center"><svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-1.337-.025-3.063-1.866-3.063-1.866 0-2.152 1.461-2.152 2.967v5.699h-3v-11h2.882v1.505h.041c.401-.76 1.38-1.562 2.846-1.562 3.043 0 3.604 2.002 3.604 4.604v6.454z"/></svg> LinkedIn_Signal</a>
+                 </div>
+            </div>
+        </div>
+        
+        <div class="text-center text-gray-700 mt-16 text-[10px] uppercase tracking-[0.3em]">
+            &copy; 2025 Vedant Kale. All Rights Reserved. Yeah Science.
         </div>
     </footer>
-    
-    <style>
-        footer a {
-            transition: all 0.3s ease;
-        }
-    
-        footer a:hover {
-            transform: translateX(5px);
-        }
-    
-        @media (max-width: 768px) {
-            footer a:hover {
-                transform: none;
-            }
-            
-            .social-links {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
 
     <script>
-        // Scroll reveal animation
-        const observerOptions = {
-            threshold: 0.1
-        };
+        // --- 1. Loader Sequence ---
+        window.addEventListener('load', () => {
+            // Wait for the progress bar animation (2.5s) plus a small buffer
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                // Start the purity counter as the loader fades
+                startPurityCounter();
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 800); // Fade out duration
+            }, 2800); 
+        });
 
+        // --- 2. Purity Counter Animation ---
+        function startPurityCounter() {
+            const counter = document.getElementById('purity-counter');
+            let current = 50.0; // Start higher for dramatic effect
+            const target = 99.1;
+            const duration = 2500; 
+            const interval = 30;
+            const step = (target - current) / (duration / interval);
+
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                    // Add the final glow effect
+                    counter.classList.add('text-glow');
+                    // Trigger a small confetti/crystal burst (optional enhancement for later)
+                }
+                // Ensure 1 decimal place
+                counter.innerText = current.toFixed(1) + '%';
+            }, interval);
+        }
+
+        // --- 3. Scroll Reveal API ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    // Add animate.css classes when element enters viewport
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                    // Stop observing once animated
+                    observer.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.15 }); // Trigger when 15% visible
 
-        document.querySelectorAll('.scroll-reveal').forEach((element) => {
-            observer.observe(element);
-        });
+        document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
+
+        // --- 4. Mobile Menu Toggle ---
+        const menuBtn = document.getElementById('menuBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
         function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+            // Lock body scroll when menu is open
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : 'auto';
         }
 
-        // Close mobile menu when clicking navigation links
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                const menu = document.getElementById('mobileMenu');
-                menu.classList.remove('active');
-            });
-        });
+        menuBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+
+        // --- 5. Chemical Fume Canvas Background ---
+        const canvas = document.getElementById('fume-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        const particles = [];
+        class Particle {
+            constructor() {
+                this.reset();
+                // Start some particles randomly on screen
+                this.y = Math.random() * canvas.height;
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100; // Start below screen
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 1 - 0.5; // Slight horizontal drift
+                // Vary vertical speed based on size (larger = slower)
+                this.speedY = Math.random() * -1 - (this.size * 0.1); 
+                this.life = Math.random() * 0.5 + 0.5; // Opacity
+                // Color palette: variations of green, blue, and sometimes yellow fume
+                const colors = [
+                    `rgba(54, 148, 87, ${this.life})`,  // Chem Green
+                    `rgba(0, 240, 255, ${this.life})`,  // Meth Blue
+                    `rgba(31, 82, 49, ${this.life})`   // Dark Green
+                ];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life -= 0.002; // Fade out slowly
+                // Reset if off screen or faded out
+                if (this.y < -50 || this.life <= 0) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.fillStyle = this.color.replace(/[\d.]+\)$/g, `${this.life})`);
+                ctx.beginPath();
+                // Draw blurry circles for "fume" look
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.shadowBlur = 0; // Reset shadow for performance
+            }
+        }
+
+        function initParticles() {
+            // Adjust particle count based on screen width for performance
+            const particleCount = window.innerWidth < 768 ? 50 : 120;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
     </script>
 </body>
-
 </html>
