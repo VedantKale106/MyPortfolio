@@ -5,107 +5,108 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
+    # Projects rebranded as "Dark Rituals"
     projects = [
         {
             "name": "Portfolio Website",
-            "type": "Personal Architecture",
-            "description": "A personal portfolio to showcase my projects and skills.",
+            "type": "The Altar",
+            "description": "My digital tombstone. Enter if you dare.",
             "link":"https://vedantkale.vercel.app/"
         },
         {
             "name": "KayKhau",
-            "type": "Recommendation Algo",
-            "description": "A website that suggests random food options and helps users discover new dishes.",
+            "type": "Flesh Consumption",
+            "description": "A roulette for the starving. Discover your next meal before it discovers you.",
             "link": "https://kaykhau.vercel.app/"
         },
         {
             "name": "LoveMail",
-            "type": "Anonymity Protocol",
-            "description": "A platform to send love confessions through email while keeping the sender anonymous.",
+            "type": "Ghost Whispers",
+            "description": "Send anonymous confessions from the void. They'll never know it was you.",
             "link": "https://lovemail-rust.vercel.app/"
         },
         {
             "name": "PuneJourney",
-            "type": "Navigation System",
-            "description": "Your ultimate guide to exploring, planning, experiencing Pune's amazing destinations.",
+            "type": "Cursed Map",
+            "description": "Navigate the haunted ruins and hidden alleys of the city.",
             "link":"https://punejourney.vercel.app/"
         },
         {
             "name": "PortfolioHub",
-            "type": "Generator Tool",
-            "description": "A Flask-based tool for creating personalized portfolios and resumes with realtime previews",
+            "type": "Identity Thief",
+            "description": "Construct a new persona. Clone yourself. Escape reality.",
             "link":"https://portfolioohub.vercel.app/"
         },
         {
             "name": "Datamitra",
-            "type": "Preprocessing Unit",
-            "description": "A tool designed for efficient data cleaning and preprocessing.",
+            "type": "Purification Rite",
+            "description": "Cleansing the corruption from your datasets.",
             "link":"https://datamitra.onrender.com/"
         },
         {
             "name": "Machine Mitra",
-            "type": "Model Synthesis",
-            "description": "Fast, efficient ML model creation",
+            "type": "Automated Evil",
+            "description": "Synthesizing intelligence to replace humanity.",
             "link":"https://machinemitra.onrender.com/"
         },
         {
             "name": "Starscout",
-            "type": "Restricted Access",
-            "description": "Open only if you are 18+.",
+            "type": "Forbidden Gaze",
+            "description": "Adults only. Stare into the abyss.",
             "link":"https://starscout.onrender.com/"
         },
         {
             "name": "Brazzers University",
-            "type": "Satire Project",
-            "description": "A Portfolio website for Brazzers University.",
+            "type": "Sinners' Academy",
+            "description": "A satirical institution for the corrupted minds.",
             "link":"https://brazzersuniversity.vercel.app/"
         },
         {
             "name": "Mediscan",
-            "type": "Diagnostics AI",
-            "description": "A system for predicting diseases based on symptoms.",
+            "type": "Plague Doctor",
+            "description": "Predicting the rot before it consumes the host.",
             "link":"https://github.com/VedantKale106/MediScan.git"
         },
         {
             "name": "Moviematch",
-            "type": "Preference Engine",
-            "description": "A recommendation system for movies based on user preferences.",
+            "type": "Nightmare Fuel",
+            "description": "Algorithms that know what you want to scream at.",
             "link":"https://github.com/VedantKale106/MovieMatch.git"
         },
         {
             "name": "Phonepro",
-            "type": "Hardware Analysis",
-            "description": "A tool to recommend phones based on user requirements.",
+            "type": "Black Mirror",
+            "description": "Hardware analysis for the digital soul.",
             "link":"https://github.com/VedantKale106/PhonePro.git"
         },
         {
             "name": "RentWizard",
-            "type": "Market Prediction",
-            "description": "A predictive tool for estimating rent prices in Pune Area.",
+            "type": "Dungeon Keeper",
+            "description": "Predicting the cost of survival in the Pune wastelands.",
             "link":"https://github.com/VedantKale106/RentWizard.git"
         },
         {
             "name": "Attendance-Mitra",
-            "type": "Tracking System",
-            "description": "Streamlit app for real-time attendance tracking with PCET ERP data.",
+            "type": "Soul Tracker",
+            "description": "Real-time surveillance of missing persons.",
             "link": "https://github.com/VedantKale106/Attendence-Mitra.git"
         },
         {
             "name": "BinanceBot",
-            "type": "Algo-Trading",
-            "description": "Binance Futures Testnet Flask bot: trades market/limit orders, validates, and logs.",
+            "type": "Blood Money",
+            "description": "Automated trading to harvest coin from the ether.",
             "link": "https://github.com/VedantKale106/Binance-Trade-Bot.git"
         }
     ]
     
-    # Strictly "Lab/Chemistry" terminology
+    # Skills rebranded as "Grimoire"
     skills = {
-        "Chemical Precursors": ["Python", "C++", "SQL", "HTML/CSS", "R", "Java"],
-        "Storage Vessels": ["MySQL", "MongoDB", "SQLite"],
-        "Active Ingredients": ["Flask", "Pandas", "Sklearn", "Streamlit", "NumPy", "BeautifulSoup"],
-        "Lab Apparatus": ["Git", "GitHub", "Jupyter", "VS-Code", "Power BI"],
-        "Controlled Territory": ["Data Science", "Machine Learning", "Full Stack"],
-        "Distribution Network": ["Heroku", "Render", "Vercel", "GitHub Pages"]
+        "Forbidden Languages": ["Python", "C++", "SQL", "HTML/CSS", "R", "Java"],
+        "Soul Containers": ["MySQL", "MongoDB", "SQLite"],
+        "Dark Magic": ["Flask", "Pandas", "Sklearn", "Streamlit", "NumPy", "BeautifulSoup"],
+        "Torture Devices": ["Git", "GitHub", "Jupyter", "VS-Code", "Power BI"],
+        "Domains of Dread": ["Data Science", "Machine Learning", "Full Stack"],
+        "Transmission Vectors": ["Heroku", "Render", "Vercel", "GitHub Pages"]
     }
     
     return render_template('index.html', projects=projects, skills=skills)

@@ -1,47 +1,47 @@
-# [Ve]dant [Ka]le ⚗️
+# Vedant Kale 🩸
 
-> **"Let's Cook."**
+> **"Even in death, the server must run."**
 
-![Status](https://img.shields.io/badge/Status-Cooking-yellow?style=for-the-badge)
-![Role](https://img.shields.io/badge/Role-Analyst_Premium-blue?style=for-the-badge)
-![Location](https://img.shields.io/badge/Location-Pune_MH-green?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Cursed-black?style=for-the-badge&logo=ghost)
+![Role](https://img.shields.io/badge/Role-Analyst_Necromancer-8a0303?style=for-the-badge)
+![Location](https://img.shields.io/badge/Location-Junnar_Graveyard-black?style=for-the-badge)
 
-## 👋 Hey, I'm Vedant
+## 🕯️ Enter If You Dare
 
-I am a 21-year-old developer from **Junnar**, currently studying in **Pune**. I am in my final year of Computer Science at **PCCOE**.
+I am a 21-year-old survivor from the shadows of **Junnar**, currently haunting **Pune**. I am in my final year of dark arts (Computer Science) at **PCCOE**.
 
-I like building things with code, going to the gym, and keeping my mind strong.
+I build nightmares with code, strengthen the flesh vessel at the gym, and silence the mind against the void.
 
-### 👨‍🔬 About Me
-* **Lifestyle:** I track my macros and make sure I get my **80g of protein** every day. 💪
-* **Mindset:** I follow **Stoicism**. I like to stay calm and focused. 🧠
-
----
-
-## 🧪 My Lab (Tech Stack)
-
-I use these tools to make my projects:
-
-* **Languages:** Python, C++, SQL
-* **Web Stuff:** Flask, HTML, CSS
-* **Tools:** Docker, Git, VS Code
+### 💀 The Survivor's Journal
+* **Sustenance:** I track my intake religiously to maintain this mortal form. **80g of protein** is the daily sacrifice. 💪
+* **Philosophy:** I follow **Stoicism**. I remain cold and unshakeable in the face of chaos. 🧠
 
 ---
 
-## 💎 The Batches (Projects)
+## ⚰️ The Grimoire (Tech Stack)
 
-Here are some cool things I made:
+I use these forbidden tools to conjure my creations:
 
-* **KayKhau:** A website that tells you what to eat when you are confused.
-* **LoveMail:** Send anonymous messages to people.
-* **MediScan:** Uses AI to predict diseases from symptoms.
-* **PuneJourney:** A guide for traveling around Pune.
+* **Incantations:** Python, C++, SQL
+* **Dark Magic:** Flask, HTML, CSS
+* **Torture Devices:** Docker, Git, VS Code
 
 ---
 
-## 📞 Call Me (Contact)
+## 🕸️ Dark Rituals (Projects)
 
-If you want to talk about code, gym, or philosophy, hit me up.
+Manifestations I have summoned from the abyss:
+
+* **Flesh Consumption (KayKhau):** A roulette for the starving. Discover your next meal before it discovers you.
+* **Ghost Whispers (LoveMail):** Send anonymous confessions from the void. They'll never know it was you.
+* **Plague Doctor (MediScan):** AI that predicts the rot before it consumes the host.
+* **Cursed Map (PuneJourney):** Navigate the haunted ruins and hidden alleys of the city.
+
+---
+
+## 🔮 Summon Me (Contact)
+
+If you wish to make a deal, discuss code, or talk philosophy... whisper my name.
 
 * **LinkedIn:** [vedantkale106](https://linkedin.com/in/vedantkale106)
 * **Email:** `vedant.kale22@pccoepune.org`
@@ -49,5 +49,5 @@ If you want to talk about code, gym, or philosophy, hit me up.
 ---
 
 <div align="center">
-  <small>Made by Vedant Kale. Stay pure. 99.1%</small>
+  <small>👻 Coded from the grave by Vedant Kale. RIP.</small>
 </div>

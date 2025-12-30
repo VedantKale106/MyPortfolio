@@ -1,65 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vedant Kale | The Cook</title>
+    <title>Vedant Kale | The Survivor</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Special+Elite&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --meth-blue: #00F0FF;
-            --chem-green-light: #4ade80;
-            --chem-green-dark: #1f5231;
-            --hazmat-yellow: #FFC107; /* The iconic yellow */
-            --hazmat-orange: #FF9800;
-            --dark-matter: #0a0a0a;
-            --industrial-gray: #1F2937;
+            --blood-red: #8a0303;
+            --fresh-blood: #ff0000;
+            --rot-green: #2b3a2b;
+            --coffin-black: #050505;
+            --ghost-white: #e0e0e0;
+            --shadow-gray: #1a1a1a;
         }
 
         body {
-            background-color: var(--dark-matter);
-            color: #E5E7EB;
-            font-family: 'Roboto Mono', monospace;
+            background-color: var(--coffin-black);
+            color: var(--ghost-white);
+            font-family: 'Special Elite', cursive; /* Typewriter style */
             overflow-x: hidden;
-            /* Subtle desert horizon at the bottom */
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L1200,120 L1200,60 C1150,70 1100,80 1050,85 C950,95 850,75 750,65 C650,55 550,75 450,85 C350,95 250,85 150,75 C100,70 50,65 0,60 Z" fill="%23111" opacity="0.3"/></svg>');
-            background-repeat: no-repeat;
-            background-position: bottom;
-            background-size: 100% 150px;
+            cursor: crosshair; /* Crosshair cursor */
         }
 
-        h1, h2, h3, .brand-font {
-            font-family: 'Oswald', sans-serif;
-            letter-spacing: 0.05em;
+        /* --- Typography --- */
+        h1, h2, .horror-font {
+            font-family: 'Nosifer', cursive; /* Dripping font */
             text-transform: uppercase;
+        }
+        
+        h3, .sub-horror {
+            font-family: 'Creepster', cursive;
+            letter-spacing: 0.1em;
         }
 
         /* --- Special Effects --- */
-
-        /* The iconic Hazard Stripe pattern */
-        .hazmat-stripe {
-            background-image: repeating-linear-gradient(
-                45deg,
-                var(--hazmat-yellow),
-                var(--hazmat-yellow) 10px,
-                var(--dark-matter) 10px,
-                var(--dark-matter) 20px
-            );
+        
+        /* Vignette overlay */
+        .vignette {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            box-shadow: 0 0 150px rgba(0,0,0,0.9) inset;
+            pointer-events: none;
+            z-index: 50;
         }
 
-        /* Crystal/Cracked Texture Overlay */
-        .crystal-texture::after {
-            content: '';
+        /* CRT Flicker */
+        @keyframes text-flicker {
+            0% { opacity: 0.1; text-shadow: 0 0 10px var(--blood-red); }
+            2% { opacity: 1; }
+            8% { opacity: 0.1; }
+            9% { opacity: 1; }
+            12% { opacity: 0.1; }
+            20% { opacity: 1; text-shadow: 0 0 5px var(--blood-red); }
+            25% { opacity: 0.3; }
+            30% { opacity: 1; }
+            70% { opacity: 0.7; }
+            72% { opacity: 0.2; }
+            77% { opacity: 0.9; }
+            100% { opacity: 0.9; }
+        }
+
+        .flicker-text {
+            animation: text-flicker 4s infinite;
+            color: var(--blood-red);
+        }
+
+        /* Glitch Effect */
+        .glitch-wrapper {
+            position: relative;
+        }
+        .glitch-wrapper::before, .glitch-wrapper::after {
+            content: attr(data-text);
             position: absolute;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4.29' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-            pointer-events: none;
-            opacity: 0.3;
-            z-index: 1;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+        .glitch-wrapper::before {
+            left: 2px;
+            text-shadow: -1px 0 #00ffff;
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        .glitch-wrapper::after {
+            left: -2px;
+            text-shadow: -1px 0 #ff00ff;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(11px, 9999px, 81px, 0); }
+            20% { clip: rect(78px, 9999px, 18px, 0); }
+            40% { clip: rect(13px, 9999px, 46px, 0); }
+            60% { clip: rect(2px, 9999px, 66px, 0); }
+            80% { clip: rect(69px, 9999px, 9px, 0); }
+            100% { clip: rect(25px, 9999px, 88px, 0); }
         }
 
         /* --- Components --- */
@@ -74,244 +112,193 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.8s ease-out;
         }
 
-        /* The Title Card Element Style (More exact match) */
-        .element-box {
-            display: inline-flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 3.8rem;
-            height: 3.8rem;
-            color: white;
-            font-weight: 700;
-            line-height: 1;
-            margin-right: 0.2rem;
-            position: relative;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .element-green { background: linear-gradient(135deg, #1f5231 0%, #369457 100%); }
-        .element-yellow { background: linear-gradient(135deg, #7c5a0b 0%, #d4a017 100%); }
-
-        .element-box .atomic-number {
-            font-size: 0.65rem;
-            position: absolute;
-            top: 3px;
-            left: 5px;
-            font-family: 'Roboto Mono', monospace;
-        }
-        .element-box .symbol {
-            font-size: 1.8rem;
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
-            font-family: 'Oswald', sans-serif;
-        }
-
-        /* Project Cards (Blue Sky Batches) */
-        .batch-card {
-            background: rgba(20, 25, 30, 0.8);
+        /* Card Styles */
+        .tombstone-card {
+            background: linear-gradient(145deg, #0a0a0a, #1a1111);
             border: 1px solid #333;
+            border-top: 4px solid #333;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease-out;
-            backdrop-filter: blur(5px);
         }
         
-        .batch-card:hover {
-            border-color: var(--meth-blue);
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.3), inset 0 0 10px rgba(0, 240, 255, 0.1);
-            transform: translateY(-3px);
+        .tombstone-card:hover {
+            border-color: var(--blood-red);
+            box-shadow: 0 0 20px rgba(138, 3, 3, 0.4);
+            transform: translateY(-5px) scale(1.02);
         }
 
-        .batch-card h3 {
-            color: #fff;
-            transition: color 0.3s;
+        .tombstone-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,0,0,0.1), transparent);
+            transition: 0.5s;
         }
-        .batch-card:hover h3 {
-            color: var(--meth-blue);
-            text-shadow: 0 0 5px var(--meth-blue);
+        .tombstone-card:hover::after {
+            left: 100%;
         }
 
-        /* Skill Slides */
-        .lab-slide {
-            background: rgba(31, 41, 55, 0.5);
-            border: 1px solid #374151;
+        /* Blood Drip Input */
+        .horror-input {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid #333;
+            border-bottom: 2px solid #500;
+            color: white;
+            font-family: 'Courier Prime', monospace;
             transition: all 0.3s;
         }
-        .lab-slide:hover {
-            background: rgba(31, 41, 55, 0.8);
-            border-color: var(--hazmat-yellow);
-            box-shadow: 0 0 15px rgba(255, 193, 7, 0.2);
-        }
-
-        /* Inputs (Digital Readout Style) */
-        .lab-input {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid #444;
-            color: var(--meth-blue);
-            font-family: 'Roboto Mono', monospace;
-            transition: all 0.3s;
-        }
-        .lab-input:focus {
+        .horror-input:focus {
             outline: none;
-            border-color: var(--meth-blue);
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
-            background: rgba(0,0,0,0.8);
-        }
-        .lab-input::placeholder {
-            color: rgba(0, 240, 255, 0.4);
-        }
-
-        /* Particle Canvas */
-        #fume-canvas {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; pointer-events: none; opacity: 0.4;
+            background: #000;
+            border-color: var(--fresh-blood);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
         }
 
         /* Mobile Menu */
         .mobile-menu {
-            transform: translateX(100%);
-            transition: transform 0.3s ease-in-out;
-            background: rgba(10,10,10,0.98);
+            background: rgba(5, 0, 0, 0.98);
+            background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
         }
-        .mobile-menu.open { transform: translateX(0); }
 
-        /* Utilities */
-        .text-glow { text-shadow: 0 0 10px var(--meth-blue); }
-        .border-hazmat { border-bottom: 3px solid var(--hazmat-yellow); }
+        /* The Flashlight Effect Element */
+        #flashlight {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle 300px at var(--x, 50%) var(--y, 50%), transparent 10%, rgba(0,0,0,0.95) 80%);
+            z-index: 40;
+        }
+        
+        @media (max-width: 768px) {
+             /* Disable heavy flashlight on mobile */
+            #flashlight { background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.8) 100%); }
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--blood-red);
+            color: white;
+        }
     </style>
 </head>
 
-<body class="antialiased selection:bg-yellow-600 selection:text-black">
+<body class="antialiased">
+
+    <div id="flashlight"></div>
+    <div class="vignette"></div>
+
+    <div class="fixed inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 pointer-events-none z-[-1]"></div>
 
     <div id="loader">
-        <div class="text-green-500 font-mono text-xl mb-4 tracking-widest animate-pulse">METHYLAMINE FLOW: STABLE</div>
-        <div class="w-64 h-2 bg-gray-900 rounded-full overflow-hidden border border-gray-800">
-            <div class="h-full bg-gradient-to-r from-green-500 to-blue-500 animate-[width_2.5s_ease-out_forwards]" style="width: 0%;"></div>
+        <div class="text-red-600 font-mono text-2xl mb-4 tracking-[0.5em] flicker-text horror-font">SUMMONING...</div>
+        <div class="w-64 h-1 bg-gray-900 overflow-hidden border border-red-900">
+            <div class="h-full bg-red-700 animate-[width_3s_ease-out_forwards]" style="width: 0%;"></div>
         </div>
-        <div class="mt-2 text-xs text-gray-500 font-mono">Starting Cook Process...</div>
     </div>
 
-    <canvas id="fume-canvas"></canvas>
-    <div class="fixed inset-0 bg-[url('https://www.transparenttextures.com/patterns/noisy-net.png')] opacity-20 pointer-events-none z-[-1]"></div>
+    <canvas id="blood-canvas" class="fixed top-0 left-0 w-full h-full z-[-2] opacity-60"></canvas>
 
-    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-gray-800">
+    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-sm border-b border-red-900/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-24">
-                <a href="#home" class="flex items-center group transform hover:scale-105 transition-transform">
-                    <div class="element-box element-green">
-                        <span class="atomic-number">23</span>
-                        <span class="symbol">Ve</span>
-                    </div>
-                    <span class="text-3xl font-bold ml-1 tracking-tighter brand-font text-white">dant</span>
-                    
-                    <div class="element-box element-yellow ml-2">
-                        <span class="atomic-number">19</span>
-                        <span class="symbol">Ka</span>
-                    </div>
-                    <span class="text-3xl font-bold ml-1 tracking-tighter brand-font text-white">le</span>
+                <a href="#home" class="flex items-center group">
+                    <span class="text-4xl horror-font text-white group-hover:text-red-600 transition-colors glitch-wrapper" data-text="V.KALE">
+                        V.KALE
+                    </span>
                 </a>
 
                 <div class="hidden md:flex space-x-8 items-center font-mono text-sm">
-                    <a href="#about" class="hover:text-yellow-400 transition-colors tracking-widest">[THE_COOK]</a>
-                    <a href="#skills" class="hover:text-green-400 transition-colors tracking-widest">[INVENTORY]</a>
-                    <a href="#projects" class="hover:text-blue-400 transition-colors tracking-widest">[BATCHES]</a>
-                    <a href="#contact" class="text-yellow-500 border border-yellow-500 px-4 py-2 hover:bg-yellow-500 hover:text-black transition-all font-bold tracking-widest">CALL_SAUL</a>
+                    <a href="#about" class="text-gray-400 hover:text-red-500 transition-colors tracking-widest">[THE_SURVIVOR]</a>
+                    <a href="#skills" class="text-gray-400 hover:text-red-500 transition-colors tracking-widest">[GRIMOIRE]</a>
+                    <a href="#projects" class="text-gray-400 hover:text-red-500 transition-colors tracking-widest">[RITUALS]</a>
+                    <a href="#contact" class="text-red-600 border border-red-800 px-4 py-2 hover:bg-red-900 hover:text-white transition-all font-bold tracking-widest">SÉANCE</a>
                 </div>
 
-                <button id="menuBtn" class="md:hidden text-yellow-500 hover:text-white focus:outline-none">
+                <button id="menuBtn" class="md:hidden text-red-600 hover:text-white focus:outline-none">
                     <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
             </div>
         </div>
     </nav>
 
-    <div id="mobileMenu" class="fixed inset-0 z-40 mobile-menu flex flex-col justify-center items-center space-y-8">
-        <button id="closeBtn" class="absolute top-6 right-6 text-gray-500 hover:text-white text-4xl">&times;</button>
-        <a href="#about" class="text-2xl brand-font hover:text-yellow-500" onclick="toggleMenu()">THE COOK</a>
-        <a href="#skills" class="text-2xl brand-font hover:text-green-500" onclick="toggleMenu()">INVENTORY</a>
-        <a href="#projects" class="text-2xl brand-font hover:text-blue-500" onclick="toggleMenu()">BATCHES</a>
-        <a href="#contact" class="text-2xl brand-font text-yellow-500 border-2 border-yellow-500 px-6 py-2" onclick="toggleMenu()">CONTACT</a>
+    <div id="mobileMenu" class="fixed inset-0 z-50 mobile-menu transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center space-y-8">
+        <button id="closeBtn" class="absolute top-6 right-6 text-red-600 hover:text-white text-4xl horror-font">X</button>
+        <a href="#about" class="text-3xl sub-horror text-gray-300 hover:text-red-600" onclick="toggleMenu()">THE SURVIVOR</a>
+        <a href="#skills" class="text-3xl sub-horror text-gray-300 hover:text-red-600" onclick="toggleMenu()">GRIMOIRE</a>
+        <a href="#projects" class="text-3xl sub-horror text-gray-300 hover:text-red-600" onclick="toggleMenu()">RITUALS</a>
+        <a href="#contact" class="text-3xl sub-horror text-red-600 border-2 border-red-900 px-6 py-2" onclick="toggleMenu()">SUMMON</a>
     </div>
 
     <main>
-        <section id="home" class="min-h-screen flex items-center justify-center px-4 pt-20 relative overflow-hidden">
-            <div class="max-w-5xl w-full z-10">
-                <div class="flex items-center justify-end mb-6">
-                    <div class="bg-black/80 border border-blue-500/50 p-4 rounded flex items-center space-x-4 backdrop-blur-sm">
-                         <div class="h-3 w-3 rounded-full bg-blue-500 animate-ping"></div>
-                        <span class="text-xs font-mono text-blue-300">CURRENT BATCH PURITY:</span>
-                        <span id="purity-counter" class="text-5xl font-bold text-blue-500 brand-font text-glow">0.0%</span>
+        <section id="home" class="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
+            <div class="max-w-5xl w-full z-10 text-center md:text-left">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="w-full">
+                        <div class="mb-4 inline-block border border-red-800 bg-black/50 px-3 py-1 text-red-500 font-mono text-xs tracking-[0.3em] animate-pulse">
+                            WARNING: CURSED CODE
+                        </div>
+                        
+                        <h1 class="text-6xl md:text-9xl font-bold mb-6 leading-none animate__animated animate__fadeInUp text-white drop-shadow-[0_5px_5px_rgba(255,0,0,0.5)]">
+                            VEDANT <br>
+                            <span class="text-red-700 flicker-text">KALE</span>
+                        </h1>
+                        
+                        <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl font-light leading-relaxed border-l-4 border-red-800 pl-6 bg-black/40 py-4">
+                            "I write code that refuses to die. Full Stack Necromancer & Data Occultist based in Junnar."
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row gap-6 animate__animated animate__fadeInUp animate__delay-1s font-mono">
+                            <a href="#projects" class="px-8 py-4 text-center border border-red-600 text-red-500 hover:bg-red-900/20 hover:text-white hover:shadow-[0_0_20px_rgba(255,0,0,0.4)] transition-all text-lg font-bold tracking-widest uppercase bg-black">
+                                ENTER THE CRYPT
+                            </a>
+                            <a href="https://github.com/vedantkale106" target="_blank" class="px-8 py-4 text-center border border-gray-700 text-gray-500 hover:text-white hover:border-gray-500 transition-colors text-lg font-bold tracking-widest uppercase bg-black">
+                                DARK MANUSCRIPTS
+                            </a>
+                        </div>
                     </div>
                 </div>
-
-                <h1 class="text-7xl md:text-9xl font-bold mb-6 leading-none animate__animated animate__fadeInUp">
-                    RESPECT THE <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-yellow-500 to-blue-500 filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">CHEMISTRY</span>
-                </h1>
-                
-                <p class="text-xl md:text-3xl text-gray-300 mb-12 max-w-3xl font-light leading-relaxed border-l-8 border-yellow-500 pl-6 bg-black/40 py-4">
-                    "I am the one who codes. Full Stack & Data Science operations executed with laboratory precision."
-                </p>
-
-                <div class="flex flex-col sm:flex-row gap-6 animate__animated animate__fadeInUp animate__delay-1s font-mono">
-                    <a href="#projects" class="px-8 py-4 text-center border-2 border-blue-500 text-blue-500 hover:bg-blue-500/10 hover:box-shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all text-lg font-bold tracking-widest uppercase bg-black/50">
-                        VIEW THE PRODUCT
-                    </a>
-                    <a href="https://github.com/vedantkale106" target="_blank" class="px-8 py-4 text-center border-2 border-gray-600 text-gray-400 hover:text-white hover:border-gray-400 transition-colors text-lg font-bold tracking-widest uppercase bg-black/50">
-                        LAB NOTES (GIT)
-                    </a>
-                </div>
-            </div>
-            
-            <div class="absolute bottom-0 right-0 opacity-30 pointer-events-none hidden lg:block">
-                 <svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="crystalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#00F0FF;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#0066FF;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <path d="M100,20 L140,60 L120,140 L60,160 L20,100 L60,40 Z" fill="url(#crystalGrad)" opacity="0.6" style="filter:drop-shadow(0 0 10px #00F0FF);"></path>
-                    <path d="M110,40 L150,70 L130,130 L70,150 L40,90 L70,50 Z" fill="url(#crystalGrad)" opacity="0.8" transform="translate(20,20)" style="filter:drop-shadow(0 0 10px #00F0FF);"></path>
-                </svg>
             </div>
         </section>
 
         <section id="about" class="py-24 px-4 relative scroll-reveal">
-            <div class="hazmat-stripe h-4 w-full absolute top-0 left-0 opacity-50"></div>
             <div class="max-w-6xl mx-auto">
-                <div class="grid md:grid-cols-5 gap-12 items-center bg-gray-900/60 p-8 border-t-4 border-yellow-500">
+                <div class="grid md:grid-cols-5 gap-12 items-center bg-gray-900/40 p-8 border border-red-900/30 relative">
+                    <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-red-600"></div>
+                    <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-red-600"></div>
+
                     <div class="md:col-span-2 relative">
-                        <div class="aspect-square bg-black rounded-lg border-2 border-yellow-600 flex items-center justify-center relative overflow-hidden group shadow-[0_0_30px_rgba(255,193,7,0.2)]">
-                            <svg class="w-2/3 h-2/3 text-yellow-600 opacity-80 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1.323c3.954.553 7 3.95 7 8.046 0 .862-.15 1.689-.425 2.465l1.132 1.132a1 1 0 11-1.414 1.414l-.695-.695a8.01 8.01 0 01-11.207 0l-.695.695a1 1 0 11-1.414-1.414l1.132-1.132A8.023 8.023 0 013 12.37c0-4.096 3.046-7.493 7-8.046V3a1 1 0 011-1zm4 10.369a6.01 6.01 0 00-3-10.31V3a1 1 0 11-2 0v-.942a6.01 6.01 0 00-3 10.31V12a1 1 0 108 0v.369z" clip-rule="evenodd"></path></svg>
-                           <div class="absolute bottom-4 left-0 w-full text-center font-mono text-yellow-500 bg-black/80 py-2">
-                               OPERATOR: HEISENBERG
-                           </div>
+                        <div class="aspect-square bg-black grayscale contrast-125 border-4 border-gray-800 relative overflow-hidden group">
+                             <div class="absolute inset-0 bg-red-900 mix-blend-overlay opacity-20 group-hover:opacity-60 transition-opacity"></div>
+                             <div class="flex items-center justify-center h-full w-full">
+                                <svg class="w-32 h-32 text-gray-700 group-hover:text-red-700 transition-colors duration-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                             </div>
+                             <div class="absolute bottom-0 w-full text-center bg-red-900/80 text-black font-bold py-1 sub-horror tracking-widest">
+                                 STATUS: INFECTED
+                             </div>
                         </div>
                     </div>
                     
                     <div class="md:col-span-3">
-                        <h2 class="text-4xl font-bold mb-8 flex items-center text-white">
-                            <span class="element-box element-yellow scale-75 mr-2"><span class="atomic-number">74</span><span class="symbol">W</span></span>
-                            THE COOK
+                        <h2 class="text-4xl md:text-5xl font-bold mb-8 text-red-600 horror-font flex items-center">
+                            THE SURVIVOR
                         </h2>
-                        <div class="space-y-6 text-gray-300 leading-relaxed text-lg font-light">
+                        <div class="space-y-6 text-gray-400 leading-relaxed text-lg">
                             <p>
-                                Operating out of Junnar, Pune territory. I don't accept "good enough." I apply rigorous scientific methodology to software architecture.
+                                Lurking in the shadows of Junnar, Pune. I do not just fix bugs; I perform exorcisms on spaghetti code.
                             </p>
                             <p>
-                                Chemistry is the study of transformation. My work transforms raw, impure data into <span class="text-blue-400 font-bold">99.1% pure</span> actionable intelligence using high-grade <span class="text-green-400 font-bold">Python</span> synthesis.
+                                My expertise lies in <span class="text-red-500">Dark Data Arts</span> and <span class="text-red-500">Full Stack Sorcery</span>. I transform raw, chaotic data into terrifyingly accurate predictions.
                             </p>
-                            <div class="bg-yellow-900/20 border-l-4 border-yellow-500 p-4 mt-6">
-                                <p class="text-yellow-500 italic font-mono">
-                                    "Technical purity is paramount. No half measures. We cook."
+                            <div class="bg-black border-l-4 border-red-600 p-4 mt-6 shadow-[0_0_15px_rgba(255,0,0,0.1)]">
+                                <p class="text-red-500 italic font-mono text-sm">
+                                    "Even in death, the server must run. 99.9% Uptime... or else."
                                 </p>
                             </div>
                         </div>
@@ -321,32 +308,29 @@
         </section>
 
         <section id="skills" class="py-24 px-4 scroll-reveal relative">
-             <div class="hazmat-stripe h-1 w-full absolute top-0 left-0 opacity-30"></div>
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
-                    <h2 class="text-5xl font-bold mb-4 brand-font">CHEMICAL INVENTORY</h2>
-                    <div class="inline-block border border-yellow-600 px-4 py-1 text-yellow-600 font-mono text-sm tracking-widest bg-black">
-                        CAUTION: VOLATILE MATERIALS
+                    <h2 class="text-5xl font-bold mb-4 horror-font text-gray-200">THE GRIMOIRE</h2>
+                    <div class="inline-block text-red-600 font-mono text-sm tracking-widest animate-pulse">
+                        /// FORBIDDEN KNOWLEDGE ///
                     </div>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-8">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {% for category, skill_list in skills.items() %}
-                    <div class="lab-slide p-6 group relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-yellow-600 text-black text-[10px] font-bold px-2 py-1 font-mono transform translate-x-8 -translate-y-2 rotate-45 group-hover:bg-yellow-500 transition-colors">
-                            HAZMAT
-                        </div>
-
-                        <h3 class="text-xl font-bold text-green-400 mb-6 border-b border-gray-700 pb-2 flex items-center brand-font">
-                            <svg class="w-6 h-6 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    <div class="tombstone-card p-6 group">
+                        <h3 class="text-2xl text-red-600 mb-6 border-b border-gray-800 pb-2 sub-horror">
                             {{ category }}
                         </h3>
                         <div class="flex flex-wrap gap-3">
                             {% for skill in skill_list %}
-                            <span class="px-3 py-2 text-xs font-mono bg-black border border-green-800 text-green-300 hover:border-green-400 hover:text-white transition-all cursor-default shadow-[0_0_5px_rgba(54,148,87,0.3)]">
+                            <span class="px-3 py-2 text-xs font-mono bg-black border border-gray-800 text-gray-400 hover:text-red-500 hover:border-red-600 transition-all cursor-crosshair">
                                 {{ skill }}
                             </span>
                             {% endfor %}
+                        </div>
+                        <div class="absolute bottom-2 right-2 opacity-10 text-6xl pointer-events-none text-red-900 horror-font">
+                            †
                         </div>
                     </div>
                     {% endfor %}
@@ -354,42 +338,37 @@
             </div>
         </section>
 
-        <section id="projects" class="py-24 px-4 relative scroll-reveal bg-gray-900/30">
-             <div class="hazmat-stripe h-1 w-full absolute top-0 left-0 opacity-30"></div>
+        <section id="projects" class="py-24 px-4 relative scroll-reveal">
             <div class="max-w-7xl mx-auto">
                 <div class="flex flex-col md:flex-row items-end justify-between mb-16 border-b border-gray-800 pb-6">
                     <div>
-                        <h2 class="text-5xl font-bold brand-font mb-2">
-                            <span class="text-blue-500 text-glow">BLUE SKY</span> BATCHES
+                        <h2 class="text-5xl font-bold horror-font mb-2 text-white">
+                            DARK <span class="text-red-600">RITUALS</span>
                         </h2>
-                        <p class="text-gray-400 font-mono">Distribution Ready Products</p>
+                        <p class="text-gray-500 font-mono">Manifestations of the Code</p>
                     </div>
-                    <span class="text-sm font-mono text-blue-400 border border-blue-500 px-3 py-1 bg-black/50 animate-pulse mt-4 md:mt-0">
-                        STATUS: CRYSTALLIZED
-                    </span>
                 </div>
                 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {% for project in projects %}
-                    <a href="{{ project.link }}" target="_blank" class="block h-full group">
-                        <div class="batch-card p-8 h-full flex flex-col justify-between crystal-texture">
-                            
+                    <a href="{{ project.link }}" target="_blank" class="block h-full">
+                        <div class="tombstone-card p-8 h-full flex flex-col justify-between">
                             <div>
-                                <div class="flex justify-between items-start mb-4 relative z-10">
-                                    <h3 class="text-2xl font-bold brand-font tracking-wider">{{ project.name }}</h3>
-                                    <div class="text-[10px] uppercase font-bold text-black bg-blue-500 px-2 py-1 font-mono shadow-[0_0_10px_var(--meth-blue)]">
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3 class="text-2xl font-bold sub-horror tracking-wider text-gray-200 group-hover:text-red-500 transition-colors">{{ project.name }}</h3>
+                                    <div class="text-[10px] uppercase font-bold text-black bg-gray-600 group-hover:bg-red-600 px-2 py-1 font-mono transition-colors">
                                         {{ project.type[:4] }}
                                     </div>
                                 </div>
                                 
-                                <p class="text-gray-400 text-sm mb-8 leading-relaxed font-mono z-10 relative">
+                                <p class="text-gray-500 text-sm mb-8 leading-relaxed font-mono">
                                     // {{ project.description }}
                                 </p>
                             </div>
                             
-                            <div class="pt-4 border-t border-gray-700/50 flex justify-between items-center z-10 relative font-mono text-xs">
-                                <span class="text-green-500">{{ project.type }}</span>
-                                <span class="text-blue-400 group-hover:translate-x-2 transition-transform font-bold">ANALYZE SAMPLE &gt;&gt;</span>
+                            <div class="pt-4 border-t border-gray-800 flex justify-between items-center font-mono text-xs">
+                                <span class="text-red-800 group-hover:text-red-500">{{ project.type }}</span>
+                                <span class="text-gray-500 group-hover:translate-x-2 transition-transform font-bold">UNVEIL &gt;</span>
                             </div>
                         </div>
                     </a>
@@ -400,145 +379,94 @@
 
         <section id="contact" class="py-24 px-4 scroll-reveal relative">
             <div class="max-w-3xl mx-auto">
-                <div class="bg-gray-900 border-2 border-gray-700 p-1 relative rounded-lg shadow-[0_0_50px_rgba(0,0,0,0.8)]">
-                    <div class="hazmat-stripe h-6 w-full rounded-t-lg border-b-2 border-black"></div>
-                    
-                    <div class="p-8 md:p-12 bg-black/80 backdrop-blur-md">
-                        <h2 class="text-4xl font-bold mb-2 text-center text-white brand-font">SECURE CHANNEL</h2>
-                        <p class="text-center text-yellow-500 mb-10 font-mono text-sm uppercase tracking-widest border-b border-yellow-600 pb-4 inline-block w-full">
-                            Encryption Active // Burner Protocol
+                <div class="bg-black border border-red-900/50 p-1 relative shadow-[0_0_50px_rgba(100,0,0,0.2)]">
+                    <div class="p-8 md:p-12 backdrop-blur-md relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-red-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none"></div>
+
+                        <h2 class="text-4xl font-bold mb-2 text-center text-white horror-font">SUMMON THE CREATOR</h2>
+                        <p class="text-center text-red-600 mb-10 font-mono text-sm uppercase tracking-widest">
+                            Don't look behind you.
                         </p>
                         
                         <form class="space-y-8">
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div class="group">
-                                    <label class="block text-blue-400 text-xs font-mono mb-2 uppercase tracking-widest">Codename</label>
-                                    <input type="text" class="w-full lab-input p-4 text-lg" placeholder="Heisenberg">
+                                    <label class="block text-gray-500 text-xs font-mono mb-2 uppercase tracking-widest">Your True Name</label>
+                                    <input type="text" class="w-full horror-input p-4 text-lg" placeholder="John Doe">
                                 </div>
                                 <div class="group">
-                                    <label class="block text-blue-400 text-xs font-mono mb-2 uppercase tracking-widest">Frequency (Email)</label>
-                                    <input type="email" class="w-full lab-input p-4 text-lg" placeholder="ww@abq.nm">
+                                    <label class="block text-gray-500 text-xs font-mono mb-2 uppercase tracking-widest">Frequency (Email)</label>
+                                    <input type="email" class="w-full horror-input p-4 text-lg" placeholder="victim@example.com">
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-blue-400 text-xs font-mono mb-2 uppercase tracking-widest">Transmission Data</label>
-                                <textarea rows="4" class="w-full lab-input p-4 text-lg font-mono" placeholder="We need to cook."></textarea>
+                                <label class="block text-gray-500 text-xs font-mono mb-2 uppercase tracking-widest">Chant / Message</label>
+                                <textarea rows="4" class="w-full horror-input p-4 text-lg font-mono" placeholder="I wish to make a deal..."></textarea>
                             </div>
-                            <button type="submit" class="w-full bg-gradient-to-b from-yellow-500 to-yellow-700 hover:from-yellow-400 hover:to-yellow-600 text-black font-bold text-xl py-6 tracking-[0.2em] uppercase transition-all border-b-4 border-yellow-900 hover:border-yellow-800 active:border-0 active:translate-y-1 shadow-[0_10px_20px_rgba(0,0,0,0.5)] font-mono relative overflow-hidden group">
-                                <span class="relative z-10">SEND SIGNAL</span>
-                                <div class="absolute inset-0 h-full w-full bg-white/30 transform -skew-x-12 -translate-x-full group-hover:animate-[shimmer_1s_ease-in-out]"></div>
+                            <button type="button" class="w-full bg-red-900 hover:bg-red-700 text-white font-bold text-xl py-6 tracking-[0.2em] sub-horror transition-all border border-red-950 hover:shadow-[0_0_20px_rgba(255,0,0,0.6)] relative overflow-hidden group">
+                                <span class="relative z-10 group-hover:text-black">SEAL THE PACT</span>
                             </button>
                         </form>
                     </div>
-                     <div class="hazmat-stripe h-6 w-full rounded-b-lg border-t-2 border-black"></div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-black py-16 border-t border-gray-800 relative overflow-hidden font-mono">
-        <div class="hazmat-stripe h-2 w-full absolute top-0 left-0 opacity-30"></div>
+    <footer class="bg-black py-16 border-t border-gray-900 relative font-mono">
         <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-12 text-sm relative z-10">
             <div>
-                <div class="flex items-center mb-6">
-                     <span class="element-box element-green scale-50 origin-left mr-0"><span class="atomic-number">23</span><span class="symbol">Ve</span></span>
-                     <span class="text-2xl font-bold brand-font text-gray-300">dant Kale</span>
-                </div>
-                <p class="text-gray-500 max-w-xs leading-relaxed">
-                    Building digital empires. No more half measures.
+                <h1 class="text-2xl mb-4 horror-font text-red-800">V.KALE</h1>
+                <p class="text-gray-600 max-w-xs leading-relaxed">
+                    Coding from the grave. <br>
+                    Junnar, Maharashtra.
                 </p>
             </div>
             
             <div>
-                <h5 class="text-yellow-500 font-bold mb-6 uppercase tracking-wider text-xs inline-block border-b border-yellow-900 pb-2">Coordinates</h5>
-                <ul class="space-y-4 text-gray-400 text-xs">
-                    <li class="flex items-center"><span class="text-yellow-600 mr-2">LOC:</span> JUNNAR, PUNE [MH]</li>
-                    <li class="flex items-center"><span class="text-yellow-600 mr-2">COM:</span> <a href="mailto:vedant.kale22@pccoepune.org" class="hover:text-blue-400 transition-colors">vedant.kale22@pccoepune.org</a></li>
+                <h5 class="text-red-700 font-bold mb-6 uppercase tracking-wider text-xs">Burial Grounds</h5>
+                <ul class="space-y-4 text-gray-500 text-xs">
+                    <li class="hover:text-red-500 cursor-pointer">JUNNAR [HAUNTED]</li>
+                    <li><a href="mailto:vedant.kale22@pccoepune.org" class="hover:text-red-500 transition-colors">vedant.kale22@pccoepune.org</a></li>
                 </ul>
             </div>
 
             <div class="md:text-right">
-                 <h5 class="text-blue-500 font-bold mb-6 uppercase tracking-wider text-xs inline-block border-b border-blue-900 pb-2">Protocols</h5>
-                 <div class="flex flex-col space-y-4 md:items-end text-gray-400 text-xs uppercase">
-                    <a href="https://github.com/vedantkale106" target="_blank" class="hover:text-blue-400 transition-colors flex items-center"><svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> GitHub_Repo</a>
-                    <a href="https://linkedin.com/in/vedantkale106" target="_blank" class="hover:text-blue-400 transition-colors flex items-center"><svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-1.337-.025-3.063-1.866-3.063-1.866 0-2.152 1.461-2.152 2.967v5.699h-3v-11h2.882v1.505h.041c.401-.76 1.38-1.562 2.846-1.562 3.043 0 3.604 2.002 3.604 4.604v6.454z"/></svg> LinkedIn_Signal</a>
+                 <h5 class="text-red-700 font-bold mb-6 uppercase tracking-wider text-xs">Connect</h5>
+                 <div class="flex flex-col space-y-4 md:items-end text-gray-500 text-xs uppercase">
+                    <a href="https://github.com/vedantkale106" target="_blank" class="hover:text-white transition-colors">GitHub_Crypt</a>
+                    <a href="https://linkedin.com/in/vedantkale106" target="_blank" class="hover:text-white transition-colors">LinkedIn_Signal</a>
                  </div>
             </div>
         </div>
         
-        <div class="text-center text-gray-700 mt-16 text-[10px] uppercase tracking-[0.3em]">
-            &copy; 2025 Vedant Kale. All Rights Reserved. Yeah Science.
+        <div class="text-center text-red-900/40 mt-16 text-[10px] uppercase tracking-[0.3em]">
+            &copy; 2026 Vedant Kale. Rest In Peace.
         </div>
     </footer>
 
     <script>
         // --- 1. Loader Sequence ---
         window.addEventListener('load', () => {
-            // Wait for the progress bar animation (2.5s) plus a small buffer
             setTimeout(() => {
                 const loader = document.getElementById('loader');
                 loader.style.opacity = '0';
-                // Start the purity counter as the loader fades
-                startPurityCounter();
                 setTimeout(() => {
                     loader.style.display = 'none';
-                }, 800); // Fade out duration
-            }, 2800); 
+                }, 1000); 
+            }, 2500); 
         });
 
-        // --- 2. Purity Counter Animation ---
-        function startPurityCounter() {
-            const counter = document.getElementById('purity-counter');
-            let current = 50.0; // Start higher for dramatic effect
-            const target = 99.1;
-            const duration = 2500; 
-            const interval = 30;
-            const step = (target - current) / (duration / interval);
+        // --- 2. Flashlight Effect (Desktop Only) ---
+        const flashlight = document.getElementById('flashlight');
+        document.addEventListener('mousemove', (e) => {
+            // Update CSS variables for the flashlight position
+            flashlight.style.setProperty('--x', e.clientX + 'px');
+            flashlight.style.setProperty('--y', e.clientY + 'px');
+        });
 
-            const timer = setInterval(() => {
-                current += step;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                    // Add the final glow effect
-                    counter.classList.add('text-glow');
-                    // Trigger a small confetti/crystal burst (optional enhancement for later)
-                }
-                // Ensure 1 decimal place
-                counter.innerText = current.toFixed(1) + '%';
-            }, interval);
-        }
-
-        // --- 3. Scroll Reveal API ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Add animate.css classes when element enters viewport
-                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
-                    // Stop observing once animated
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.15 }); // Trigger when 15% visible
-
-        document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
-
-        // --- 4. Mobile Menu Toggle ---
-        const menuBtn = document.getElementById('menuBtn');
-        const closeBtn = document.getElementById('closeBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        function toggleMenu() {
-            mobileMenu.classList.toggle('open');
-            // Lock body scroll when menu is open
-            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : 'auto';
-        }
-
-        menuBtn.addEventListener('click', toggleMenu);
-        closeBtn.addEventListener('click', toggleMenu);
-
-        // --- 5. Chemical Fume Canvas Background ---
-        const canvas = document.getElementById('fume-canvas');
+        // --- 3. Blood Rain Canvas ---
+        const canvas = document.getElementById('blood-canvas');
         const ctx = canvas.getContext('2d');
         
         function resize() {
@@ -548,69 +476,95 @@
         window.addEventListener('resize', resize);
         resize();
 
-        const particles = [];
-        class Particle {
+        const drops = [];
+        class Drop {
             constructor() {
                 this.reset();
-                // Start some particles randomly on screen
                 this.y = Math.random() * canvas.height;
             }
             reset() {
                 this.x = Math.random() * canvas.width;
-                this.y = canvas.height + Math.random() * 100; // Start below screen
-                this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 1 - 0.5; // Slight horizontal drift
-                // Vary vertical speed based on size (larger = slower)
-                this.speedY = Math.random() * -1 - (this.size * 0.1); 
-                this.life = Math.random() * 0.5 + 0.5; // Opacity
-                // Color palette: variations of green, blue, and sometimes yellow fume
-                const colors = [
-                    `rgba(54, 148, 87, ${this.life})`,  // Chem Green
-                    `rgba(0, 240, 255, ${this.life})`,  // Meth Blue
-                    `rgba(31, 82, 49, ${this.life})`   // Dark Green
-                ];
-                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.y = -10;
+                this.speed = Math.random() * 5 + 5; // Fast fall
+                this.len = Math.random() * 20 + 10;
+                this.width = Math.random() * 2 + 0.5;
+                this.color = `rgba(${138 + Math.random()*50}, 0, 0, ${Math.random() * 0.5 + 0.2})`; // Varying red shades
             }
             update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                this.life -= 0.002; // Fade out slowly
-                // Reset if off screen or faded out
-                if (this.y < -50 || this.life <= 0) {
+                this.y += this.speed;
+                if (this.y > canvas.height) {
                     this.reset();
                 }
             }
             draw() {
-                ctx.fillStyle = this.color.replace(/[\d.]+\)$/g, `${this.life})`);
                 ctx.beginPath();
-                // Draw blurry circles for "fume" look
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = this.color;
-                ctx.fill();
-                ctx.shadowBlur = 0; // Reset shadow for performance
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = this.width;
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x, this.y + this.len);
+                ctx.stroke();
             }
         }
 
-        function initParticles() {
-            // Adjust particle count based on screen width for performance
-            const particleCount = window.innerWidth < 768 ? 50 : 120;
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
+        function initDrops() {
+            const count = window.innerWidth < 768 ? 40 : 100;
+            for (let i = 0; i < count; i++) drops.push(new Drop());
         }
 
-        function animateParticles() {
+        function animateDrops() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
+            for (let i = 0; i < drops.length; i++) {
+                drops[i].update();
+                drops[i].draw();
             }
-            requestAnimationFrame(animateParticles);
+            requestAnimationFrame(animateDrops);
         }
 
-        initParticles();
-        animateParticles();
+        initDrops();
+        animateDrops();
+
+        // --- 4. Scroll Reveal ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
+
+        // --- 5. Mobile Menu ---
+        const menuBtn = document.getElementById('menuBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        function toggleMenu() {
+            const isOpen = mobileMenu.classList.contains('translate-x-0');
+            if (isOpen) {
+                mobileMenu.classList.remove('translate-x-0');
+                mobileMenu.classList.add('translate-x-full');
+            } else {
+                mobileMenu.classList.remove('translate-x-full');
+                mobileMenu.classList.add('translate-x-0');
+            }
+            document.body.style.overflow = isOpen ? 'auto' : 'hidden';
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+
+        // --- 6. Random Glitch Effect (Easter Egg) ---
+        setInterval(() => {
+            const body = document.body;
+            // 5% chance to shift the body slightly
+            if(Math.random() > 0.95) {
+                body.style.transform = `translate(${Math.random()*4 - 2}px, ${Math.random()*4 - 2}px)`;
+                setTimeout(() => { body.style.transform = 'translate(0,0)'; }, 100);
+            }
+        }, 2000);
+
     </script>
 </body>
 </html>
