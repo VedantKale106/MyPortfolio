@@ -3,101 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vedant Kale | The Survivor</title>
+    <title>Vedant Kale | The Stoic Coder</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Special+Elite&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Classical Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --blood-red: #8a0303;
-            --fresh-blood: #ff0000;
-            --rot-green: #2b3a2b;
-            --coffin-black: #050505;
-            --ghost-white: #e0e0e0;
-            --shadow-gray: #1a1a1a;
+            --marble-white: #fdfbf7;
+            --parchment: #f0e6d2;
+            --ink-black: #1a1a1a;
+            --philosopher-gold: #c5a059;
+            --stone-gray: #4a4a4a;
+            --bronze: #8c7853;
         }
 
         body {
-            background-color: var(--coffin-black);
-            color: var(--ghost-white);
-            font-family: 'Special Elite', cursive; /* Typewriter style */
+            background-color: var(--marble-white);
+            color: var(--ink-black);
+            font-family: 'Cormorant Garamond', serif;
             overflow-x: hidden;
-            cursor: crosshair; /* Crosshair cursor */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a1a1a' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
         /* --- Typography --- */
-        h1, h2, .horror-font {
-            font-family: 'Nosifer', cursive; /* Dripping font */
-            text-transform: uppercase;
+        h1, h2, .classical-font {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.05em;
         }
         
-        h3, .sub-horror {
-            font-family: 'Creepster', cursive;
-            letter-spacing: 0.1em;
+        h3, .sub-header {
+            font-family: 'Cinzel', serif;
+            font-weight: 400;
         }
 
-        /* --- Special Effects --- */
-        
-        /* Vignette overlay */
-        .vignette {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            box-shadow: 0 0 150px rgba(0,0,0,0.9) inset;
-            pointer-events: none;
-            z-index: 50;
+        p, .body-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            line-height: 1.6;
         }
 
-        /* CRT Flicker */
-        @keyframes text-flicker {
-            0% { opacity: 0.1; text-shadow: 0 0 10px var(--blood-red); }
-            2% { opacity: 1; }
-            8% { opacity: 0.1; }
-            9% { opacity: 1; }
-            12% { opacity: 0.1; }
-            20% { opacity: 1; text-shadow: 0 0 5px var(--blood-red); }
-            25% { opacity: 0.3; }
-            30% { opacity: 1; }
-            70% { opacity: 0.7; }
-            72% { opacity: 0.2; }
-            77% { opacity: 0.9; }
-            100% { opacity: 0.9; }
-        }
-
-        .flicker-text {
-            animation: text-flicker 4s infinite;
-            color: var(--blood-red);
-        }
-
-        /* Glitch Effect */
-        .glitch-wrapper {
-            position: relative;
-        }
-        .glitch-wrapper::before, .glitch-wrapper::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-        }
-        .glitch-wrapper::before {
-            left: 2px;
-            text-shadow: -1px 0 #00ffff;
-            clip: rect(24px, 550px, 90px, 0);
-            animation: glitch-anim-2 3s infinite linear alternate-reverse;
-        }
-        .glitch-wrapper::after {
-            left: -2px;
-            text-shadow: -1px 0 #ff00ff;
-            clip: rect(85px, 550px, 140px, 0);
-            animation: glitch-anim 2.5s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-anim {
-            0% { clip: rect(11px, 9999px, 81px, 0); }
-            20% { clip: rect(78px, 9999px, 18px, 0); }
-            40% { clip: rect(13px, 9999px, 46px, 0); }
-            60% { clip: rect(2px, 9999px, 66px, 0); }
-            80% { clip: rect(69px, 9999px, 9px, 0); }
-            100% { clip: rect(25px, 9999px, 88px, 0); }
+        .sans-serif {
+            font-family: 'Lato', sans-serif;
         }
 
         /* --- Components --- */
@@ -106,7 +54,7 @@
         #loader {
             position: fixed;
             inset: 0;
-            background: #000;
+            background: var(--marble-white);
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -114,192 +62,242 @@
             align-items: center;
         }
 
-        /* Card Styles */
-        .tombstone-card {
-            background: linear-gradient(145deg, #0a0a0a, #1a1111);
-            border: 1px solid #333;
-            border-top: 4px solid #333;
-            transition: all 0.4s ease;
+        /* Marble Card Styles */
+        .philosopher-card {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.5s ease;
             position: relative;
             overflow: hidden;
         }
         
-        .tombstone-card:hover {
-            border-color: var(--blood-red);
-            box-shadow: 0 0 20px rgba(138, 3, 3, 0.4);
-            transform: translateY(-5px) scale(1.02);
-        }
-
-        .tombstone-card::after {
+        .philosopher-card::before {
             content: '';
             position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,0,0,0.1), transparent);
-            transition: 0.5s;
-        }
-        .tombstone-card:hover::after {
-            left: 100%;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--philosopher-gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
         }
 
-        /* Blood Drip Input */
-        .horror-input {
-            background: rgba(10, 10, 10, 0.8);
-            border: 1px solid #333;
-            border-bottom: 2px solid #500;
-            color: white;
-            font-family: 'Courier Prime', monospace;
+        .philosopher-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: var(--philosopher-gold);
+        }
+
+        .philosopher-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Input Fields */
+        .stoic-input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #ddd;
+            color: var(--ink-black);
+            font-family: 'Cormorant Garamond', serif;
             transition: all 0.3s;
+            font-size: 1.25rem;
         }
-        .horror-input:focus {
+        .stoic-input:focus {
             outline: none;
-            background: #000;
-            border-color: var(--fresh-blood);
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+            border-color: var(--philosopher-gold);
+            background: rgba(197, 160, 89, 0.05);
         }
 
-        /* Mobile Menu */
-        .mobile-menu {
-            background: rgba(5, 0, 0, 0.98);
-            background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+        /* Navigation */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--philosopher-gold);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
         }
 
-        /* The Flashlight Effect Element */
-        #flashlight {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            background: radial-gradient(circle 300px at var(--x, 50%) var(--y, 50%), transparent 10%, rgba(0,0,0,0.95) 80%);
-            z-index: 40;
+        /* Buttons */
+        .btn-gold {
+            background-color: transparent;
+            color: var(--ink-black);
+            border: 1px solid var(--ink-black);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
         }
-        
-        @media (max-width: 768px) {
-             /* Disable heavy flashlight on mobile */
-            #flashlight { background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.8) 100%); }
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background-color: var(--ink-black);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+        .btn-gold:hover {
+            color: var(--marble-white);
+            border-color: var(--ink-black);
+        }
+        .btn-gold:hover::before {
+            width: 100%;
+        }
+
+        /* Scroll Reveal */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Selection */
         ::selection {
-            background: var(--blood-red);
+            background: var(--philosopher-gold);
             color: white;
+        }
+        
+        /* Drop Cap */
+        .drop-cap:first-letter {
+            float: left;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            font-weight: 700;
+            margin-right: 0.1em;
+            color: var(--philosopher-gold);
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Grain texture overlay */
+        .texture-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 50;
         }
     </style>
 </head>
 
 <body class="antialiased">
 
-    <div id="flashlight"></div>
-    <div class="vignette"></div>
+    <!-- Texture Overlay for Parchment Feel -->
+    <div class="texture-overlay"></div>
 
-    <div class="fixed inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 pointer-events-none z-[-1]"></div>
-
+    <!-- Preloader -->
     <div id="loader">
-        <div class="text-red-600 font-mono text-2xl mb-4 tracking-[0.5em] flicker-text horror-font">SUMMONING...</div>
-        <div class="w-64 h-1 bg-gray-900 overflow-hidden border border-red-900">
-            <div class="h-full bg-red-700 animate-[width_3s_ease-out_forwards]" style="width: 0%;"></div>
-        </div>
+        <div class="text-3xl mb-4 classical-font tracking-widest">PONDERING...</div>
+        <div class="w-16 h-16 border-4 border-gray-200 border-t-[#c5a059] rounded-full animate-spin"></div>
+        <div class="mt-4 italic text-gray-500 font-serif">"The unexamined code is not worth writing."</div>
     </div>
 
-    <canvas id="blood-canvas" class="fixed top-0 left-0 w-full h-full z-[-2] opacity-60"></canvas>
+    <!-- Constellation Canvas Background -->
+    <canvas id="constellation-canvas" class="fixed top-0 left-0 w-full h-full z-[-1] opacity-40"></canvas>
 
-    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-sm border-b border-red-900/30">
+    <nav class="fixed w-full z-50 bg-[#fdfbf7]/90 backdrop-blur-md border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-24">
                 <a href="#home" class="flex items-center group">
-                    <span class="text-4xl horror-font text-white group-hover:text-red-600 transition-colors glitch-wrapper" data-text="V.KALE">
+                    <span class="text-3xl classical-font text-black group-hover:text-[#c5a059] transition-colors">
                         V.KALE
                     </span>
                 </a>
 
-                <div class="hidden md:flex space-x-8 items-center font-mono text-sm">
-                    <a href="#about" class="text-gray-400 hover:text-red-500 transition-colors tracking-widest">[THE_SURVIVOR]</a>
-                    <a href="#skills" class="text-gray-400 hover:text-red-500 transition-colors tracking-widest">[GRIMOIRE]</a>
-                    <a href="#projects" class="text-gray-400 hover:text-red-500 transition-colors tracking-widest">[RITUALS]</a>
-                    <a href="#contact" class="text-red-600 border border-red-800 px-4 py-2 hover:bg-red-900 hover:text-white transition-all font-bold tracking-widest">SÉANCE</a>
+                <div class="hidden md:flex space-x-10 items-center font-serif text-lg tracking-wide">
+                    <a href="#about" class="nav-link text-gray-800 hover:text-[#c5a059] transition-colors">The Stoic</a>
+                    <a href="#skills" class="nav-link text-gray-800 hover:text-[#c5a059] transition-colors">The Lyceum</a>
+                    <a href="#projects" class="nav-link text-gray-800 hover:text-[#c5a059] transition-colors">Magnum Opus</a>
+                    <a href="#contact" class="px-6 py-2 border border-[#c5a059] text-[#c5a059] hover:bg-[#c5a059] hover:text-white transition-all duration-300 rounded-sm">Dialectic</a>
                 </div>
 
-                <button id="menuBtn" class="md:hidden text-red-600 hover:text-white focus:outline-none">
+                <button id="menuBtn" class="md:hidden text-black hover:text-[#c5a059] focus:outline-none">
                     <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
             </div>
         </div>
     </nav>
 
-    <div id="mobileMenu" class="fixed inset-0 z-50 mobile-menu transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center space-y-8">
-        <button id="closeBtn" class="absolute top-6 right-6 text-red-600 hover:text-white text-4xl horror-font">X</button>
-        <a href="#about" class="text-3xl sub-horror text-gray-300 hover:text-red-600" onclick="toggleMenu()">THE SURVIVOR</a>
-        <a href="#skills" class="text-3xl sub-horror text-gray-300 hover:text-red-600" onclick="toggleMenu()">GRIMOIRE</a>
-        <a href="#projects" class="text-3xl sub-horror text-gray-300 hover:text-red-600" onclick="toggleMenu()">RITUALS</a>
-        <a href="#contact" class="text-3xl sub-horror text-red-600 border-2 border-red-900 px-6 py-2" onclick="toggleMenu()">SUMMON</a>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 z-40 bg-[#fdfbf7]/90 backdrop-blur-lg transform translate-x-full transition-transform duration-500 flex flex-col justify-center items-center space-y-8">
+        <button id="closeBtn" class="absolute top-8 right-8 text-black hover:text-[#c5a059] text-4xl font-serif">×</button>
+        <a href="#about" class="text-3xl classical-font text-gray-800 hover:text-[#c5a059]" onclick="toggleMenu()">The Stoic</a>
+        <a href="#skills" class="text-3xl classical-font text-gray-800 hover:text-[#c5a059]" onclick="toggleMenu()">The Lyceum</a>
+        <a href="#projects" class="text-3xl classical-font text-gray-800 hover:text-[#c5a059]" onclick="toggleMenu()">Magnum Opus</a>
+        <a href="#contact" class="text-3xl classical-font text-[#c5a059] border-b-2 border-[#c5a059] pb-2" onclick="toggleMenu()">Dialectic</a>
     </div>
 
     <main>
-        <section id="home" class="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
-            <div class="max-w-5xl w-full z-10 text-center md:text-left">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="w-full">
-                        <div class="mb-4 inline-block border border-red-800 bg-black/50 px-3 py-1 text-red-500 font-mono text-xs tracking-[0.3em] animate-pulse">
-                            WARNING: CURSED CODE
-                        </div>
-                        
-                        <h1 class="text-6xl md:text-9xl font-bold mb-6 leading-none animate__animated animate__fadeInUp text-white drop-shadow-[0_5px_5px_rgba(255,0,0,0.5)]">
-                            VEDANT <br>
-                            <span class="text-red-700 flicker-text">KALE</span>
-                        </h1>
-                        
-                        <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl font-light leading-relaxed border-l-4 border-red-800 pl-6 bg-black/40 py-4">
-                            "I write code that refuses to die. Full Stack Necromancer & Data Occultist based in Junnar."
-                        </p>
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center px-4 relative">
+            <div class="max-w-5xl w-full z-10 text-center">
+                <div class="mb-6 inline-block border-y border-gray-300 py-2 px-6">
+                    <span class="text-[#c5a059] font-serif italic text-xl tracking-wider">Est. 2026</span>
+                </div>
+                
+                <h1 class="text-6xl md:text-8xl font-bold mb-6 leading-tight animate__animated animate__fadeInUp text-black">
+                    VEDANT KALE
+                </h1>
+                
+                <p class="text-2xl md:text-3xl text-gray-600 mb-12 max-w-3xl mx-auto font-light leading-relaxed italic animate__animated animate__fadeInUp animate__delay-1s">
+                    "I think in logic, therefore I code."
+                </p>
 
-                        <div class="flex flex-col sm:flex-row gap-6 animate__animated animate__fadeInUp animate__delay-1s font-mono">
-                            <a href="#projects" class="px-8 py-4 text-center border border-red-600 text-red-500 hover:bg-red-900/20 hover:text-white hover:shadow-[0_0_20px_rgba(255,0,0,0.4)] transition-all text-lg font-bold tracking-widest uppercase bg-black">
-                                ENTER THE CRYPT
-                            </a>
-                            <a href="https://github.com/vedantkale106" target="_blank" class="px-8 py-4 text-center border border-gray-700 text-gray-500 hover:text-white hover:border-gray-500 transition-colors text-lg font-bold tracking-widest uppercase bg-black">
-                                DARK MANUSCRIPTS
-                            </a>
-                        </div>
-                    </div>
+                <div class="flex flex-col sm:flex-row justify-center gap-6 animate__animated animate__fadeInUp animate__delay-1s">
+                    <a href="#projects" class="btn-gold px-10 py-4 text-xl uppercase tracking-widest font-serif">
+                        Observe the Works
+                    </a>
                 </div>
             </div>
+            
+            <!-- Decorative Greek Pattern Bottom -->
+            <div class="absolute bottom-0 w-full h-16 bg-repeat-x opacity-10" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Greek_key_pattern.svg/1200px-Greek_key_pattern.svg.png'); background-size: contain;"></div>
         </section>
 
-        <section id="about" class="py-24 px-4 relative scroll-reveal">
+        <!-- About Section -->
+        <section id="about" class="py-24 px-4 relative scroll-reveal bg-white">
             <div class="max-w-6xl mx-auto">
-                <div class="grid md:grid-cols-5 gap-12 items-center bg-gray-900/40 p-8 border border-red-900/30 relative">
-                    <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-red-600"></div>
-                    <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-red-600"></div>
-
-                    <div class="md:col-span-2 relative">
-                        <div class="aspect-square bg-black grayscale contrast-125 border-4 border-gray-800 relative overflow-hidden group">
-                             <div class="absolute inset-0 bg-red-900 mix-blend-overlay opacity-20 group-hover:opacity-60 transition-opacity"></div>
-                             <div class="flex items-center justify-center h-full w-full">
-                                <svg class="w-32 h-32 text-gray-700 group-hover:text-red-700 transition-colors duration-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                             </div>
-                             <div class="absolute bottom-0 w-full text-center bg-red-900/80 text-black font-bold py-1 sub-horror tracking-widest">
-                                 STATUS: INFECTED
-                             </div>
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div class="relative">
+                        <div class="border-4 border-double border-gray-200 p-2 relative">
+                             <!-- Placeholder for "Statue" or Profile -->
+                            <div class="aspect-[3/4] bg-gray-100 flex items-center justify-center relative overflow-hidden grayscale contrast-125">
+                                <img src="{{ url_for('static', filename='image.jpg') }}" alt="Vedant Kale" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-gray-900/10 to-transparent"></div>
+                            </div>
+                            <!-- Decorative Corner -->
+                            <div class="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-[#c5a059]"></div>
+                            <div class="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-[#c5a059]"></div>
                         </div>
                     </div>
                     
-                    <div class="md:col-span-3">
-                        <h2 class="text-4xl md:text-5xl font-bold mb-8 text-red-600 horror-font flex items-center">
-                            THE SURVIVOR
+                    <div>
+                        <h2 class="text-4xl md:text-5xl mb-8 text-black border-l-4 border-[#c5a059] pl-6">
+                            THE PHILOSOPHER
                         </h2>
-                        <div class="space-y-6 text-gray-400 leading-relaxed text-lg">
-                            <p>
-                                Lurking in the shadows of Junnar, Pune. I do not just fix bugs; I perform exorcisms on spaghetti code.
+                        <div class="space-y-6 text-gray-700 text-lg text-justify">
+                            <p class="drop-cap">
+                                In the digital agora of Pune, I stand as a humble architect of logic. I do not merely write code; I construct syllogisms in Python and dialectics in JavaScript.
                             </p>
                             <p>
-                                My expertise lies in <span class="text-red-500">Dark Data Arts</span> and <span class="text-red-500">Full Stack Sorcery</span>. I transform raw, chaotic data into terrifyingly accurate predictions.
+                                My pursuit is the <span class="font-bold text-[#c5a059]">Logos</span>—the rational principle that governs the server and the client. Through the rigorous application of Data Science and Full Stack development, I seek to bring order to the chaos of raw information.
                             </p>
-                            <div class="bg-black border-l-4 border-red-600 p-4 mt-6 shadow-[0_0_15px_rgba(255,0,0,0.1)]">
-                                <p class="text-red-500 italic font-mono text-sm">
-                                    "Even in death, the server must run. 99.9% Uptime... or else."
-                                </p>
+                            <div class="mt-8 p-6 bg-[#f9f9f9] border-l-2 border-gray-300 italic text-gray-600">
+                                "We are what we repeatedly commit. Excellence, then, is not an act, but a habit."
                             </div>
                         </div>
                     </div>
@@ -307,68 +305,77 @@
             </div>
         </section>
 
-        <section id="skills" class="py-24 px-4 scroll-reveal relative">
+        <!-- Skills Section -->
+        <section id="skills" class="py-24 px-4 scroll-reveal bg-[#fdfbf7] relative">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
-                    <h2 class="text-5xl font-bold mb-4 horror-font text-gray-200">THE GRIMOIRE</h2>
-                    <div class="inline-block text-red-600 font-mono text-sm tracking-widest animate-pulse">
-                        /// FORBIDDEN KNOWLEDGE ///
-                    </div>
+                    <span class="text-[#c5a059] uppercase tracking-[0.2em] text-sm font-bold">The Curriculum</span>
+                    <h2 class="text-5xl mt-2 mb-4 text-black">THE LYCEUM</h2>
+                    <div class="w-24 h-1 bg-[#c5a059] mx-auto"></div>
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {% for category, skill_list in skills.items() %}
-                    <div class="tombstone-card p-6 group">
-                        <h3 class="text-2xl text-red-600 mb-6 border-b border-gray-800 pb-2 sub-horror">
-                            {{ category }}
-                        </h3>
-                        <div class="flex flex-wrap gap-3">
-                            {% for skill in skill_list %}
-                            <span class="px-3 py-2 text-xs font-mono bg-black border border-gray-800 text-gray-400 hover:text-red-500 hover:border-red-600 transition-all cursor-crosshair">
-                                {{ skill }}
+                    <div class="philosopher-card p-8 bg-white">
+                        <div class="mb-4">
+                            <span class="text-4xl text-[#c5a059] font-serif block mb-2">
+                                {% if loop.index == 1 %}I.{% elif loop.index == 2 %}II.{% elif loop.index == 3 %}III.{% elif loop.index == 4 %}IV.{% elif loop.index == 5 %}V.{% else %}VI.{% endif %}
                             </span>
+                            <h3 class="text-2xl text-black border-b border-gray-100 pb-3">
+                                {{ category }}
+                            </h3>
+                        </div>
+                        <ul class="space-y-2">
+                            {% for skill in skill_list %}
+                            <li class="flex items-center text-gray-600 font-serif text-lg">
+                                <span class="w-1.5 h-1.5 bg-[#c5a059] rounded-full mr-3"></span>
+                                {{ skill }}
+                            </li>
                             {% endfor %}
-                        </div>
-                        <div class="absolute bottom-2 right-2 opacity-10 text-6xl pointer-events-none text-red-900 horror-font">
-                            †
-                        </div>
+                        </ul>
                     </div>
                     {% endfor %}
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="py-24 px-4 relative scroll-reveal">
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 px-4 relative scroll-reveal bg-white">
             <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row items-end justify-between mb-16 border-b border-gray-800 pb-6">
+                <div class="flex flex-col md:flex-row items-end justify-between mb-16 border-b border-gray-200 pb-6">
                     <div>
-                        <h2 class="text-5xl font-bold horror-font mb-2 text-white">
-                            DARK <span class="text-red-600">RITUALS</span>
+                        <h2 class="text-5xl mb-2 text-black">
+                            THE MAGNUM OPUS
                         </h2>
-                        <p class="text-gray-500 font-mono">Manifestations of the Code</p>
+                        <p class="text-gray-500 italic font-serif text-xl">Manifestations of the Intellect</p>
+                    </div>
+                    <div class="hidden md:block text-[#c5a059] text-5xl font-serif">
+                        &alpha; &Omega;
                     </div>
                 </div>
                 
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                     {% for project in projects %}
-                    <a href="{{ project.link }}" target="_blank" class="block h-full">
-                        <div class="tombstone-card p-8 h-full flex flex-col justify-between">
+                    <a href="{{ project.link }}" target="_blank" class="block h-full group">
+                        <div class="philosopher-card p-8 h-full flex flex-col justify-between bg-[#fdfbf7]">
                             <div>
-                                <div class="flex justify-between items-start mb-4">
-                                    <h3 class="text-2xl font-bold sub-horror tracking-wider text-gray-200 group-hover:text-red-500 transition-colors">{{ project.name }}</h3>
-                                    <div class="text-[10px] uppercase font-bold text-black bg-gray-600 group-hover:bg-red-600 px-2 py-1 font-mono transition-colors">
-                                        {{ project.type[:4] }}
-                                    </div>
+                                <div class="flex justify-between items-start mb-6">
+                                    <h3 class="text-2xl font-bold tracking-wide text-gray-900 group-hover:text-[#c5a059] transition-colors">
+                                        {{ project.name }}
+                                    </h3>
                                 </div>
                                 
-                                <p class="text-gray-500 text-sm mb-8 leading-relaxed font-mono">
-                                    // {{ project.description }}
+                                <div class="mb-4 text-xs font-bold uppercase tracking-widest text-gray-400 font-sans">
+                                    {{ project.type }}
+                                </div>
+
+                                <p class="text-gray-600 text-lg leading-relaxed font-serif italic mb-8">
+                                    "{{ project.description }}"
                                 </p>
                             </div>
                             
-                            <div class="pt-4 border-t border-gray-800 flex justify-between items-center font-mono text-xs">
-                                <span class="text-red-800 group-hover:text-red-500">{{ project.type }}</span>
-                                <span class="text-gray-500 group-hover:translate-x-2 transition-transform font-bold">UNVEIL &gt;</span>
+                            <div class="flex items-center text-[#c5a059] font-bold tracking-widest text-xs uppercase group-hover:translate-x-2 transition-transform">
+                                Examine The Work <span class="ml-2">&rarr;</span>
                             </div>
                         </div>
                     </a>
@@ -377,71 +384,67 @@
             </div>
         </section>
 
-        <section id="contact" class="py-24 px-4 scroll-reveal relative">
-            <div class="max-w-3xl mx-auto">
-                <div class="bg-black border border-red-900/50 p-1 relative shadow-[0_0_50px_rgba(100,0,0,0.2)]">
-                    <div class="p-8 md:p-12 backdrop-blur-md relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-red-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none"></div>
-
-                        <h2 class="text-4xl font-bold mb-2 text-center text-white horror-font">SUMMON THE CREATOR</h2>
-                        <p class="text-center text-red-600 mb-10 font-mono text-sm uppercase tracking-widest">
-                            Don't look behind you.
-                        </p>
-                        
-                        <form class="space-y-8">
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div class="group">
-                                    <label class="block text-gray-500 text-xs font-mono mb-2 uppercase tracking-widest">Your True Name</label>
-                                    <input type="text" class="w-full horror-input p-4 text-lg" placeholder="John Doe">
-                                </div>
-                                <div class="group">
-                                    <label class="block text-gray-500 text-xs font-mono mb-2 uppercase tracking-widest">Frequency (Email)</label>
-                                    <input type="email" class="w-full horror-input p-4 text-lg" placeholder="victim@example.com">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-gray-500 text-xs font-mono mb-2 uppercase tracking-widest">Chant / Message</label>
-                                <textarea rows="4" class="w-full horror-input p-4 text-lg font-mono" placeholder="I wish to make a deal..."></textarea>
-                            </div>
-                            <button type="button" class="w-full bg-red-900 hover:bg-red-700 text-white font-bold text-xl py-6 tracking-[0.2em] sub-horror transition-all border border-red-950 hover:shadow-[0_0_20px_rgba(255,0,0,0.6)] relative overflow-hidden group">
-                                <span class="relative z-10 group-hover:text-black">SEAL THE PACT</span>
-                            </button>
-                        </form>
-                    </div>
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 px-4 scroll-reveal relative bg-[#1a1a1a] text-[#fdfbf7]">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="mb-12">
+                    <h2 class="text-4xl md:text-5xl mb-4 text-[#fdfbf7]">INITIATE A DIALECTIC</h2>
+                    <p class="text-[#c5a059] font-serif text-xl italic">
+                        "Send forth your inquiry, and let us seek the truth together."
+                    </p>
                 </div>
+                
+                <form class="space-y-10 text-left max-w-2xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-10">
+                        <div class="group relative">
+                            <input type="text" class="w-full stoic-input pb-2 border-gray-600 focus:border-[#c5a059] bg-transparent text-[#fdfbf7]" placeholder="Name of the Scholar">
+                        </div>
+                        <div class="group relative">
+                            <input type="email" class="w-full stoic-input pb-2 border-gray-600 focus:border-[#c5a059] bg-transparent text-[#fdfbf7]" placeholder="Method of Correspondence">
+                        </div>
+                    </div>
+                    <div class="group relative">
+                        <textarea rows="4" class="w-full stoic-input pb-2 border-gray-600 focus:border-[#c5a059] bg-transparent text-[#fdfbf7]" placeholder="The nature of your proposition..."></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="button" class="px-12 py-4 border border-[#c5a059] text-[#c5a059] hover:bg-[#c5a059] hover:text-[#1a1a1a] transition-all uppercase tracking-[0.2em] font-serif text-lg">
+                            Dispatch
+                        </button>
+                    </div>
+                </form>
             </div>
         </section>
     </main>
 
-    <footer class="bg-black py-16 border-t border-gray-900 relative font-mono">
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-12 text-sm relative z-10">
+    <footer class="bg-[#151515] py-16 border-t border-gray-800 relative text-[#999]">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-12 text-sm">
             <div>
-                <h1 class="text-2xl mb-4 horror-font text-red-800">V.KALE</h1>
-                <p class="text-gray-600 max-w-xs leading-relaxed">
-                    Coding from the grave. <br>
+                <h1 class="text-2xl mb-4 classical-font text-[#c5a059]">V.KALE</h1>
+                <p class="font-serif italic text-lg">
+                    Data Scientist & Full Stack Philosopher.<br>
                     Junnar, Maharashtra.
                 </p>
             </div>
             
             <div>
-                <h5 class="text-red-700 font-bold mb-6 uppercase tracking-wider text-xs">Burial Grounds</h5>
-                <ul class="space-y-4 text-gray-500 text-xs">
-                    <li class="hover:text-red-500 cursor-pointer">JUNNAR [HAUNTED]</li>
-                    <li><a href="mailto:vedant.kale22@pccoepune.org" class="hover:text-red-500 transition-colors">vedant.kale22@pccoepune.org</a></li>
+                <h5 class="text-white font-bold mb-6 uppercase tracking-wider text-xs font-sans">The Academy</h5>
+                <ul class="space-y-4 font-serif text-lg">
+                    <li><a href="mailto:vedant.kale22@pccoepune.org" class="hover:text-[#c5a059] transition-colors">vedant.kale22@pccoepune.org</a></li>
+                    <li>Junnar / Pune</li>
                 </ul>
             </div>
 
             <div class="md:text-right">
-                 <h5 class="text-red-700 font-bold mb-6 uppercase tracking-wider text-xs">Connect</h5>
-                 <div class="flex flex-col space-y-4 md:items-end text-gray-500 text-xs uppercase">
-                    <a href="https://github.com/vedantkale106" target="_blank" class="hover:text-white transition-colors">GitHub_Crypt</a>
-                    <a href="https://linkedin.com/in/vedantkale106" target="_blank" class="hover:text-white transition-colors">LinkedIn_Signal</a>
+                 <h5 class="text-white font-bold mb-6 uppercase tracking-wider text-xs font-sans">Connections</h5>
+                 <div class="flex flex-col space-y-4 md:items-end font-serif text-lg">
+                    <a href="https://github.com/vedantkale106" target="_blank" class="hover:text-[#c5a059] transition-colors">GitHub</a>
+                    <a href="https://linkedin.com/in/vedantkale106" target="_blank" class="hover:text-[#c5a059] transition-colors">LinkedIn</a>
                  </div>
             </div>
         </div>
         
-        <div class="text-center text-red-900/40 mt-16 text-[10px] uppercase tracking-[0.3em]">
-            &copy; 2026 Vedant Kale. Rest In Peace.
+        <div class="text-center text-gray-700 mt-16 text-xs uppercase tracking-[0.3em] font-sans">
+            &copy; 2026 Vedant Kale. Memento Mori.
         </div>
     </footer>
 
@@ -451,83 +454,88 @@
             setTimeout(() => {
                 const loader = document.getElementById('loader');
                 loader.style.opacity = '0';
+                loader.style.transition = 'opacity 1s ease';
                 setTimeout(() => {
                     loader.style.display = 'none';
                 }, 1000); 
-            }, 2500); 
+            }, 2000); 
         });
 
-        // --- 2. Flashlight Effect (Desktop Only) ---
-        const flashlight = document.getElementById('flashlight');
-        document.addEventListener('mousemove', (e) => {
-            // Update CSS variables for the flashlight position
-            flashlight.style.setProperty('--x', e.clientX + 'px');
-            flashlight.style.setProperty('--y', e.clientY + 'px');
-        });
-
-        // --- 3. Blood Rain Canvas ---
-        const canvas = document.getElementById('blood-canvas');
+        // --- 2. Constellation/Ideas Canvas ---
+        const canvas = document.getElementById('constellation-canvas');
         const ctx = canvas.getContext('2d');
-        
+        let width, height;
+        let particles = [];
+
         function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
         }
         window.addEventListener('resize', resize);
         resize();
 
-        const drops = [];
-        class Drop {
+        class Particle {
             constructor() {
-                this.reset();
-                this.y = Math.random() * canvas.height;
-            }
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = -10;
-                this.speed = Math.random() * 5 + 5; // Fast fall
-                this.len = Math.random() * 20 + 10;
-                this.width = Math.random() * 2 + 0.5;
-                this.color = `rgba(${138 + Math.random()*50}, 0, 0, ${Math.random() * 0.5 + 0.2})`; // Varying red shades
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
             }
             update() {
-                this.y += this.speed;
-                if (this.y > canvas.height) {
-                    this.reset();
-                }
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
             }
             draw() {
+                ctx.fillStyle = 'rgba(26, 26, 26, 0.5)'; // Dark gray
                 ctx.beginPath();
-                ctx.strokeStyle = this.color;
-                ctx.lineWidth = this.width;
-                ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x, this.y + this.len);
-                ctx.stroke();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
             }
         }
 
-        function initDrops() {
-            const count = window.innerWidth < 768 ? 40 : 100;
-            for (let i = 0; i < count; i++) drops.push(new Drop());
+        function initParticles() {
+            particles = [];
+            const count = window.innerWidth < 768 ? 40 : 80;
+            for (let i = 0; i < count; i++) particles.push(new Particle());
         }
 
-        function animateDrops() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < drops.length; i++) {
-                drops[i].update();
-                drops[i].draw();
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                // Draw connections (The Dialectic)
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(197, 160, 89, ${1 - dist/150})`; // Gold connections
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
             }
-            requestAnimationFrame(animateDrops);
+            requestAnimationFrame(animateParticles);
         }
 
-        initDrops();
-        animateDrops();
+        initParticles();
+        animateParticles();
 
-        // --- 4. Scroll Reveal ---
+        // --- 3. Scroll Reveal ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                    entry.target.classList.add('visible');
                     observer.unobserve(entry.target);
                 }
             });
@@ -535,7 +543,7 @@
 
         document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
 
-        // --- 5. Mobile Menu ---
+        // --- 4. Mobile Menu ---
         const menuBtn = document.getElementById('menuBtn');
         const closeBtn = document.getElementById('closeBtn');
         const mobileMenu = document.getElementById('mobileMenu');
@@ -554,16 +562,6 @@
 
         menuBtn.addEventListener('click', toggleMenu);
         closeBtn.addEventListener('click', toggleMenu);
-
-        // --- 6. Random Glitch Effect (Easter Egg) ---
-        setInterval(() => {
-            const body = document.body;
-            // 5% chance to shift the body slightly
-            if(Math.random() > 0.95) {
-                body.style.transform = `translate(${Math.random()*4 - 2}px, ${Math.random()*4 - 2}px)`;
-                setTimeout(() => { body.style.transform = 'translate(0,0)'; }, 100);
-            }
-        }, 2000);
 
     </script>
 </body>

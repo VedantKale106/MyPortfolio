@@ -1,53 +1,132 @@
-# Vedant Kale 🩸
+# Vedant Kale 🧠
 
-> **"Even in death, the server must run."**
+> **"I am not disturbed by things, but by the view I take of them."**
 
-![Status](https://img.shields.io/badge/Status-Cursed-black?style=for-the-badge&logo=ghost)
-![Role](https://img.shields.io/badge/Role-Analyst_Necromancer-8a0303?style=for-the-badge)
-![Location](https://img.shields.io/badge/Location-Junnar_Graveyard-black?style=for-the-badge)
-
-## 🕯️ Enter If You Dare
-
-I am a 21-year-old survivor from the shadows of **Junnar**, currently haunting **Pune**. I am in my final year of dark arts (Computer Science) at **PCCOE**.
-
-I build nightmares with code, strengthen the flesh vessel at the gym, and silence the mind against the void.
-
-### 💀 The Survivor's Journal
-* **Sustenance:** I track my intake religiously to maintain this mortal form. **80g of protein** is the daily sacrifice. 💪
-* **Philosophy:** I follow **Stoicism**. I remain cold and unshakeable in the face of chaos. 🧠
+![Mode](https://img.shields.io/badge/Mode-Observing-black?style=for-the-badge)
+![Practice](https://img.shields.io/badge/Practice-Stoicism-2c2c2c?style=for-the-badge)
+![State](https://img.shields.io/badge/State-Detached-black?style=for-the-badge)
 
 ---
 
-## ⚰️ The Grimoire (Tech Stack)
+## 🏛️ A Quiet Entrance
 
-I use these forbidden tools to conjure my creations:
+This is not a résumé.  
+This is not a portfolio.  
+This is a place where thoughts are stored and occasionally questioned.
 
-* **Incantations:** Python, C++, SQL
-* **Dark Magic:** Flask, HTML, CSS
-* **Torture Devices:** Docker, Git, VS Code
-
----
-
-## 🕸️ Dark Rituals (Projects)
-
-Manifestations I have summoned from the abyss:
-
-* **Flesh Consumption (KayKhau):** A roulette for the starving. Discover your next meal before it discovers you.
-* **Ghost Whispers (LoveMail):** Send anonymous confessions from the void. They'll never know it was you.
-* **Plague Doctor (MediScan):** AI that predicts the rot before it consumes the host.
-* **Cursed Map (PuneJourney):** Navigate the haunted ruins and hidden alleys of the city.
+I live an ordinary life.  
+I wake up, I work, I train, I eat, I sleep.  
+Nothing remarkable — and therefore, everything essential.
 
 ---
 
-## 🔮 Summon Me (Contact)
+## 📜 Fragment I — The Cup
 
-If you wish to make a deal, discuss code, or talk philosophy... whisper my name.
+A man complained that his cup was broken.
 
-* **LinkedIn:** [vedantkale106](https://linkedin.com/in/vedantkale106)
-* **Email:** `vedant.kale22@pccoepune.org`
+Another man laughed and said,
+*"I knew the cup was broken the moment I started using it."*
+
+Both drank water.
+Only one was angry.
+
+---
+
+## 📜 Fragment II — Control
+
+There are three kinds of events:
+1. Those I control
+2. Those I influence
+3. Those that do not know I exist
+
+Most suffering comes from arguing with the third.
+
+---
+
+## 📜 Fragment III — The Gym at 6 AM
+
+At 6 AM the gym is silent.
+
+No music.  
+No mirrors.  
+No one watching.
+
+The body moves.
+The mind follows.
+Ego does not enter.
+
+This is philosophy with sweat.
+
+---
+
+## 📜 Fragment IV — The Observer
+
+When I feel anxious, I ask:
+*"Who is observing this feeling?"*
+
+The observer is calm.
+The feeling fades.
+
+---
+
+## 📜 Fragment V — The Market
+
+In the marketplace, people trade money for objects.
+Quietly, they trade time for approval.
+
+I try not to shop for either.
+
+---
+
+## 📜 Fragment VI — A Small Story
+
+A student asked his teacher:
+*"What should I read to become wise?"*
+
+The teacher replied:
+*"Read less. Observe more."*
+
+The student was disappointed.
+Years later, he understood.
+
+---
+
+## 🕯️ Principles (Unordered, Incomplete)
+
+* Silence is productive.
+* Consistency is more impressive than talent.
+* Discipline feels boring — that is its advantage.
+* Comfort is a slow negotiator.
+* Most problems disappear if you wait without reacting.
+* Attention is life’s real currency.
+
+---
+
+## 📓 Notes to Self
+
+* Do not rush explanations.
+* Do not argue with strangers.
+* Do not check the phone first thing in the morning.
+* Do one hard thing every day.
+* Leave some questions unanswered.
+
+---
+
+## 🧭 Exit
+
+If you found meaning here, it came from you — not from these words.
+
+Return to your work.
+Return to your body.
+Return to the present moment.
 
 ---
 
 <div align="center">
-  <small>👻 Coded from the grave by Vedant Kale. RIP.</small>
+  <small>
+    Written without urgency.  
+    Maintained without ambition.  
+    Read without obligation.
+  </small>
 </div>
+
