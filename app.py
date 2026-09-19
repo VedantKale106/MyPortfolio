@@ -4,108 +4,108 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    # Projects rebranded as "The Magnum Opus"
     projects = [
         {
             "name": "Portfolio Website",
-            "type": "The Cave Allegory",
-            "description": "My shadow on the digital wall. Is it the real me, or just a projection?",
+            "type": "Personal Brand",
+            "description": "A clean personal portfolio built to showcase projects, skills, and contact details.",
             "link": "https://vedantkale.vercel.app/"
         },
         {
             "name": "KayKhau",
-            "type": "Epicurean Choice",
-            "description": "A dialetic of hunger. Satisfy the appetites through the chaos of randomization.",
+            "type": "Food Discovery",
+            "description": "A food selection app focused on quick discovery and a simple user flow.",
             "link": "https://kaykhau.vercel.app/"
         },
         {
             "name": "LoveMail",
-            "type": "Platonic Confessions",
-            "description": "Whispers from the void. Love detached from the physical form.",
+            "type": "Messaging",
+            "description": "A lightweight app for sharing messages and simple personal communication.",
             "link": "https://lovemail-rust.vercel.app/"
         },
         {
             "name": "PuneJourney",
-            "type": "The Peripatetic",
-            "description": "Wandering the streets of the Polis in search of hidden truths.",
+            "type": "Travel Guide",
+            "description": "A location-focused project for exploring places and planning journeys.",
             "link": "https://punejourney.vercel.app/"
         },
         {
             "name": "PortfolioHub",
-            "type": "The Ship of Theseus",
-            "description": "Construct a new identity. If you replace every part, does the original remain?",
+            "type": "Portfolio Tool",
+            "description": "A portfolio builder concept for organizing profile content in one place.",
             "link": "https://portfolioohub.vercel.app/"
         },
         {
             "name": "Datamitra",
-            "type": "Empirical Purification",
-            "description": "Refining raw sensory data into absolute, uncorrupted truth.",
+            "type": "Data Platform",
+            "description": "A project centered on structured data handling and clean information workflows.",
             "link": "https://datamitra.onrender.com/"
         },
         {
             "name": "Machine Mitra",
-            "type": "The Ghost in the Machine",
-            "description": "Synthesizing the Logos within silicon. Can a machine possess a soul?",
+            "type": "AI Utility",
+            "description": "An experiment in adding intelligence-driven features to a software workflow.",
             "link": "https://machinemitra.onrender.com/"
         },
         {
             "name": "Starscout",
-            "type": "The Dionysian Gaze",
-            "description": "Staring into the primal chaos. Not for the faint of Stoicism.",
+            "type": "Discovery",
+            "description": "A discovery-oriented project built around exploring and surfacing content.",
             "link": "https://starscout.onrender.com/"
         },
         {
             "name": "Brazzers University",
-            "type": "The Cynic's Satire",
-            "description": "A Diogenean mockery of established academic norms.",
+            "type": "Academic Tool",
+            "description": "A university-themed concept project focused on student-facing utility.",
             "link": "https://brazzersuniversity.vercel.app/"
         },
         {
             "name": "Mediscan",
-            "type": "Bioethics",
-            "description": "Preserving the mortal coil before it shuffles off.",
+            "type": "Healthcare",
+            "description": "A healthcare project aimed at organizing and scanning medical information.",
             "link": "https://github.com/VedantKale106/MediScan.git"
         },
         {
             "name": "Moviematch",
-            "type": "Aesthetics",
-            "description": "Algorithms that determine the sublime from the mundane.",
+            "type": "Recommendation",
+            "description": "A movie-matching project centered on recommendation and user choice.",
             "link": "https://github.com/VedantKale106/MovieMatch.git"
         },
         {
             "name": "Phonepro",
-            "type": "Materialism",
-            "description": "Analyzing the atoms of our digital extensions.",
+            "type": "Product Explorer",
+            "description": "A product-focused project for comparing and analyzing device information.",
             "link": "https://github.com/VedantKale106/PhonePro.git"
         },
         {
             "name": "RentWizard",
-            "type": "The Social Contract",
-            "description": "Predicting the cost of dwelling within the state of society.",
+            "type": "Prediction",
+            "description": "A prediction project for estimating rental values from input data.",
             "link": "https://github.com/VedantKale106/RentWizard.git"
         },
         {
             "name": "Attendance-Mitra",
-            "type": "The Panopticon",
-            "description": "Surveillance of the many. Who is present, and who is merely existing?",
+            "type": "Attendance System",
+            "description": "A classroom attendance project for tracking presence and records.",
             "link": "https://github.com/VedantKale106/Attendence-Mitra.git"
         },
         {
             "name": "BinanceBot",
-            "type": "The Invisible Hand",
-            "description": "Automated accumulation of value in the metaphysical marketplace.",
+            "type": "Automation",
+            "description": "A bot project focused on automation and trading workflow logic.",
             "link": "https://github.com/VedantKale106/Binance-Trade-Bot.git"
         }
     ]
     
-    # Skills rebranded as "The Lyceum"
     skills = {
         "Dialects of Logic": ["Python", "C++", "SQL", "HTML/CSS", "R", "Java"],
-        "Archives of Memory": ["MySQL", "MongoDB", "SQLite"],
-        "Methods of Inquiry": ["Flask", "Pandas", "Sklearn", "Streamlit", "NumPy", "BeautifulSoup"],
-        "Socratic Tools": ["Git", "GitHub", "Jupyter", "VS-Code", "Power BI"],
         "Schools of Thought": ["Data Science", "Machine Learning", "Full Stack"],
-        "The Agora": ["Heroku", "Render", "Vercel", "GitHub Pages"]
+        "Methods of Inquiry": ["Flask", "Pandas", "Sklearn", "Streamlit", "NumPy", "BeautifulSoup"],
+        "Archives of Memory": ["MySQL", "MongoDB", "SQLite"],
+        "Socratic Tools": ["Git", "GitHub", "Jupyter", "VS Code", "Power BI","Eclipse"],
+        "The Agora": ["Heroku", "Render", "Vercel", "GitHub Pages"],
+        "Java Full Stack": ["Spring Boot", "Spring MVC", "Hibernate", "JPA", "REST APIs", "Microservices"],
+        "Microservices & Cloud": ["Spring Cloud", "Eureka", "API Gateway", "Docker", "RabbitMQ", "Distributed Systems"]
     }
     
     return render_template('index.html', projects=projects, skills=skills)

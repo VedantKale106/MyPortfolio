@@ -6,564 +6,433 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vedant Kale | The Stoic Coder</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-    <!-- Classical Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --marble-white: #fdfbf7;
-            --parchment: #f0e6d2;
-            --ink-black: #1a1a1a;
-            --philosopher-gold: #c5a059;
-            --stone-gray: #4a4a4a;
-            --bronze: #8c7853;
+            --bg: #fdfbf7;
+            --surface: rgba(255, 255, 255, 0.84);
+            --surface-alt: rgba(244, 236, 223, 0.78);
+            --text: #171717;
+            --muted: #585858;
+            --accent: #b58a43;
+            --accent-dark: #8a6427;
+            --border: rgba(23, 23, 23, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--marble-white);
-            color: var(--ink-black);
+            margin: 0;
             font-family: 'Cormorant Garamond', serif;
-            overflow-x: hidden;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a1a1a' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(181, 138, 67, 0.14), transparent 28%),
+                radial-gradient(circle at top right, rgba(23, 23, 23, 0.05), transparent 24%),
+                linear-gradient(180deg, #fffdf9 0%, var(--bg) 100%);
         }
 
-        /* --- Typography --- */
-        h1, h2, .classical-font {
+        h1, h2, h3, .classical {
             font-family: 'Cinzel', serif;
-            letter-spacing: 0.05em;
-        }
-        
-        h3, .sub-header {
-            font-family: 'Cinzel', serif;
-            font-weight: 400;
+            letter-spacing: 0.03em;
         }
 
-        p, .body-text {
+        p, li, .body-copy {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            line-height: 1.6;
         }
 
-        .sans-serif {
-            font-family: 'Lato', sans-serif;
+        ::selection {
+            background: rgba(196, 127, 68, 0.2);
         }
 
-        /* --- Components --- */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.76);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
 
-        /* Loader */
-        #loader {
+        .mobile-menu {
+            background: rgba(253, 251, 247, 0.58);
+            backdrop-filter: blur(22px);
+        }
+
+        .mobile-menu-link {
+            opacity: 0;
+            transform: translateY(12px);
+            animation: menuFadeIn 0.5s ease forwards;
+        }
+
+        .mobile-menu-link:nth-child(2) { animation-delay: 0.06s; }
+        .mobile-menu-link:nth-child(3) { animation-delay: 0.12s; }
+        .mobile-menu-link:nth-child(4) { animation-delay: 0.18s; }
+
+        @keyframes menuFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .paper-overlay {
             position: fixed;
             inset: 0;
-            background: var(--marble-white);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            pointer-events: none;
+            opacity: 0.22;
+            z-index: 0;
+            background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
         }
 
-        /* Marble Card Styles */
-        .philosopher-card {
-            background: #fff;
-            border: 1px solid #e5e5e5;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: all 0.5s ease;
+        .section-shell {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .hero-card,
+        .content-card,
+        .project-card,
+        .skill-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 45px rgba(17, 24, 39, 0.06);
+        }
+
+        .hero-card {
             position: relative;
             overflow: hidden;
         }
-        
-        .philosopher-card::before {
+
+        .hero-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
-            background: var(--philosopher-gold);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
+            inset: auto -8% -45% auto;
+            width: 16rem;
+            height: 16rem;
+            border-radius: 9999px;
+            background: radial-gradient(circle, rgba(181, 138, 67, 0.24), rgba(181, 138, 67, 0));
+            pointer-events: none;
         }
 
-        .philosopher-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            border-color: var(--philosopher-gold);
-        }
-
-        .philosopher-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        /* Input Fields */
-        .stoic-input {
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid #ddd;
-            color: var(--ink-black);
-            font-family: 'Cormorant Garamond', serif;
-            transition: all 0.3s;
-            font-size: 1.25rem;
-        }
-        .stoic-input:focus {
-            outline: none;
-            border-color: var(--philosopher-gold);
-            background: rgba(197, 160, 89, 0.05);
-        }
-
-        /* Navigation */
-        .nav-link {
-            position: relative;
-        }
-        .nav-link::after {
+        .hero-card::after {
             content: '';
             position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: -2px;
-            left: 0;
-            background-color: var(--philosopher-gold);
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
+            inset: 1.25rem auto auto 1.25rem;
+            width: 5rem;
+            height: 5rem;
+            border-top: 1px solid rgba(181, 138, 67, 0.35);
+            border-left: 1px solid rgba(181, 138, 67, 0.35);
+            pointer-events: none;
         }
 
-        /* Buttons */
-        .btn-gold {
-            background-color: transparent;
-            color: var(--ink-black);
-            border: 1px solid var(--ink-black);
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-        .btn-gold::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 0%; height: 100%;
-            background-color: var(--ink-black);
-            transition: all 0.3s ease;
-            z-index: -1;
-        }
-        .btn-gold:hover {
-            color: var(--marble-white);
-            border-color: var(--ink-black);
-        }
-        .btn-gold:hover::before {
-            width: 100%;
+        .pill {
+            border: 1px solid rgba(181, 138, 67, 0.18);
+            background: rgba(181, 138, 67, 0.08);
+            color: var(--accent-dark);
         }
 
-        /* Scroll Reveal */
-        .scroll-reveal {
+        .section-label {
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--accent-dark);
+        }
+
+        .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease-out;
+            transform: translateY(18px) scale(0.99);
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
-        .scroll-reveal.visible {
+
+        .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Selection */
-        ::selection {
-            background: var(--philosopher-gold);
-            color: white;
-        }
-        
-        /* Drop Cap */
-        .drop-cap:first-letter {
-            float: left;
-            font-size: 3.5rem;
-            line-height: 0.8;
-            font-weight: 700;
-            margin-right: 0.1em;
-            color: var(--philosopher-gold);
-            font-family: 'Cinzel', serif;
+        .nav-link {
+            color: var(--muted);
+            transition: color 0.2s ease;
         }
 
-        /* Grain texture overlay */
-        .texture-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
-            opacity: 0.4;
-            pointer-events: none;
-            z-index: 50;
+        .nav-link:hover {
+            color: var(--text);
+        }
+
+        .btn-primary {
+            background: var(--text);
+            color: white;
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: #000;
+            transform: translateY(-1px);
+            box-shadow: 0 12px 24px rgba(17, 24, 39, 0.14);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(181, 138, 67, 0.45);
+            transform: translateY(-1px);
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.45rem 0.75rem;
+            border-radius: 9999px;
+            background: #f8f5f1;
+            color: #3d4652;
+            font-size: 0.9rem;
+            border: 1px solid rgba(17, 24, 39, 0.06);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .chip:hover {
+            transform: translateY(-1px);
+            border-color: rgba(181, 138, 67, 0.25);
+        }
+
+        .project-link {
+            color: var(--accent-dark);
+        }
+
+        .project-link:hover {
+            color: var(--accent);
+        }
+
+        .floaty {
+            animation: floaty 7s ease-in-out infinite;
+        }
+
+        .floaty-delay {
+            animation-delay: 1.2s;
+        }
+
+        @keyframes floaty {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @media (max-width: 640px) {
+            .section-shell {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
+<body>
+    <div class="paper-overlay"></div>
 
-<body class="antialiased">
+    <header class="glass-nav fixed top-0 inset-x-0 z-50">
+        <div class="section-shell px-4 sm:px-6 lg:px-8">
+            <div class="h-16 sm:h-20 flex items-center justify-between">
+                <a href="#home" class="text-sm sm:text-lg font-bold tracking-[0.3em] uppercase classical">Vedant Kale</a>
 
-    <!-- Texture Overlay for Parchment Feel -->
-    <div class="texture-overlay"></div>
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium body-copy">
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                </nav>
 
-    <!-- Preloader -->
-    <div id="loader">
-        <div class="text-3xl mb-4 classical-font tracking-widest">PONDERING...</div>
-        <div class="w-16 h-16 border-4 border-gray-200 border-t-[#c5a059] rounded-full animate-spin"></div>
-        <div class="mt-4 italic text-gray-500 font-serif">"The unexamined code is not worth writing."</div>
-    </div>
-
-    <!-- Constellation Canvas Background -->
-    <canvas id="constellation-canvas" class="fixed top-0 left-0 w-full h-full z-[-1] opacity-40"></canvas>
-
-    <nav class="fixed w-full z-50 bg-[#fdfbf7]/90 backdrop-blur-md border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-24">
-                <a href="#home" class="flex items-center group">
-                    <span class="text-3xl classical-font text-black group-hover:text-[#c5a059] transition-colors">
-                        V.KALE
-                    </span>
-                </a>
-
-                <div class="hidden md:flex space-x-10 items-center font-serif text-lg tracking-wide">
-                    <a href="#about" class="nav-link text-gray-800 hover:text-[#c5a059] transition-colors">The Stoic</a>
-                    <a href="#skills" class="nav-link text-gray-800 hover:text-[#c5a059] transition-colors">The Lyceum</a>
-                    <a href="#projects" class="nav-link text-gray-800 hover:text-[#c5a059] transition-colors">Magnum Opus</a>
-                    <a href="#contact" class="px-6 py-2 border border-[#c5a059] text-[#c5a059] hover:bg-[#c5a059] hover:text-white transition-all duration-300 rounded-sm">Dialectic</a>
-                </div>
-
-                <button id="menuBtn" class="md:hidden text-black hover:text-[#c5a059] focus:outline-none">
-                    <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
+                <button id="menuBtn" class="md:hidden text-sm font-semibold px-4 py-2 rounded-full border border-[rgba(17,24,39,0.08)] bg-white body-copy">
+                    Menu
                 </button>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed inset-0 z-40 bg-[#fdfbf7]/90 backdrop-blur-lg transform translate-x-full transition-transform duration-500 flex flex-col justify-center items-center space-y-8">
-        <button id="closeBtn" class="absolute top-8 right-8 text-black hover:text-[#c5a059] text-4xl font-serif">×</button>
-        <a href="#about" class="text-3xl classical-font text-gray-800 hover:text-[#c5a059]" onclick="toggleMenu()">The Stoic</a>
-        <a href="#skills" class="text-3xl classical-font text-gray-800 hover:text-[#c5a059]" onclick="toggleMenu()">The Lyceum</a>
-        <a href="#projects" class="text-3xl classical-font text-gray-800 hover:text-[#c5a059]" onclick="toggleMenu()">Magnum Opus</a>
-        <a href="#contact" class="text-3xl classical-font text-[#c5a059] border-b-2 border-[#c5a059] pb-2" onclick="toggleMenu()">Dialectic</a>
+    <div id="mobileMenu" class="mobile-menu fixed inset-0 z-40 transform translate-x-full opacity-0 scale-95 transition-all duration-300 md:hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-white/45 via-transparent to-white/35 pointer-events-none"></div>
+        <div class="relative h-full flex flex-col justify-center items-center gap-8 text-2xl font-semibold classical">
+            <button id="closeBtn" class="absolute top-6 right-6 text-4xl leading-none">&times;</button>
+            <a href="#about" class="mobile-menu-link" onclick="toggleMenu()">About</a>
+            <a href="#skills" class="mobile-menu-link" onclick="toggleMenu()">Skills</a>
+            <a href="#projects" class="mobile-menu-link" onclick="toggleMenu()">Projects</a>
+        </div>
     </div>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="min-h-screen flex items-center justify-center px-4 relative">
-            <div class="max-w-5xl w-full z-10 text-center">
-                <div class="mb-6 inline-block border-y border-gray-300 py-2 px-6">
-                    <span class="text-[#c5a059] font-serif italic text-xl tracking-wider">Est. 2026</span>
-                </div>
-                
-                <h1 class="text-6xl md:text-8xl font-bold mb-6 leading-tight animate__animated animate__fadeInUp text-black">
-                    VEDANT KALE
-                </h1>
-                
-                <p class="text-2xl md:text-3xl text-gray-600 mb-12 max-w-3xl mx-auto font-light leading-relaxed italic animate__animated animate__fadeInUp animate__delay-1s">
-                    "I think in logic, therefore I code."
-                </p>
-
-                <div class="flex flex-col sm:flex-row justify-center gap-6 animate__animated animate__fadeInUp animate__delay-1s">
-                    <a href="#projects" class="btn-gold px-10 py-4 text-xl uppercase tracking-widest font-serif">
-                        Observe the Works
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Decorative Greek Pattern Bottom -->
-            <div class="absolute bottom-0 w-full h-16 bg-repeat-x opacity-10" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Greek_key_pattern.svg/1200px-Greek_key_pattern.svg.png'); background-size: contain;"></div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="py-24 px-4 relative scroll-reveal bg-white">
-            <div class="max-w-6xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-16 items-center">
-                    <div class="relative">
-                        <div class="border-4 border-double border-gray-200 p-2 relative">
-                             <!-- Placeholder for "Statue" or Profile -->
-                            <div class="aspect-[3/4] bg-gray-100 flex items-center justify-center relative overflow-hidden grayscale contrast-125">
-                                <img src="{{ url_for('static', filename='image.jpg') }}" alt="Vedant Kale" class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-gradient-to-t from-gray-900/10 to-transparent"></div>
-                            </div>
-                            <!-- Decorative Corner -->
-                            <div class="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-[#c5a059]"></div>
-                            <div class="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-[#c5a059]"></div>
-                        </div>
+    <main class="pt-24 sm:pt-28 pb-16 relative z-10">
+        <section id="home" class="section-shell px-4 sm:px-6 lg:px-8">
+            <div class="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-stretch">
+                <div class="hero-card rounded-[2rem] p-6 sm:p-8 lg:p-14 reveal order-2 lg:order-1">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full pill text-sm font-semibold mb-6 sm:mb-8 body-copy">
+                        <span class="w-2 h-2 rounded-full bg-[#b58a43]"></span>
+                        The Stoic Coder
                     </div>
-                    
-                    <div>
-                        <h2 class="text-4xl md:text-5xl mb-8 text-black border-l-4 border-[#c5a059] pl-6">
-                            THE PHILOSOPHER
-                        </h2>
-                        <div class="space-y-6 text-gray-700 text-lg text-justify">
-                            <p class="drop-cap">
-                                In the digital agora of Pune, I stand as a humble architect of logic. I do not merely write code; I construct syllogisms in Python and dialectics in JavaScript.
-                            </p>
-                            <p>
-                                My pursuit is the <span class="font-bold text-[#c5a059]">Logos</span>—the rational principle that governs the server and the client. Through the rigorous application of Data Science and Full Stack development, I seek to bring order to the chaos of raw information.
-                            </p>
-                            <div class="mt-8 p-6 bg-[#f9f9f9] border-l-2 border-gray-300 italic text-gray-600">
-                                "We are what we repeatedly commit. Excellence, then, is not an act, but a habit."
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="py-24 px-4 scroll-reveal bg-[#fdfbf7] relative">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16">
-                    <span class="text-[#c5a059] uppercase tracking-[0.2em] text-sm font-bold">The Curriculum</span>
-                    <h2 class="text-5xl mt-2 mb-4 text-black">THE LYCEUM</h2>
-                    <div class="w-24 h-1 bg-[#c5a059] mx-auto"></div>
-                </div>
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.96] tracking-tight max-w-3xl classical">
+                        Philosophy-themed, but still grounded in code.
+                    </h1>
 
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {% for category, skill_list in skills.items() %}
-                    <div class="philosopher-card p-8 bg-white">
-                        <div class="mb-4">
-                            <span class="text-4xl text-[#c5a059] font-serif block mb-2">
-                                {% if loop.index == 1 %}I.{% elif loop.index == 2 %}II.{% elif loop.index == 3 %}III.{% elif loop.index == 4 %}IV.{% elif loop.index == 5 %}V.{% else %}VI.{% endif %}
-                            </span>
-                            <h3 class="text-2xl text-black border-b border-gray-100 pb-3">
-                                {{ category }}
-                            </h3>
-                        </div>
-                        <ul class="space-y-2">
-                            {% for skill in skill_list %}
-                            <li class="flex items-center text-gray-600 font-serif text-lg">
-                                <span class="w-1.5 h-1.5 bg-[#c5a059] rounded-full mr-3"></span>
-                                {{ skill }}
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="py-24 px-4 relative scroll-reveal bg-white">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row items-end justify-between mb-16 border-b border-gray-200 pb-6">
-                    <div>
-                        <h2 class="text-5xl mb-2 text-black">
-                            THE MAGNUM OPUS
-                        </h2>
-                        <p class="text-gray-500 italic font-serif text-xl">Manifestations of the Intellect</p>
-                    </div>
-                    <div class="hidden md:block text-[#c5a059] text-5xl font-serif">
-                        &alpha; &Omega;
-                    </div>
-                </div>
-                
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    {% for project in projects %}
-                    <a href="{{ project.link }}" target="_blank" class="block h-full group">
-                        <div class="philosopher-card p-8 h-full flex flex-col justify-between bg-[#fdfbf7]">
-                            <div>
-                                <div class="flex justify-between items-start mb-6">
-                                    <h3 class="text-2xl font-bold tracking-wide text-gray-900 group-hover:text-[#c5a059] transition-colors">
-                                        {{ project.name }}
-                                    </h3>
-                                </div>
-                                
-                                <div class="mb-4 text-xs font-bold uppercase tracking-widest text-gray-400 font-sans">
-                                    {{ project.type }}
-                                </div>
-
-                                <p class="text-gray-600 text-lg leading-relaxed font-serif italic mb-8">
-                                    "{{ project.description }}"
-                                </p>
-                            </div>
-                            
-                            <div class="flex items-center text-[#c5a059] font-bold tracking-widest text-xs uppercase group-hover:translate-x-2 transition-transform">
-                                Examine The Work <span class="ml-2">&rarr;</span>
-                            </div>
-                        </div>
-                    </a>
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-24 px-4 scroll-reveal relative bg-[#1a1a1a] text-[#fdfbf7]">
-            <div class="max-w-4xl mx-auto text-center">
-                <div class="mb-12">
-                    <h2 class="text-4xl md:text-5xl mb-4 text-[#fdfbf7]">INITIATE A DIALECTIC</h2>
-                    <p class="text-[#c5a059] font-serif text-xl italic">
-                        "Send forth your inquiry, and let us seek the truth together."
+                    <p class="mt-5 sm:mt-6 text-lg sm:text-xl text-gray-600 max-w-2xl leading-8 body-copy">
+                        I treat this place like a quiet provocation: a place where philosophy, discipline, and code meet without asking permission.
                     </p>
+
+                    <div class="mt-8 flex flex-wrap gap-3 body-copy">
+                        <span class="chip">Java</span>
+                        <span class="chip">Spring Boot</span>
+                        <span class="chip">Microservices</span>
+                        <span class="chip">REST APIs</span>
+                        <span class="chip">Data Science</span>
+                    </div>
+
+                    <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-4">
+                        <a href="#projects" class="btn-primary px-6 py-3 rounded-full font-semibold text-center">View Projects</a>
+                        <a href="#about" class="btn-secondary px-6 py-3 rounded-full font-semibold text-center">Read the Thinking</a>
+                    </div>
                 </div>
-                
-                <form class="space-y-10 text-left max-w-2xl mx-auto">
-                    <div class="grid md:grid-cols-2 gap-10">
-                        <div class="group relative">
-                            <input type="text" class="w-full stoic-input pb-2 border-gray-600 focus:border-[#c5a059] bg-transparent text-[#fdfbf7]" placeholder="Name of the Scholar">
-                        </div>
-                        <div class="group relative">
-                            <input type="email" class="w-full stoic-input pb-2 border-gray-600 focus:border-[#c5a059] bg-transparent text-[#fdfbf7]" placeholder="Method of Correspondence">
+
+                <div class="content-card rounded-[2rem] p-5 sm:p-8 flex flex-col justify-between reveal order-1 lg:order-2">
+                    <div class="floaty">
+                        <div class="rounded-[1.5rem] overflow-hidden bg-[#ede7df] aspect-[4/5] border border-[rgba(17,24,39,0.06)]">
+                            <img src="{{ url_for('static', filename='image.jpg') }}" alt="Vedant Kale" class="w-full h-full object-cover">
                         </div>
                     </div>
-                    <div class="group relative">
-                        <textarea rows="4" class="w-full stoic-input pb-2 border-gray-600 focus:border-[#c5a059] bg-transparent text-[#fdfbf7]" placeholder="The nature of your proposition..."></textarea>
+
+                    <div class="mt-6 rounded-2xl bg-[#f8f5f1] p-5 body-copy text-sm sm:text-base text-gray-600 leading-7">
+                        Built with passion, sharpened by repetition, and still carrying a little bit of elegant rebellion.
                     </div>
-                    <div class="text-center">
-                        <button type="button" class="px-12 py-4 border border-[#c5a059] text-[#c5a059] hover:bg-[#c5a059] hover:text-[#1a1a1a] transition-all uppercase tracking-[0.2em] font-serif text-lg">
-                            Dispatch
-                        </button>
-                    </div>
-                </form>
+                </div>
             </div>
         </section>
+
+        <section id="about" class="section-shell px-4 sm:px-6 lg:px-8 mt-12 lg:mt-16 reveal">
+            <div class="content-card rounded-[2rem] p-8 sm:p-10 lg:p-12">
+                <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
+                    <div>
+                        <div class="section-label">About</div>
+                        <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold classical">A coder who likes philosophy, clean ideas, and building things that last.</h2>
+                    </div>
+                    <div class="space-y-5 text-gray-600 leading-8 text-lg body-copy">
+                        <p>
+                            I’m Vedant, and I built this portfolio during my journey while figuring out how to turn curiosity into useful software. I like keeping my work practical, thoughtful, and a little bit different from the usual template.
+                        </p>
+                        <p>
+                            Outside the screen, I’m drawn to philosophy, discipline, and the idea that good work should feel simple even when the thinking behind it is not.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section-shell px-4 sm:px-6 lg:px-8 mt-12 lg:mt-16 reveal">
+            <div class="flex items-end justify-between gap-6 mb-6">
+                <div>
+                    <div class="section-label">Skills</div>
+                    <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold classical">A Lyceum of knowledge and experience.</h2>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {% for category, skill_list in skills.items() %}
+                <div class="skill-card rounded-[1.5rem] p-6 sm:p-7">
+                    <h3 class="text-xl font-bold mb-4 classical">{{ category }}</h3>
+                    <div class="flex flex-wrap gap-3">
+                        {% for skill in skill_list %}
+                        <span class="chip">{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="projects" class="section-shell px-4 sm:px-6 lg:px-8 mt-12 lg:mt-16 reveal">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+                <div>
+                    <div class="section-label">Projects</div>
+                        <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold classical">Works shaped by thought, habit, and a small refusal to be ordinary.</h2>
+                </div>
+                <p class="text-gray-600 max-w-2xl body-copy">
+                    These are the pieces I made while learning, experimenting, and testing how far the idea could go before it stopped behaving.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {% for project in projects %}
+                <a href="{{ project.link }}" target="_blank" rel="noreferrer" class="project-card rounded-[1.5rem] p-6 sm:p-7 flex flex-col justify-between min-h-[17rem] hover:-translate-y-1 transition-transform duration-200">
+                    <div>
+                        <div class="text-xs uppercase tracking-[0.24em] text-gray-400 font-semibold body-copy">{{ project.type }}</div>
+                        <h3 class="mt-3 text-2xl font-bold tracking-tight classical">{{ project.name }}</h3>
+                        <p class="mt-4 text-gray-600 leading-7 body-copy">{{ project.description }}</p>
+                    </div>
+                    <div class="mt-6 project-link font-semibold">Open project →</div>
+                </a>
+                {% endfor %}
+            </div>
+        </section>
+
     </main>
 
-    <footer class="bg-[#151515] py-16 border-t border-gray-800 relative text-[#999]">
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-12 text-sm">
-            <div>
-                <h1 class="text-2xl mb-4 classical-font text-[#c5a059]">V.KALE</h1>
-                <p class="font-serif italic text-lg">
-                    Data Scientist & Full Stack Philosopher.<br>
-                    Junnar, Maharashtra.
-                </p>
+    <footer class="section-shell px-4 sm:px-6 lg:px-8 py-10 text-sm text-gray-500">
+        <div class="flex flex-col md:flex-row gap-3 md:items-center md:justify-between border-t border-[rgba(17,24,39,0.08)] pt-6">
+            <div>Vedant Kale</div>
+            <div class="flex gap-5">
+                <a href="https://github.com/vedantkale106" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://linkedin.com/in/vedantkale106" target="_blank" rel="noreferrer">LinkedIn</a>
             </div>
-            
-            <div>
-                <h5 class="text-white font-bold mb-6 uppercase tracking-wider text-xs font-sans">The Academy</h5>
-                <ul class="space-y-4 font-serif text-lg">
-                    <li><a href="mailto:vedant.kale22@pccoepune.org" class="hover:text-[#c5a059] transition-colors">vedant.kale22@pccoepune.org</a></li>
-                    <li>Junnar / Pune</li>
-                </ul>
-            </div>
-
-            <div class="md:text-right">
-                 <h5 class="text-white font-bold mb-6 uppercase tracking-wider text-xs font-sans">Connections</h5>
-                 <div class="flex flex-col space-y-4 md:items-end font-serif text-lg">
-                    <a href="https://github.com/vedantkale106" target="_blank" class="hover:text-[#c5a059] transition-colors">GitHub</a>
-                    <a href="https://linkedin.com/in/vedantkale106" target="_blank" class="hover:text-[#c5a059] transition-colors">LinkedIn</a>
-                 </div>
-            </div>
-        </div>
-        
-        <div class="text-center text-gray-700 mt-16 text-xs uppercase tracking-[0.3em] font-sans">
-            &copy; 2026 Vedant Kale. Memento Mori.
         </div>
     </footer>
 
     <script>
-        // --- 1. Loader Sequence ---
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.style.opacity = '0';
-                loader.style.transition = 'opacity 1s ease';
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 1000); 
-            }, 2000); 
-        });
-
-        // --- 2. Constellation/Ideas Canvas ---
-        const canvas = document.getElementById('constellation-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let particles = [];
-
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.size = Math.random() * 2 + 1;
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(26, 26, 26, 0.5)'; // Dark gray
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            const count = window.innerWidth < 768 ? 40 : 80;
-            for (let i = 0; i < count; i++) particles.push(new Particle());
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, width, height);
-            
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-                
-                // Draw connections (The Dialectic)
-                for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (dist < 150) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(197, 160, 89, ${1 - dist/150})`; // Gold connections
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animateParticles);
-        }
-
-        initParticles();
-        animateParticles();
-
-        // --- 3. Scroll Reveal ---
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.12 });
 
-        document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
+        document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
 
-        // --- 4. Mobile Menu ---
+        const motionObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.setProperty('--motion-delay', '0s');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.floaty').forEach((element) => motionObserver.observe(element));
+
         const menuBtn = document.getElementById('menuBtn');
         const closeBtn = document.getElementById('closeBtn');
         const mobileMenu = document.getElementById('mobileMenu');
 
         function toggleMenu() {
             const isOpen = mobileMenu.classList.contains('translate-x-0');
-            if (isOpen) {
-                mobileMenu.classList.remove('translate-x-0');
-                mobileMenu.classList.add('translate-x-full');
-            } else {
-                mobileMenu.classList.remove('translate-x-full');
-                mobileMenu.classList.add('translate-x-0');
+            mobileMenu.classList.toggle('translate-x-0', !isOpen);
+            mobileMenu.classList.toggle('translate-x-full', isOpen);
+            mobileMenu.classList.toggle('opacity-100', !isOpen);
+            mobileMenu.classList.toggle('opacity-0', isOpen);
+            mobileMenu.classList.toggle('scale-100', !isOpen);
+            mobileMenu.classList.toggle('scale-95', isOpen);
+
+            if (!isOpen) {
+                const links = mobileMenu.querySelectorAll('.mobile-menu-link');
+                links.forEach((link) => {
+                    link.style.animation = 'none';
+                    link.offsetHeight;
+                    link.style.animation = '';
+                });
             }
             document.body.style.overflow = isOpen ? 'auto' : 'hidden';
         }
 
         menuBtn.addEventListener('click', toggleMenu);
         closeBtn.addEventListener('click', toggleMenu);
-
     </script>
 </body>
 </html>
